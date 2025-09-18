@@ -5,35 +5,66 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BAHA | موقع رقمي</title>
   <style>
+    * {margin: 0; padding: 0; box-sizing: border-box;}
     body {
-      margin: 0;
-      font-family: Tahoma, Arial, sans-serif;
+      font-family: "Tahoma", Arial, sans-serif;
       background: #f4f6f9;
       color: #333;
+      line-height: 1.6;
     }
+
+    /* ===== Header ===== */
     header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
       background: #1e3a8a;
       color: #fff;
-      padding: 15px 30px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 15px 40px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      z-index: 1000;
     }
-    header h1 { margin: 0; font-size: 22px; }
+    header h1 {font-size: 24px;}
     nav a {
       color: #fff;
-      margin: 0 10px;
+      margin: 0 12px;
       text-decoration: none;
       font-weight: bold;
+      transition: color 0.3s;
     }
+    nav a:hover {color: #60a5fa;}
+
+    /* ===== Hero ===== */
     .hero {
-      background: linear-gradient(to right, #1e3a8a, #3b82f6);
+      background: linear-gradient(135deg, #1e3a8a, #3b82f6);
       color: white;
       text-align: center;
-      padding: 80px 20px;
+      padding: 150px 20px 100px;
+      animation: fadeIn 1.5s ease-in-out;
     }
-    .hero h2 { font-size: 40px; margin-bottom: 15px; }
-    .hero p { font-size: 18px; margin-bottom: 25px; }
-    .  </footer>
-</body>
-</html>
+    .hero h2 {font-size: 46px; margin-bottom: 20px;}
+    .hero p {font-size: 20px; margin-bottom: 30px;}
+    .hero button {
+      background: #fff;
+      color: #1e3a8a;
+      padding: 14px 30px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.3s, background 0.3s;
+    }
+    .hero button:hover {
+      background: #f3f4f6;
+      transform: scale(1.05);
+    }
+
+    /* ===== Services ===== */
+    .services {
+      padding: 80px 20px;
+      text-align: center;
+    }
+    .services h2 {margin-bottom: 40px; font-size: 30px; color
