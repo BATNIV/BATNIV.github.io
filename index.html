@@ -1,29 +1,93 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>متجر بهاء - منتجات رقمية وخدمات</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BAHA STORE — سوق المنتجات الرقمية</title>
+  <link rel="stylesheet" href="assets/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <header>
-    <h1>متجر بهاء</h1>
-    <nav>
-      <a href="index.html">الرئيسية</a>
-      <a href="services.html">الخدمات</a>
-      <a href="products.html">المنتجات</a>
-      <a href="contact.html">اتصل بنا</a>
-    </nav>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="brand">BAHA STORE</h1>
+      <nav class="main-nav">
+        <a href="index.html">الرئيسية</a>
+        <a href="products.html">المنتجات</a>
+        <a href="services.html">الخدمات</a>
+        <a href="sell.html">كن بائعاً</a>
+        <a href="contact.html">تواصل</a>
+      </nav>
+    </div>
   </header>
 
   <section class="hero">
-    <h2>مرحبا بك في متجر بهاء</h2>
-    <p>نوفر لك منتجات رقمية وخدمات احترافية (كتابة، تسويق، سكريبتات...)</p>
+    <div class="container">
+      <h2>أفضل المنتجات الرقمية والخدمات في مكان واحد</h2>
+      <p>كتب إلكترونية — قوالب — سكريبتات — خدمات تسويق وكتابة. اشتري وحمّل فوراً.</p>
+      <div class="cta">
+        <a class="btn" href="products.html">تسوق الآن</a>
+        <a class="btn outline" href="sell.html">اعرض منتجك</a>
+      </div>
+    </div>
   </section>
 
-  <footer>
-    <p>© 2025 متجر بهاء - جميع الحقوق محفوظة</p>
+  <section class="features container">
+    <div class="feat">
+      <i class="fa-solid fa-book"></i>
+      <h3>كتب إلكترونية</h3>
+      <p>دروس، أدلة، وكتب قابلة للبيع مباشرة.</p>
+    </div>
+    <div class="feat">
+      <i class="fa-solid fa-code"></i>
+      <h3>سكريبتات</h3>
+      <p>أدوات جاهزة لتسريع مشاريع الويب.</p>
+    </div>
+    <div class="feat">
+      <i class="fa-solid fa-paint-brush"></i>
+      <h3>قوالب وتصاميم</h3>
+      <p>قوالب صفحات هبوط، تصاميم سوشيال، صور منتج.</p>
+    </div>
+    <div class="feat">
+      <i class="fa-solid fa-bullhorn"></i>
+      <h3>خدمات</h3>
+      <p>كتابة محتوى، حملات وتسويق، تصميم واجهات.</p>
+    </div>
+  </section>
+
+  <section class="products-preview container">
+    <h2>منتجات مميزة</h2>
+    <div class="grid">
+      <div class="product-card">
+        <img src="assets/ebook.jpg" alt="ebook">
+        <h3>دليل إنشاء متجر رقمي</h3>
+        <p class="price">5$ <span class="muted">تحميل فوري</span></p>
+        <a class="btn" href="product.html">عرض</a>
+      </div>
+
+      <div class="product-card">
+        <img src="assets/template.jpg" alt="template">
+        <h3>قالب صفحة هبوط (HTML)</h3>
+        <p class="price">2$ <span class="muted">تحميل فوري</span></p>
+        <a class="btn" href="product.html">عرض</a>
+      </div>
+
+      <div class="product-card">
+        <img src="assets/script.jpg" alt="script">
+        <h3>سكريبت جافاسكربت</h3>
+        <p class="price">3$ <span class="muted">تحميل فوري</span></p>
+        <a class="btn" href="product.html">عرض</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="contact-info">
+        <p>📞 <a href="tel:+2130655643510">+2130655643510</a> — 📧 <a href="mailto:mafaity13@gmail.com">mafaity13@gmail.com</a></p>
+      </div>
+      <p>© 2025 BAHA STORE</p>
+    </div>
   </footer>
 </body>
 </html>

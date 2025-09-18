@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>تواصل — BAHA STORE</title>
+  <title>اعرض منتجك — BAHA STORE</title>
   <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
@@ -21,10 +21,17 @@
   </header>
 
   <main class="container">
-    <h2>تواصل معنا</h2>
-    <p>📞 الهاتف: <a href="tel:+2130655643510">+2130655643510</a></p>
-    <p>📧 البريد: <a href="mailto:mafaity13@gmail.com">mafaity13@gmail.com</a></p>
-    <p>تابعنا على وسائل التواصل عند الإطلاق.</p>
+    <h2>كن بائعاً على BAHA STORE</h2>
+    <p>ارفع منتجاتك الرقمية وابدأ بالبيع. ارسل لنا التفاصيل عبر البريد أو استخدم النموذج.</p>
+    <form action="mailto:mafaity13@gmail.com" method="post" enctype="text/plain" class="order-form">
+      <label>اسم البائع:</label>
+      <input type="text" name="seller" required>
+      <label>بريد البائع:</label>
+      <input type="email" name="seller_email" required>
+      <label>رابط المنتج / وصف:</label>
+      <textarea name="seller_details" rows="5" required></textarea>
+      <button type="submit" class="btn">أرسل عرضك</button>
+    </form>
   </main>
 
   <footer class="site-footer">

@@ -1,34 +1,74 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>المنتجات - متجر بهاء</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>المنتجات — BAHA STORE</title>
+  <link rel="stylesheet" href="assets/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <header>
-    <h1>منتجاتنا الرقمية</h1>
-    <nav>
-      <a href="index.html">الرئيسية</a>
-      <a href="services.html">الخدمات</a>
-      <a href="products.html">المنتجات</a>
-      <a href="contact.html">اتصل بنا</a>
-    </nav>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="brand">BAHA STORE</h1>
+      <nav class="main-nav">
+        <a href="index.html">الرئيسية</a>
+        <a href="products.html">المنتجات</a>
+        <a href="services.html">الخدمات</a>
+        <a href="sell.html">كن بائعاً</a>
+        <a href="contact.html">تواصل</a>
+      </nav>
+    </div>
   </header>
 
-  <section>
-    <div class="card">
-      <h2>📘 كتب إلكترونية</h2>
-      <p>مجموعة كتب رقمية جاهزة للبيع.</p>
+  <main class="container">
+    <h2>جميع المنتجات</h2>
+    <div class="filters">
+      <button class="chip">الكل</button>
+      <button class="chip">كتب إلكترونية</button>
+      <button class="chip">قوالب</button>
+      <button class="chip">سكريبتات</button>
+      <button class="chip">خدمات</button>
     </div>
-    <div class="card">
-      <h2>📂 باقات منتجات</h2>
-      <p>ملفات رقمية متنوعة (تصاميم، أدوات...).</p>
-    </div>
-  </section>
 
-  <footer>
-    <p>© 2025 متجر بهاء</p>
+    <div class="grid products-grid">
+      <!-- Product list -->
+      <div class="product-card">
+        <img src="assets/ebook.jpg" alt="ebook">
+        <h3>دليل إنشاء متجر رقمي</h3>
+        <p class="price">5$</p>
+        <div class="actions">
+          <a class="btn" href="product.html">عرض</a>
+          <a class="btn outline" href="contact.html">اطلب خدمة</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img src="assets/template.jpg" alt="template">
+        <h3>قالب صفحة هبوط</h3>
+        <p class="price">2$</p>
+        <div class="actions">
+          <a class="btn" href="product.html">عرض</a>
+          <a class="btn outline" href="contact.html">اطلب خدمة</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img src="assets/script.jpg" alt="script">
+        <h3>سكريبت جافاسكربت</h3>
+        <p class="price">3$</p>
+        <div class="actions">
+          <a class="btn" href="product.html">عرض</a>
+          <a class="btn outline" href="contact.html">اطلب خدمة</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 BAHA STORE</p>
+    </div>
   </footer>
 </body>
 </html>
