@@ -1,70 +1,49 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BAHA | موقع رقمي</title>
-  <style>
-    * {margin: 0; padding: 0; box-sizing: border-box;}
-    body {
-      font-family: "Tahoma", Arial, sans-serif;
-      background: #f4f6f9;
-      color: #333;
-      line-height: 1.6;
-    }
+  <title>BAHA - Digital Hub</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>🌐 BAHA - Digital Hub</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-    /* ===== Header ===== */
-    header {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      background: #1e3a8a;
-      color: #fff;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 40px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      z-index: 1000;
-    }
-    header h1 {font-size: 24px;}
-    nav a {
-      color: #fff;
-      margin: 0 12px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
-    nav a:hover {color: #60a5fa;}
+  <section class="hero" id="home">
+    <h2>Welcome to BAHA</h2>
+    <p>Your gateway to digital products and opportunities</p>
+  </section>
 
-    /* ===== Hero ===== */
-    .hero {
-      background: linear-gradient(135deg, #1e3a8a, #3b82f6);
-      color: white;
-      text-align: center;
-      padding: 150px 20px 100px;
-      animation: fadeIn 1.5s ease-in-out;
-    }
-    .hero h2 {font-size: 46px; margin-bottom: 20px;}
-    .hero p {font-size: 20px; margin-bottom: 30px;}
-    .hero button {
-      background: #fff;
-      color: #1e3a8a;
-      padding: 14px 30px;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: transform 0.3s, background 0.3s;
-    }
-    .hero button:hover {
-      background: #f3f4f6;
-      transform: scale(1.05);
-    }
+  <section class="section" id="about">
+    <h2>About Us</h2>
+    <p>We provide high-quality digital solutions and profitable opportunities online.</p>
+  </section>
 
-    /* ===== Services ===== */
-    .services {
-      padding: 80px 20px;
-      text-align: center;
-    }
-    .services h2 {margin-bottom: 40px; font-size: 30px; color
+  <section class="section" id="services">
+    <h2>Our Services</h2>
+    <div class="card">📘 E-books</div>
+    <div class="card">🎨 Graphic Design</div>
+    <div class="card">💻 Web Development</div>
+    <div class="card">📈 Online Business</div>
+  </section>
+
+  <section class="section" id="contact">
+    <h2>Contact Us</h2>
+    <p>📞 +2130655643510</p>
+    <p>📧 mafaity13@gmail.com</p>
+  </section>
+
+  <footer>
+    <p>© 2025 BAHA Digital Hub - All Rights Reserved</p>
+  </footer>
+</body>
+</html>
