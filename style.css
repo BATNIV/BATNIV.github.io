@@ -1,20 +1,97 @@
+/* الخلفية المتدرجة المتحركة */
+body {
+    margin:0;
+    font-family:sans-serif;
+    background: linear-gradient(270deg, #001f3f, #000000, #004080, #000000);
+    background-size: 800% 800%;
+    animation: gradientBG 25s ease infinite;
+    color:#00aaff;
+}
+@keyframes gradientBG {
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
 
-body { margin:0; font-family:sans-serif; background: linear-gradient(270deg, #001f3f, #000000, #004080, #000000); background-size: 800% 800%; animation: gradientBG 25s ease infinite; color:#00aaff; }
-@keyframes gradientBG { 0%{background-position:0% 50%;} 50%{background-position:100% 50%;} 100%{background-position:0% 50%;} }
-.header { display:flex; justify-content:space-between; align-items:center; padding:10px 50px; background:#000022; }
-.header nav a { color:#00aaff; text-decoration:none; margin-left:15px; }
-.hero { display:flex; flex-direction:column; align-items:center; justify-content:center; height:80vh; text-align:center; animation:fadeIn 2s; }
-.hero h2 { font-size:3em; margin-bottom:20px; }
-.hero p { font-size:1.5em; margin-bottom:30px; }
+/* الهيدر */
+.header {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px 50px;
+    background:#000022;
+}
+.header nav a {
+    color:#00aaff;
+    text-decoration:none;
+    margin-left:15px;
+}
+
+/* الواجهة الرئيسية */
+.hero {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    height:80vh;
+    text-align:center;
+    animation:fadeIn 2s;
+}
+.hero h2 {
+    font-size:3em;
+    margin-bottom:20px;
+}
+.hero p {
+    font-size:1.5em;
+    margin-bottom:30px;
+}
 @keyframes fadeIn { from {opacity:0; transform:translateY(-20px);} to {opacity:1; transform:translateY(0);} }
-.btn { padding:10px 20px; background:#00aaff; color:#0d0d0d; text-decoration:none; border-radius:8px; margin:5px; display:inline-block; transition:0.3s; }
-.btn:hover { transform:translateY(-3px); box-shadow:0 0 10px #00aaff; }
+
+/* الأزرار */
+.btn {
+    padding:10px 20px;
+    background:#00aaff;
+    color:#0d0d0d;
+    text-decoration:none;
+    border-radius:8px;
+    margin:5px;
+    display:inline-block;
+    transition:0.3s;
+}
+.btn:hover {
+    transform:translateY(-3px);
+    box-shadow:0 0 10px #00aaff;
+}
 .btn-wp { background:#25D366; color:#fff; }
+
+/* صفحة المنتجات */
 .products { padding:50px; }
-.product-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:30px; }
-.product-card { background:#111; padding:20px; border-radius:10px; text-align:center; transition:0.3s; }
-.product-card:hover { transform:translateY(-5px); box-shadow:0 0 15px #00aaff; }
+.product-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+    gap:30px;
+}
+.product-card {
+    background:#111;
+    padding:20px;
+    border-radius:10px;
+    text-align:center;
+    transition:0.3s;
+}
+.product-card:hover {
+    transform:translateY(-5px);
+    box-shadow:0 0 15px #00aaff;
+}
 .product-card img { width:100px; height:100px; margin-bottom:15px; }
 .binance-logo { width:80px; margin-bottom:10px; }
 .price { font-size:1.2em; color:#00ffdd; margin:10px 0; }
+
+/* صفحة التواصل */
 .contact { padding:50px; text-align:center; }
+
+/* تصميم متجاوب */
+@media(max-width:600px){
+    .hero h2 { font-size:2em; }
+    .hero p { font-size:1em; }
+    .btn { font-size:1em; padding:10px 20px; }
+}
