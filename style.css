@@ -1,5 +1,5 @@
 
-body { margin:0; font-family:sans-serif; background: linear-gradient(270deg, #001f3f, #004080, #001f3f); background-size: 600% 600%; animation: gradientBG 20s ease infinite; color:#00aaff; }
+body { margin:0; font-family:sans-serif; background: linear-gradient(270deg, #001f3f, #000000, #004080, #000000); background-size: 800% 800%; animation: gradientBG 25s ease infinite; color:#00aaff; }
 @keyframes gradientBG { 0%{background-position:0% 50%;} 50%{background-position:100% 50%;} 100%{background-position:0% 50%;} }
 .header { display:flex; justify-content:space-between; align-items:center; padding:10px 50px; background:#000022; }
 .header nav a { color:#00aaff; text-decoration:none; margin-left:15px; }
@@ -15,5 +15,6 @@ body { margin:0; font-family:sans-serif; background: linear-gradient(270deg, #00
 .product-card { background:#111; padding:20px; border-radius:10px; text-align:center; transition:0.3s; }
 .product-card:hover { transform:translateY(-5px); box-shadow:0 0 15px #00aaff; }
 .product-card img { width:100px; height:100px; margin-bottom:15px; }
+.binance-logo { width:80px; margin-bottom:10px; }
 .price { font-size:1.2em; color:#00ffdd; margin:10px 0; }
 .contact { padding:50px; text-align:center; }
