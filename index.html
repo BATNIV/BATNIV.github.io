@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAHA STORE</title>
+    <style>
+        body { margin:0; font-family:sans-serif; }
+        .main-container {
+            height:100vh;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            overflow:hidden;
+            text-align:center;
+            background: linear-gradient(270deg, #0d0d0d, #001f3f, #0d0d0d);
+            background-size: 600% 600%;
+            animation: gradientAnimation 20s ease infinite;
+            color:#00aaff;
+        }
+        @keyframes gradientAnimation {
+            0% {background-position:0% 50%;}
+            50% {background-position:100% 50%;}
+            100% {background-position:0% 50%;}
+        }
+        #main-title { font-size:3em; margin-bottom:20px; opacity:0; transform:translateY(-50px); transition:1s; }
+        #main-text { font-size:1.5em; margin-bottom:40px; opacity:0; transform:translateY(50px); transition:1s 0.5s; }
+        #service-btn {
+            padding:15px 30px;
+            background-color:#00aaff;
+            color:#0d0d0d;
+            text-decoration:none;
+            font-weight:bold;
+            border-radius:10px;
+            transition:0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+        #service-btn:hover { transform:scale(1.1); background-color:#00ffcc; box-shadow: 0 0 20px #00ffcc; }
+    </style>
+</head>
+<body>
+<div class="main-container">
+    <h1 id="main-title">مرحبا بك في BAHA STORE</h1>
+    <p id="main-text">هنا يمكنك طلب خدماتنا الرقمية بسهولة وسرعة.</p>
+    <a href="#طلب-الخدمة" id="service-btn">طلب خدمة</a>
+</div>
+<script>
+    window.onload = function() {
+        document.getElementById('main-title').style.opacity = '1';
+        document.getElementById('main-title').style.transform = 'translateY(0)';
+        document.getElementById('main-text').style.opacity = '1';
+        document.getElementById('main-text').style.transform = 'translateY(0)';
+    };
+</script>
+</body>
+</html>
