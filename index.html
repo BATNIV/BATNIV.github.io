@@ -4,29 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fast10 Production</title>
-<meta name="description" content="Fast10 Production - متجر المنتجات الرقمية والكورسات الاحترافية. اشترِ منتجات رقمية ودفع آمن عبر Binance Pay وPayeer.">
-<meta name="keywords" content="Fast10, Fast10 Production, منتجات رقمية, كورسات, شحن رصيد, متجر إلكتروني, بيع رقمي, منتجات تعليمية">
+<meta name="description" content="Fast10 Production - متجر المنتجات الرقمية والكورسات. اشترِ منتجات رقمية ودفع آمن عبر Binance Pay وPayeer.">
 <style>
-body {font-family: Arial,sans-serif;margin:0;padding:0;color:#fff;background:linear-gradient(-45deg,#0d1117,#0d2538,#0d1117,#001f44);background-size:400% 400%;animation:gradientBG 20s ease infinite;}
-@keyframes gradientBG {0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
-header {background: rgba(22,27,34,0.9); padding:15px; text-align:center; box-shadow: 0 0 10px #00aaff;}
+body {font-family: Arial,sans-serif;margin:0;padding:0;background:#0d1117;color:#fff;}
+header {background:#161b22;padding:15px;text-align:center;}
 header h1 {color:#00aaff;margin:0;}
-nav a {color:#fff;margin:0 10px;text-decoration:none;font-weight:bold;cursor:pointer;transition:0.3s;}
+nav a {color:#fff;margin:0 10px;text-decoration:none;cursor:pointer;}
 nav a:hover{color:#00ff84;}
-.container {max-width:900px;margin:20px auto;padding:20px;background: rgba(22,27,34,0.85);border-radius:16px;box-shadow: 0 0 15px #00aaff;}
+.container {max-width:700px;margin:20px auto;padding:20px;background:#161b22;border-radius:12px;}
 h2 {color:#00aaff;text-align:center;}
-input,select,button {width:100%;padding:12px;margin:10px 0;border:none;border-radius:12px;font-size:16px;}
-button {background:#00aaff;color:#fff;cursor:pointer;transition:0.3s;}
-button:hover{background:#00ff84;color:#000;}
-.card {background: rgba(0,0,0,0.6);padding:20px;border-radius:16px;text-align:center;margin:15px 0;box-shadow: 0 0 10px #00aaff;transition: transform 0.3s, box-shadow 0.3s;}
-.card:hover{transform: translateY(-5px);box-shadow: 0 0 20px #00ff84;}
-.card img{width:120px;height:120px;display:block;margin:0 auto 10px;border-radius:12px;}
-.payment-icons{display:flex;align-items:center;gap:15px;margin:10px 0;justify-content:center;}
-.payment-icons div{display:flex;align-items:center;gap:8px;background: rgba(0,0,0,0.4);padding:10px;border-radius:12px;cursor:pointer;transition:0.3s;}
-.payment-icons div:hover{background:#00ff84;color:#000;}
-.payment-icons img{width:40px;height:40px;}
-a.whatsapp{display:block;margin-top:10px;color:#00ff84;text-decoration:none;font-weight:bold;text-align:center;transition:0.3s;}
-a.whatsapp:hover{color:#00aaff;}
+input,select,button {width:100%;padding:10px;margin:8px 0;border:none;border-radius:8px;}
+button {background:#00aaff;color:#fff;cursor:pointer;}
+button:hover{background:#0088cc;}
+.card{background:#222831;padding:15px;border-radius:10px;margin:10px 0;text-align:center;}
+.card h3{color:#00aaff;}
+.payment-icons{display:flex;justify-content:center;gap:15px;margin:10px 0;}
+.payment-icons div{display:flex;align-items:center;gap:8px;background:#161b22;padding:8px;border-radius:10px;cursor:pointer;}
+.payment-icons img{width:30px;height:30px;}
+a.whatsapp{text-align:center;display:block;margin-top:10px;color:#00ff84;text-decoration:none;font-weight:bold;}
 </style>
 </head>
 <body>
@@ -41,7 +36,7 @@ a.whatsapp:hover{color:#00aaff;}
 </nav>
 </header>
 
-<!-- تسجيل حساب -->
+<!-- تسجيل / دخول -->
 <div class="container" id="registerDiv">
 <h2>إنشاء حساب</h2>
 <input type="text" id="regUser" placeholder="اسم المستخدم">
@@ -50,7 +45,6 @@ a.whatsapp:hover{color:#00aaff;}
 <p>لديك حساب؟ <a onclick="showLogin()">تسجيل الدخول</a></p>
 </div>
 
-<!-- تسجيل دخول -->
 <div class="container" id="loginDiv" style="display:none;">
 <h2>تسجيل الدخول</h2>
 <input type="text" id="loginUser" placeholder="اسم المستخدم">
@@ -78,7 +72,6 @@ a.whatsapp:hover{color:#00aaff;}
 <p class="balance">رصيدك الحالي: <span id="balanceOrder">0</span> USDT</p>
 <div id="productsContainer"></div>
 
-<!-- سلة الدفع -->
 <div id="cartDiv" style="display:none;">
 <h3>🛒 طلبك</h3>
 <p>المنتج: <span id="cartProduct"></span></p>
@@ -89,7 +82,6 @@ a.whatsapp:hover{color:#00aaff;}
 <div onclick="copyPayID('binance')"><img src="binance_icon.png"> Binance ID: <span id="binanceID">782102873</span></div>
 <div onclick="copyPayID('payeer')"><img src="payeer_icon.png"> Payeer ID: <span id="payeerID">P1112102994</span></div>
 </div>
-
 <a class="whatsapp" href="https://wa.me/213655643510" target="_blank">📲 تواصل عبر واتساب</a>
 <button onclick="placeOrder()">تم الدفع، أرسل الطلب</button>
 </div>
@@ -152,28 +144,21 @@ function updateBalance(){
 function realTopUp(){
   const amt=parseFloat(document.getElementById('topupAmount').value);
   const m=document.getElementById('topupMethod').value;
-  // ---------- المنتجات ----------
+  if(amt<10 || amt>50) return alert('ادخل مبلغ بين 10 و50 USDT');
+  localStorage.setItem('fast10Balance',(parseFloat(localStorage.getItem('fast10Balance'))||0)+amt);
+  updateBalance();
+  alert('تم شحن الرصيد: '+amt+' USDT');
+}
+
+// ---------- المنتجات ----------
 const products=[
 {name:"دورة تطوير ويب",price:15},
-{name:"دورة برمجة بايثون",price:20},
-{name:"دورة تصميم جرافيك",price:18},
-{name:"دورة تسويق إلكتروني",price:25},
-{name:"دورة فوتوشوب متقدم",price:22},
-{name:"دورة Excel احترافية",price:12},
-{name:"دورة تداول العملات",price:30},
-{name:"دورة سوشيال ميديا",price:17},
-{name:"دورة تعلم SEO",price:15},
-{name:"دورة تحرير فيديو",price:20},
-{name:"كتاب PDF تعلم HTML",price:10},
-{name:"كتاب PDF تعلم CSS",price:10},
-{name:"كتاب PDF تعلم JS",price:12},
-{name:"قالب موقع جاهز",price:25},
-{name:"قالب متجر إلكتروني",price:35},
-{name:"قالب كورس أونلاين",price:40},
-{name:"أيقونات وأزرار UI",price:12},
-{name:"تصاميم سوشيال ميديا",price:15},
-{name:"صور مجانية عالية الجودة",price:10},
-{name:"مكتبة فيديوهات تعليمية",price:45}
+{name:"دورة بايثون",price:20},
+{name:"دورة فوتوشوب",price:18},
+{name:"كتاب HTML",price:10},
+{name:"كتاب CSS",price:10},
+{name:"كتاب JS",price:12},
+{name:"قالب متجر",price:35}
 ];
 
 function renderProducts(){
@@ -195,12 +180,8 @@ function addToCart(index){
   document.getElementById('cartPrice').innerText=currentCart.price;
   document.getElementById('cartDiv').style.display='block';
 }
-
-// نسخ رقم الدفع
 function copyPayID(method){
-  let text="";
-  if(method==='binance') text="Binance ID: 782102873";
-  else if(method==='payeer') text="Payeer ID: P1112102994";
+  let text=method==='binance'?"Binance ID: 782102873":"Payeer ID: P1112102994";
   navigator.clipboard.writeText(text);
   alert('تم نسخ رقم الدفع: '+text);
 }
@@ -218,23 +199,16 @@ function placeOrder(){
   renderCustomerOrders();
 }
 
-// ---------- عرض طلبات الزبون ----------
+// ---------- طلبات الزبون ----------
 function renderCustomerOrders(){
   const username=localStorage.getItem('fast10User');
   const orders=JSON.parse(localStorage.getItem('fast10Orders')||'[]');
   const myOrders=orders.filter(o=>o.user===username);
   const container=document.getElementById('myOrdersList');
-  container.innerHTML='';
-  if(myOrders.length===0) container.innerHTML='<p>لم تقم بأي طلب بعد.</p>';
-  myOrders.forEach((o,i)=>{
-    const div=document.createElement('div');
-    div.className='card';
-    div.innerHTML=`<p>${o.product} - ${o.price} USDT - الحالة: ${o.status}</p>`;
-    container.appendChild(div);
-  });
+  container.innerHTML=myOrders.length?myOrders.map(o=>`<div class="card"><p>${o.product} - ${o.price} USDT - الحالة: ${o.status}</p></div>`).join(''):'<p>لم تقم بأي طلب بعد.</p>';
 }
 
-// ---------- إدارة الطلبات (مدير) ----------
+// ---------- إدارة الطلبات ----------
 function renderAdminOrders(){
   const orders=JSON.parse(localStorage.getItem('fast10Orders')||'[]');
   const search=document.getElementById('searchOrder')?.value.toLowerCase()||"";
@@ -249,7 +223,6 @@ function renderAdminOrders(){
     container.appendChild(div);
   });
 }
-
 function updateOrder(index,status){
   const orders=JSON.parse(localStorage.getItem('fast10Orders')||'[]');
   orders[index].status=status;
@@ -257,3 +230,7 @@ function updateOrder(index,status){
   renderAdminOrders();
   renderCustomerOrders();
 }
+</script>
+
+</body>
+</html>
