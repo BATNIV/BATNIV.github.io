@@ -3,30 +3,107 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fast10 - موقع الرشق والشحن</title>
+<title>Fast10 Digital Products</title>
 <style>
-body {font-family: Arial,sans-serif;margin:0;padding:0;background:linear-gradient(135deg,#0d1117,#0d2538);color:#fff;}
-header {background:#161b22;padding:15px;text-align:center;}
+body {
+  font-family: Arial,sans-serif;
+  margin:0;
+  padding:0;
+  color:#fff;
+  background: linear-gradient(-45deg,#0d1117,#0d2538,#0d1117,#001f44);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+header {
+  background: rgba(22,27,34,0.9);
+  padding:15px;
+  text-align:center;
+  box-shadow: 0 0 10px #00aaff;
+}
+
 header h1 {color:#00aaff;margin:0;}
-nav a {color:#fff;margin:0 10px;text-decoration:none;cursor:pointer;}
-.container {max-width:400px;margin:20px auto;padding:15px;background:#161b22;border-radius:12px;}
+
+nav a {
+  color:#fff;
+  margin:0 10px;
+  text-decoration:none;
+  cursor:pointer;
+  font-weight:bold;
+  transition:0.3s;
+}
+
+nav a:hover{color:#00ff84;}
+
+.container {
+  max-width:500px;
+  margin:20px auto;
+  padding:20px;
+  background: rgba(22,27,34,0.85);
+  border-radius:16px;
+  box-shadow: 0 0 15px #00aaff;
+}
+
 h2 {color:#00aaff;text-align:center;}
-input,select,button {width:100%;padding:10px;margin:8px 0;border:none;border-radius:8px;}
-button {background:#00aaff;color:#fff;cursor:pointer;}
-button:hover{background:#0088cc;}
-.invoice,.balance{background:#161b22;padding:15px;border-radius:10px;margin-top:10px;text-align:center;}
-.card{background:#161b22;padding:15px;border-radius:12px;text-align:center;margin:10px 0;}
-.card button{margin:5px;width:48%;}
-.card h3{color:#00aaff;}
-a.whatsapp{text-align:center;display:block;margin-top:10px;color:#00ff84;text-decoration:none;font-weight:bold;}
+
+input,select,button {
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border:none;
+  border-radius:12px;
+  font-size:16px;
+}
+
+button {
+  background:#00aaff;
+  color:#fff;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+button:hover{background:#00ff84;color:#000;}
+
+.card {
+  background: rgba(0,0,0,0.6);
+  padding:20px;
+  border-radius:16px;
+  text-align:center;
+  margin:15px 0;
+  box-shadow: 0 0 10px #00aaff;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover{
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px #00ff84;
+}
+
+.card h3{color:#00ff84;}
+a.whatsapp{
+  display:block;
+  margin-top:10px;
+  color:#00ff84;
+  text-decoration:none;
+  font-weight:bold;
+  text-align:center;
+  transition:0.3s;
+}
+a.whatsapp:hover{color:#00aaff;}
 </style>
 </head>
 <body>
 
 <header>
-<h1>Fast10</h1>
+<h1>Fast10 Products</h1>
 <nav>
-<a onclick="showOrder()">الرئيسية</a>
+<a onclick="showOrder()">المنتجات</a>
 <a onclick="showWallet()">شحن رصيد</a>
 <a onclick="showCustomerOrders()">طلباتي</a>
 <a onclick="showAdminOrders()">إدارة الطلبات</a>
@@ -64,50 +141,57 @@ a.whatsapp{text-align:center;display:block;margin-top:10px;color:#00ff84;text-de
 <button onclick="realTopUp()">شحن الآن</button>
 </div>
 
-<!-- صفحة الطلب -->
+<!-- صفحة المنتجات -->
 <div class="container" id="orderPage" style="display:none;">
-<h2>خدمات الرشق والإعلانات</h2>
+<h2>📦 منتجات رقمية</h2>
 <p class="balance">رصيدك الحالي: <span id="balanceOrder">0</span> USDT</p>
 
-<form id="orderForm">
-<input type="text" id="orderName" placeholder="اسمك الكامل" required>
-<input type="email" id="orderEmail" placeholder="بريدك الإلكتروني" required>
-
-<select id="serviceSelect" required>
-  <option value="">اختر الخدمة</option>
-  <option value="زيادة متابعين فيسبوك">زيادة متابعين فيسبوك</option>
-  <option value="مشاهدات إنستغرام">مشاهدات إنستغرام</option>
-  <option value="مشاهدات TikTok">مشاهدات TikTok</option>
-  <option value="إعجابات إنستغرام">إعجابات إنستغرام</option>
-  <option value="إعلانات ممولة">إعلانات ممولة</option>
-  <option value="مشاهدات يوتيوب">مشاهدات يوتيوب</option>
-  <option value="زيادة متابعين تيليجرام">زيادة متابعين تيليجرام</option>
-</select>
-
-<input type="number" id="quantitySelect" placeholder="ادخل عدد الرشق" min="1" required>
-
-<div class="invoice" id="invoice" style="display:none;">
-<h3>📄 فاتورتك</h3>
-<p>الخدمة: <span id="invService"></span></p>
-<p>العدد: <span id="invQuantity"></span></p>
-<p>السعر للوحدة: <span id="invUnitPrice"></span> USDT</p>
-<p>الإجمالي: <span id="invTotal"></span> USDT</p>
+<div class="card">
+<h3>باقة 50 قالب تصميم إنستغرام</h3>
+<p>السعر: 15 USDT</p>
+<button onclick="addToCart('باقة 50 قالب تصميم إنستغرام',15,'link_to_file_1.zip')">اشتري</button>
 </div>
 
-<div class="payment">
+<div class="card">
+<h3>كتاب PDF: تعلم التسويق الرقمي</h3>
+<p>السعر: 10 USDT</p>
+<button onclick="addToCart('كتاب PDF: تعلم التسويق الرقمي',10,'link_to_file_2.pdf')">اشتري</button>
+</div>
+
+<div class="card">
+<h3>اشتراك شهري بالمنتجات الرقمية</h3>
+<p>السعر: 25 USDT / شهر</p>
+<button onclick="subscribe('اشتراك شهري','link_to_subscription.zip',25,30)">اشترك الآن</button>
+</div>
+
+<div class="card">
+<h3>باقة قوالب سوشيال ميديا كاملة</h3>
+<p>السعر: 40 USDT</p>
+<button onclick="addToCart('باقة قوالب سوشيال ميديا كاملة',40,'link_to_file_3.zip')">اشتري</button>
+</div>
+
+<div class="card">
+<h3>دورة فيديو: التسويق عبر الفيسبوك</h3>
+<p>السعر: 50 USDT</p>
+<button onclick="addToCart('دورة فيديو: التسويق عبر الفيسبوك',50,'link_to_file_4.zip')">اشتري</button>
+</div>
+
+<div id="cartDiv" style="display:none;">
+<h3>🛒 طلبك</h3>
+<p>المنتج: <span id="cartProduct"></span></p>
+<p>السعر: <span id="cartPrice"></span> USDT</p>
+
 <h3>💳 اختر طريقة الدفع</h3>
 <select id="payMethod">
 <option value="binance">Binance Pay</option>
 <option value="payeer">Payeer</option>
 <option value="poste">البريد</option>
 </select>
-<p id="payID">782102873</p>
-<button type="button" onclick="copyPayID()">نسخ رقم الدفع</button>
-<a class="whatsapp" href="https://wa.me/213655643510" target="_blank">📲 تواصل معنا عبر واتساب</a>
+<p id="payID">Binance: 782102873 / Payeer: P1112102994</p>
+<button onclick="copyPayID()">نسخ رقم الدفع</button>
+<a class="whatsapp" href="https://wa.me/213655643510" target="_blank">📲 تواصل عبر واتساب</a>
+<button onclick="placeOrder()">تم الدفع، أرسل الطلب</button>
 </div>
-
-<button type="submit">إرسال الطلب</button>
-</form>
 </div>
 
 <!-- إدارة الطلبات -->
@@ -123,9 +207,9 @@ a.whatsapp{text-align:center;display:block;margin-top:10px;color:#00ff84;text-de
 </div>
 
 <script>
-// تعريف المدير
-const adminUser = "admin";
-const adminPass = "12345";
+// المدير
+const adminUser="admin";
+const adminPass="12345";
 
 // تسجيل / دخول
 function register(){
@@ -143,8 +227,6 @@ function register(){
 function login(){
   const lu=document.getElementById('loginUser').value;
   const lp=document.getElementById('loginPass').value;
-
-  // تسجيل دخول المدير
   if(lu===adminUser && lp===adminPass){
     localStorage.setItem('fast10User',adminUser);
     alert('تم تسجيل الدخول كمدير!');
@@ -153,10 +235,8 @@ function login(){
     showAdminOrders();
     return;
   }
-
   const u=localStorage.getItem('fast10User');
   const p=localStorage.getItem('fast10Pass');
-
   if(lu===u && lp===p){
     alert('تم تسجيل الدخول!');
     document.getElementById('loginDiv').style.display='none';
@@ -167,72 +247,45 @@ function login(){
 
 function showLogin(){document.getElementById('registerDiv').style.display='none';document.getElementById('loginDiv').style.display='block';}
 function showRegister(){document.getElementById('loginDiv').style.display='none';document.getElementById('registerDiv').style.display='block';}
-function showOrder(){document.getElementById('orderPage').style.display='block';document.getElementById('walletPage').style.display='none';document.getElementById('adminOrders').style.display='none';document.getElementById('customerOrders').style.display='none';updateBalance();}
+https://pay.binance.com/en/pay?amount='+amt,'_blankfunction showOrder(){document.getElementById('orderPage').style.display='block';document.getElementById('walletPage').style.display='none';document.getElementById('adminOrders').style.display='none';document.getElementById('customerOrders').style.display='none';updateBalance();}
 function showWallet(){document.getElementById('walletPage').style.display='block';document.getElementById('orderPage').style.display='none';document.getElementById('adminOrders').style.display='none';document.getElementById('customerOrders').style.display='none';updateBalance();}
-function showAdminOrders(){
-  const currentUser = localStorage.getItem('fast10User');
-  if(currentUser !== adminUser){
-    alert("هذه الصفحة خاصة بالمدير فقط!");
-    return;
-  }
-  document.getElementById('adminOrders').style.display='block';
-  document.getElementById('orderPage').style.display='none';
-  document.getElementById('walletPage').style.display='none';
-  document.getElementById('customerOrders').style.display='none';
-  renderAdminOrders();
+function showAdminOrders(){if(localStorage.getItem('fast10User')!==adminUser){ alert("هذه الصفحة خاصة بالمدير فقط!"); return; }document.getElementById('adminOrders').style.display='block';document.getElementById('orderPage').style.display='none';document.getElementById('walletPage').style.display='none';document.getElementById('customerOrders').style.display='none';renderAdminOrders();}
+function showCustomerOrders(){document.getElementById('customerOrders').style.display='block';document.getElementById(' orderPage').style.display='none';
+document.getElementById('walletPage').style.display='none';
+document.getElementById('adminOrders').style.display='none';
+updateBalance();
+renderCustomerOrders();
 }
-function showCustomerOrders(){document.getElementById('customerOrders').style.display='block';document.getElementById('orderPage').style.display='none';document.getElementById('walletPage').style.display='none';document.getElementById('adminOrders').style.display='none';renderCustomerOrders();}
 
-// رصيد
+// تحديث الرصيد
 function updateBalance(){
   const b=parseFloat(localStorage.getItem('fast10Balance'))||0;
   document.getElementById('balance').innerText=b.toFixed(2);
   document.getElementById('balanceOrder').innerText=b.toFixed(2);
 }
 
-// شحن
+// شحن الرصيد
 function realTopUp(){
   const amt=parseFloat(document.getElementById('topupAmount').value);
   const m=document.getElementById('topupMethod').value;
-  if(amt<=0)return alert('ادخل مبلغ صالح');
-  if(m==='binance')window.open('https://pay.binance.com/en/pay?amount='+amt,'_blank');
-  else if(m==='payeer')window.open('https://payeer.com/merchant/?amount='+amt,'_blank');
+  if(amt<=0) return alert('ادخل مبلغ صالح');
+  if(m==='binance') window.open('https://pay.binance.com/en/pay?amount='+amt,'_blank');
+  else if(m==='payeer') window.open('https://payeer.com/merchant/?amount='+amt,'_blank');
   else alert('اذهب لأقرب مكتب بريد وادفع: '+amt+' USDT');
   localStorage.setItem('fast10Balance',(parseFloat(localStorage.getItem('fast10Balance'))||0)+amt);
   updateBalance();
 }
 
-// فاتورة
-const serviceSelect=document.getElementById("serviceSelect");
-const quantitySelect=document.getElementById("quantitySelect");
-const invoice=document.getElementById("invoice");
-const invService=document.getElementById("invService");
-const invQuantity=document.getElementById("invQuantity");
-const invUnitPrice=document.getElementById("invUnitPrice");
-const invTotal=document.getElementById("invTotal");
-
-function updateInvoice(){
-  const s=serviceSelect.value;
-  const q=parseInt(quantitySelect.value)||0;
-  let p=0;
-  if(s==="زيادة متابعين فيسبوك") p=0.01;
-  else if(s==="مشاهدات إنستغرام") p=0.008;
-  else if(s==="مشاهدات TikTok") p=0.012;
-  else if(s==="إعجابات إنستغرام") p=0.005;
-  else if(s==="إعلانات ممولة") p=5;
-  else if(s==="مشاهدات يوتيوب") p=0.02;
-  else if(s==="زيادة متابعين تيليجرام") p=0.01;
-
-  if(s&&q>0){
-    invService.innerText=s;
-    invQuantity.innerText=q;
-    invUnitPrice.innerText=p;
-    invTotal.innerText=(p*q).toFixed(2);
-    invoice.style.display='block';
-  }else invoice.style.display='none';
+// السلة
+let cartProduct='', cartPrice=0, cartFile='';
+function addToCart(product,price,file){
+  cartProduct=product;
+  cartPrice=price;
+  cartFile=file;
+  document.getElementById('cartProduct').innerText=cartProduct;
+  document.getElementById('cartPrice').innerText=cartPrice+' USDT';
+  document.getElementById('cartDiv').style.display='block';
 }
-serviceSelect.addEventListener("change",updateInvoice);
-quantitySelect.addEventListener("input",updateInvoice);
 
 // نسخ رقم الدفع
 function copyPayID(){
@@ -240,100 +293,145 @@ function copyPayID(){
   alert('تم نسخ رقم الدفع');
 }
 
-// إرسال الطلب وتخزينه
-document.getElementById("orderForm").addEventListener("submit", function(e){
-  e.preventDefault();
-  const total=parseFloat(invTotal.innerText)||0;
-  const balance=parseFloat(localStorage.getItem('fast10Balance'))||0;
-  if(total > balance){
-    alert("رصيدك غير كافٍ لإتمام الطلب!");
-    return;
-  }
-  localStorage.setItem('fast10Balance',(balance-total).toFixed(2));
-  updateBalance();
+// إرسال الطلب
+function placeOrder(){
+  const orders=JSON.parse(localStorage.getItem('fast10Orders')||'[]');
+  const user=localStorage.getItem('fast10User');
+  orders.push({user:user,product:cartProduct,price:cartPrice,file:cartFile,status:'جديد',date:new Date()});
+  localStorage.setItem('fast10Orders',JSON.stringify(orders));
+  alert('تم إرسال طلبك! انتظر التأكيد من المدير.');
+  cartProduct=''; cartPrice=0; cartFile=''; document.getElementById('cartDiv').style.display='none';
+  renderAdminOrders();
+}
 
-  const orders = JSON.parse(localStorage.getItem('fast10Orders')||'[]');
-  const user = document.getElementById("orderName").value;
-  orders.push({
-    user: user,
-    name: user,
-    email: document.getElementById("orderEmail").value,
-    service: serviceSelect.value,
-    quantity: parseInt(quantitySelect.value)||0,
-    total: total.toFixed(2),
-    status: "جديد"
-  });
-  localStorage.setItem('fast10Orders', JSON.stringify(orders));
-  alert("تم إرسال الطلب بنجاح!");
-  this.reset();
-  invoice.style.display='none';
-});
-
-// إدارة الطلبات
+// إدارة الطلبات للمدير
+let lastOrdersCount=0;
 function renderAdminOrders(){
-  const ordersDiv = document.getElementById('ordersList');
+  const ordersDiv=document.getElementById('ordersList');
+  const orders=JSON.parse(localStorage.getItem('fast10Orders')||'[]');
   ordersDiv.innerHTML='';
-  const orders = JSON.parse(localStorage.getItem('fast10Orders')||'[]');
+  if(orders.length>lastOrdersCount){
+    const newOrders=orders.length-lastOrdersCount;
+    alert(`📢 هناك ${newOrders} طلب جديد!`);
+    const audio = new Audio('https://www.soundjay.com/buttons/sounds/button-3.mp3');
+    audio.play();
+  }
+  lastOrdersCount = orders.length;
 
   orders.forEach((order,index)=>{
     const div=document.createElement('div');
     div.className='card';
-    div.innerHTML = `
-      <p>الزبون: ${order.name}</p>
-      <p>الخدمة: ${order.service}</p>
-      <p>العدد: ${order.quantity}</p>
-      <p>الإجمالي: ${order.total} USDT</p>
+    div.innerHTML=`
+      <p>الزبون: ${order.user}</p>
+      <p>المنتج: ${order.product}</p>
+      <p>السعر: ${order.price} USDT</p>
       <p>الحالة: <span id="status${index}">${order.status}</span></p>
-      ${order.status==="جديد"? `<button onclick="updateOrder(${index},'مقبول')">قبول</button>
-      <button onclick="updateOrder(${index},'مرفوض')">رفض</button>` : ''}
-      ${order.status==="مقبول"? `<button onclick="updateOrder(${index},'مكتمل')">مكتمل</button>` : ''}
+      ${order.status==="جديد"? `<button onclick="updateOrder(${index},'مكتمل')">تم الدفع / مكتمل</button>` : ''}
     `;
     ordersDiv.appendChild(div);
   });
 }
 
+// تحديث حالة الطلب
 function updateOrder(index,newStatus){
   const orders=JSON.parse(localStorage.getItem('fast10Orders')||'[]');
   orders[index].status=newStatus;
   localStorage.setItem('fast10Orders',JSON.stringify(orders));
   renderAdminOrders();
-
-  const user = localStorage.getItem('fast10User');
-  if(orders[index].user === user){
-    alert(`تم تحديث حالة طلبك إلى: ${newStatus}`);
-    renderCustomerOrders();
-  }
+  renderCustomerOrders();
 }
 
-// طلبات الزبون
+// عرض طلبات الزبون
 function renderCustomerOrders(){
-  const ordersDiv = document.getElementById('myOrdersList');
-  ordersDiv.innerHTML='';
-  const orders = JSON.parse(localStorage.getItem('fast10Orders')||'[]');
   const user = localStorage.getItem('fast10User');
+  const myDiv = document.getElementById('myOrdersList');
+  const orders = JSON.parse(localStorage.getItem('fast10Orders')||'[]');
+  const subscriptions = JSON.parse(localStorage.getItem('fast10Subscriptions')||'[]');
+  myDiv.innerHTML='';
 
-  orders.filter(o => o.user === user).forEach((order)=>{
+  // طلبات مكتملة
+  orders.filter(o=>o.user===user && o.status==='مكتمل').forEach(order=>{
     const div=document.createElement('div');
     div.className='card';
     div.innerHTML = `
-      <p>الخدمة: ${order.service}</p>
-      <p>العدد: ${order.quantity}</p>
-      <p>الإجمالي: ${order.total} USDT</p>
-      <p>الحالة: ${order.status}</p>
+      <p>المنتج: ${order.product}</p>
+      <p>السعر: ${order.price} USDT</p>
+      <a href="${order.file}" target="_blank">تحميل المنتج</a>
     `;
-    ordersDiv.appendChild(div);
+    myDiv.appendChild(div);
   });
+
+  // الاشتراكات
+  subscriptions.filter(s=>s.user===user).forEach((sub,index)=>{
+    const now = new Date();
+    const end = new Date(sub.endDate);
+    if(now > end){ sub.status='منتهي'; }
+    const div=document.createElement('div');
+    div.className='card';
+    div.innerHTML = `
+      <p>اشتراك: ${sub.product}</p>
+      <p>الحالة: ${sub.status}</p>
+      <p>ينتهي: ${new Date(sub.endDate).toLocaleDateString()}</p>
+      ${sub.status==='منتهي'? `<button onclick="renewSubscription(${index},${sub.price},'${sub.file}')">تجديد الاشتراك</button>` : `<a href="${sub.file}" target="_blank">تحميل المنتج</a>`}
+    `;
+    myDiv.appendChild(div);
+  });
+  localStorage.setItem('fast10Subscriptions', JSON.stringify(subscriptions));
 }
 
-// تحديث تلقائي كل 5 ثواني لصفحة طلباتي
-setInterval(()=>{
-  const custOrdersDiv = document.getElementById('myOrdersList');
-  if(custOrdersDiv && custOrdersDiv.style.display !== 'none'){
-    renderCustomerOrders();
+// الاشتراك
+function subscribe(name,file,price,days=30){
+  const user = localStorage.getItem('fast10User');
+  if(!user) return alert('سجل الدخول أولاً');
+
+  let balance = parseFloat(localStorage.getItem('fast10Balance')) || 0;
+  if(balance >= price){
+    balance -= price;
+    localStorage.setItem('fast10Balance', balance);
+    updateBalance();
+    alert('تم خصم الرصيد واشتراكك مفعل! يمكنك تحميل المنتج الآن.');
+  }else{
+    alert(`ادفع ${price} USDT عبر Binance/Payeer/البريد ثم اضغط OK`);
   }
-},5000);
 
+  const subscriptions = JSON.parse(localStorage.getItem('fast10Subscriptions')||'[]');
+  const now = new Date();
+  const endDate = new Date();
+  endDate.setDate(now.getDate() + days); 
+  subscriptions.push({
+    user: user,
+    product: name,
+    file: file,
+    price: price,
+    startDate: now,
+    endDate: endDate,
+    status: 'مفعل'
+  });
+  localStorage.setItem('fast10Subscriptions', JSON.stringify(subscriptions));
+  renderCustomerOrders();
+}
+
+// تجديد الاشتراك
+function renewSubscription(index,price,file){
+  let balance = parseFloat(localStorage.getItem('fast10Balance')) || 0;
+  if(balance >= price){
+    balance -= price;
+    localStorage.setItem('fast10Balance', balance);
+    updateBalance();
+    alert('تم تجديد الاشتراك بنجاح!');
+    const subscriptions = JSON.parse(localStorage.getItem('fast10Subscriptions')||'[]');
+    const now = new Date();
+    const endDate = new Date();
+    endDate.setDate(now.getDate() + 30);
+    subscriptions[index].status='مفعل';
+    subscriptions[index].startDate=now;
+    subscriptions[index].endDate=endDate;
+    localStorage.setItem('fast10Subscriptions', JSON.stringify(subscriptions));
+    renderCustomerOrders();
+  }else{
+    alert(`ادفع ${price} USDT عبر Binance/Payeer/البريد ثم اضغط OK`);
+  }
+}
 </script>
-
 </body>
-</html>
+</html>                                
