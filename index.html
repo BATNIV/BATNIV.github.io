@@ -8,17 +8,20 @@
 body {font-family: Arial,sans-serif;margin:0;padding:0;background:linear-gradient(135deg,#0d1117,#0d2538);color:#fff;}
 header {background:#161b22;padding:15px;text-align:center;}
 header h1 {color:#00aaff;margin:0;}
-nav a {color:#fff;margin:0 10px;text-decoration:none;}
-.container {max-width:500px;margin:20px auto;padding:15px;background:#161b22;border-radius:12px;}
+nav a {color:#fff;margin:0 10px;text-decoration:none;cursor:pointer;}
+.container {max-width:400px;margin:20px auto;padding:15px;background:#161b22;border-radius:12px;}
 h2 {color:#00aaff;text-align:center;}
 input,select,button {width:100%;padding:10px;margin:8px 0;border:none;border-radius:8px;}
 button {background:#00aaff;color:#fff;cursor:pointer;}
 button:hover{background:#0088cc;}
-.invoice,.balance{background:#161b22;padding:15px;border-radius:10px;margin-top:10px;text-align:center;}
-.card{background:#161b22;padding:15px;border-radius:12px;text-align:center;margin:10px 0;display:flex;align-items:center;justify-content:space-between;}
-.card h3{color:#00aaff;margin:5px 0;}
-.card img{width:30px;height:30px;margin-left:10px;}
+.invoice,.balance,.orders{background:#161b22;padding:15px;border-radius:10px;margin-top:10px;text-align:center;}
+.card{background:#161b22;padding:15px;border-radius:12px;text-align:center;margin:10px 0;}
+.card h3{color:#00aaff;}
 a.whatsapp{text-align:center;display:block;margin-top:10px;color:#00ff84;text-decoration:none;font-weight:bold;}
+.order-item{background:#0d2538;padding:10px;border-radius:8px;margin:5px 0;}
+.accept-btn, .reject-btn{padding:5px 10px;margin:3px;border:none;border-radius:6px;cursor:pointer;}
+.accept-btn{background:#00ff84;color:#000;}
+.reject-btn{background:#ff4d4d;color:#fff;}
 </style>
 </head>
 <body>
@@ -26,8 +29,11 @@ a.whatsapp{text-align:center;display:block;margin-top:10px;color:#00ff84;text-de
 <header>
 <h1>Fast10</h1>
 <nav>
-<a href="#" onclick="showOrder()">الرئيسية</a>
-<a href="#" onclick="showWallet()">شحن رصيد</a>
+<a onclick="showRegister()">إنشاء حساب</a>
+<a onclick="showLogin()">تسجيل الدخول</a>
+<a onclick="showOrder()">الرشق</a>
+<a onclick="showWallet()">شحن رصيد</a>
+<a onclick="showAdmin()">لوحة التحكم</a>
 </nav>
 </header>
 
@@ -37,7 +43,7 @@ a.whatsapp{text-align:center;display:block;margin-top:10px;color:#00ff84;text-de
 <input type="text" id="regUser" placeholder="اسم المستخدم">
 <input type="password" id="regPass" placeholder="كلمة المرور">
 <button onclick="register()">تسجيل</button>
-<p>لديك حساب؟ <a href="#" onclick="showLogin()">تسجيل الدخول</a></p>
+<p>لديك حساب؟ <a onclick="showLogin()">تسجيل الدخول</a></p>
 </div>
 
 <!-- تسجيل دخول -->
@@ -46,7 +52,7 @@ a.whatsapp{text-align:center;display:block;margin-top:10px;color:#00ff84;text-de
 <input type="text" id="loginUser" placeholder="اسم المستخدم">
 <input type="password" id="loginPass" placeholder="كلمة المرور">
 <button onclick="login()">دخول</button>
-<p>لا تملك حساب؟ <a href="#" onclick="showRegister()">إنشاء حساب</a></p>
+<p>لا تملك حساب؟ <a onclick="showRegister()">إنشاء حساب</a></p>
 </div>
 
 <!-- شحن الرصيد -->
@@ -65,26 +71,22 @@ a.whatsapp{text-align:center;display:block;margin-top:10px;color:#00ff84;text-de
 <!-- صفحة الطلب -->
 <div class="container" id="orderPage" style="display:none;">
 <h2>خدمات الرشق والإعلانات</h2>
-<div class="card"><h3>متابعين فيسبوك</h3><span>0.10$ لكل 100</span><img src="https://img.icons8.com/color/48/000000/facebook-new.png"/></div>
-<div class="card"><h3>لايكات وتعليقات فيسبوك</h3><span>0.05$ لكل 100</span><img src="https://img.icons8.com/color/48/000000/facebook-like.png"/></div>
-<div class="card"><h3>مشاهدات إنستغرام</h3><span>0.08$ لكل 100</span><img src="https://img.icons8.com/color/48/000000/instagram-new.png"/></div>
-<div class="card"><h3>مشاهدات TikTok</h3><span>0.12$ لكل 100</span><img src="https://img.icons8.com/color/48/000000/tiktok.png"/></div>
-<div class="card"><h3>أعضاء تيلغرام</h3><span>0.10$ لكل عضو</span><img src="https://img.icons8.com/color/48/000000/telegram-app.png"/></div>
-<div class="card"><h3>مشاهدات يوتيوب</h3><span>0.12$ لكل 100</span><img src="https://img.icons8.com/color/48/000000/youtube-play.png"/></div>
+<div class="card"><h3>زيادة متابعين فيسبوك</h3></div>
+<div class="card"><h3>مشاهدات إنستغرام</h3></div>
+<div class="card"><h3>مشاهدات TikTok</h3></div>
+<div class="card"><h3>إعلانات ممولة</h3></div>
 
 <p class="balance">رصيدك الحالي: <span id="balanceOrder">0</span> USDT</p>
 
-<form id="orderForm" action="https://formsubmit.co/mafaity13@gmail.com" method="POST" target="_blank">
+<form id="orderForm">
 <input type="text" name="name" placeholder="اسمك الكامل" required>
 <input type="email" name="email" placeholder="بريدك الإلكتروني" required>
 <select id="serviceSelect" name="service" required>
 <option value="">اختر الخدمة</option>
-<option value="فيسبوك">متابعين فيسبوك</option>
-<option value="لايكات فيسبوك">لايكات وتعليقات فيسبوك</option>
+<option value="فيسبوك">زيادة متابعين فيسبوك</option>
 <option value="إنستغرام">مشاهدات إنستغرام</option>
 <option value="TikTok">مشاهدات TikTok</option>
-<option value="تيلغرام">أعضاء تيلغرام</option>
-<option value="يوتيوب">مشاهدات يوتيوب</option>
+<option value="إعلان">إعلانات ممولة</option>
 </select>
 <select id="quantitySelect" name="quantity" required>
 <option value="">اختر العدد</option>
@@ -93,6 +95,7 @@ a.whatsapp{text-align:center;display:block;margin-top:10px;color:#00ff84;text-de
 <option value="1000">1000</option>
 <option value="5000">5000</option>
 <option value="10000">10000</option>
+<option value="20000">20000</option>
 <option value="30000">30000</option>
 </select>
 
@@ -100,12 +103,10 @@ a.whatsapp{text-align:center;display:block;margin-top:10px;color:#00ff84;text-de
 <h3>📄 فاتورتك</h3>
 <p>الخدمة: <span id="invService"></span></p>
 <p>العدد: <span id="invQuantity"></span></p>
-<p>السعر للوحدة: <span id="invUnitPrice"></span> $</p>
-<p>الإجمالي: <span id="invTotal"></span> $</p>
+<p>السعر للوحدة: <span id="invUnitPrice"></span> USDT</p>
+<p>الإجمالي: <span id="invTotal"></span> USDT</p>
 </div>
 
-<div class="payment">
-<h3>💳 اختر طريقة الدفع</h3>
 <select id="payMethod">
 <option value="binance">Binance Pay</option>
 <option value="payeer">Payeer</option>
@@ -114,97 +115,49 @@ a.whatsapp{text-align:center;display:block;margin-top:10px;color:#00ff84;text-de
 <p id="payID">782102873</p>
 <button type="button" onclick="copyPayID()">نسخ رقم الدفع</button>
 <a class="whatsapp" href="https://wa.me/213655643510" target="_blank">📲 تواصل معنا عبر واتساب</a>
-</div>
-
-<button type="submit">إرسال الطلب</button>
+<br>
+<button type="button" onclick="placeOrder()">إرسال الطلب</button>
 </form>
 </div>
 
+<!-- لوحة التحكم -->
+<div class="container" id="adminPage" style="display:none;">
+<h2>لوحة التحكم</h2>
+<div id="ordersList" class="orders"></div>
+</div>
+
 <script>
-// تسجيل / دخول
+// التسجيل / الدخول
 function register(){
   const u=document.getElementById('regUser').value;
   const p=document.getElementById('regPass').value;
   if(u && p){
-    localStorage.setItem('fast10User',u);
-    localStorage.setItem('fast10Pass',p);
-    localStorage.setItem('fast10Balance',0);
+    if(localStorage.getItem('fast10Users')) {
+      const users=JSON.parse(localStorage.getItem('fast10Users'));
+      if(users[u]) return alert('اسم المستخدم موجود');
+      users[u]={pass:p,balance:0,orders:[]};
+      localStorage.setItem('fast10Users',JSON.stringify(users));
+    } else {
+      const users={};
+      users[u]={pass:p,balance:0,orders:[]};
+      localStorage.setItem('fast10Users',JSON.stringify(users));
+    }
     alert('تم إنشاء الحساب! سجل الدخول الآن.');
     showLogin();
   }else alert('املأ كل الحقول');
 }
+
 function login(){
-  const u=localStorage.getItem('fast10User');
-  const p=localStorage.getItem('fast10Pass');
   const lu=document.getElementById('loginUser').value;
   const lp=document.getElementById('loginPass').value;
-  if(lu===u && lp===p){
+  const users=JSON.parse(localStorage.getItem('fast10Users')||'{}');
+  if(users[lu] && users[lu].pass===lp){
+    localStorage.setItem('fast10Current',lu);
     alert('تم تسجيل الدخول!');
-    document.getElementById('loginDiv').style.display='none';
-    document.getElementById('registerDiv').style.display='none';
     showOrder();
-  }else alert('بيانات غير صحيحة');
-}
-function showLogin(){document.getElementById('registerDiv').style.display='none';document.getElementById('loginDiv').style.display='block';}
-function showRegister(){document.getElementById('loginDiv').style.display='none';document.getElementById('registerDiv').style.display='block';}
-function showOrder(){document.getElementById('orderPage').style.display='block';document.getElementById('walletPage').style.display='none';updateBalance();}
-function showWallet(){document.getElementById('walletPage').style.display='block';document.getElementById('orderPage').style.display='none';updateBalance();}
-
-// رصيد
-function updateBalance(){
-  const b=parseFloat(localStorage.getItem('fast10Balance'))||0;
-  document.getElementById('balance').innerText=b.toFixed(2);
-  document.getElementById('balanceOrder').innerText=b.toFixed(2);
+  } else alert('بيانات غير صحيحة');
 }
 
-// شحن
-function realTopUp(){
-  const amt=parseFloat(document.getElementById('topupAmount').value);
-  const m=document.getElementById('topupMethod').value;
-  if(amt<=0)return alert('ادخل مبلغ صالح');
-  if(m==='binance')window.open('https://pay.binance.com/en/pay?amount='+amt,'_blank');
-  else if(m==='payeer')window.open('https://payeer.com/merchant/?amount='+amt,'_blank');
-  else alert('اذهب لأقرب مكتب بريد وادفع: '+amt+' USDT');
-  localStorage.setItem('fast10Balance',(parseFloat(localStorage.getItem('fast10Balance'))||0)+amt);
-  updateBalance();
-}
-
-// فاتورة
-const serviceSelect=document.getElementById("serviceSelect");
-const quantitySelect=document.getElementById("quantitySelect");
-const invoice=document.getElementById("invoice");
-const invService=document.getElementById("invService");
-const invQuantity=document.getElementById("invQuantity");
-const invUnitPrice=document.getElementById("invUnitPrice");
-const invTotal=document.getElementById("invTotal");
-
-function updateInvoice(){
-  const s=serviceSelect.value;
-  const q=parseInt(quantitySelect.value)||0;
-  let p=0;
-  if(s==="فيسبوك")p=0.10;
-  else if(s==="لايكات فيسبوك")p=0.05;
-  else if(s==="إنستغرام")p=0.08;
-  else if(s==="TikTok")p=0.12;
-  else if(s==="تيلغرام")p=0.10;
-  else if(s==="يوتيوب")p=0.12;
-  if(s&&q>0){
-    invService.innerText=s;
-    invQuantity.innerText=q;
-    invUnitPrice.innerText=p.toFixed(2);
-    invTotal.innerText=(p*q).toFixed(2);
-    invoice.style.display='block';
-  }else invoice.style.display='none';
-}
-serviceSelect.addEventListener("change",updateInvoice);
-quantitySelect.addEventListener("change",updateInvoice);
-
-// نسخ رقم الدفع
-function copyPayID(){
-  navigator.clipboard.writeText(document.getElementById('payID').innerText);
-  alert('تم نسخ رقم الدفع');
-}
-</script>
-
-</body>
-</html>
+function showRegister(){document.getElementById('registerDiv').style.display='block';document.getElementById('loginDiv').style.display='none';document.getElementById('orderPage').style.display='none';document.getElementById('walletPage').style.display='none';document.getElementById('adminPage').style.display='none';}
+function showLogin(){document.getElementById('registerDiv').style.display='none';document.getElementById('loginDiv').style.display='block';document.getElementById('orderPage').style.display='none';document.getElementById('walletPage').style.display='none';document.getElementById('adminPage').style.display='none';}
+function showOrder(){document.getElementById('registerDiv').style.display
