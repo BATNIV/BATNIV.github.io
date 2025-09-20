@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fast10 - اطلب الآن</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header>
+    <h1>Fast10</h1>
+    <nav>
+      <a href="index.html">الرئيسية</a>
+      <a href="logout.html" id="logoutBtn">تسجيل خروج</a>
+    </nav>
+  </header>
+
+  <section class="order-form">
+    <h2>اطلب خدمتك الآن</h2>
+    <form id="orderForm">
+      <input type="text" id="orderName" placeholder="اسمك" readonly>
+      <input type="email" id="orderEmail" placeholder="البريد الإلكتروني" readonly>
+      <select id="serviceSelect" required>
+        <option value="">اختر الخدمة</option>
+        <option value="فيسبوك متابعين">فيسبوك متابعين</option>
+        <option value="إنستغرام مشاهدات">إنستغرام مشاهدات</option>
+        <option value="TikTok مشاهدات">TikTok مشاهدات</option>
+        <option value="باقة كاملة">💼 باقة كاملة</option>
+      </select>
+      <select id="quantitySelect" required>
+        <option value="">اختر العدد</option>
+        <option value="100">100</option>
+        <option value="500">500</option>
+        <option value="1000">1000</option>
+        <option value="5000">5000</option>
+      </select>
+
+      <div class="invoice" id="invoice" style="display:none;"><h3>📄 فاتورتك</h3><div id="invoiceDetails"></div><p><strong>الإجمالي: <span id="invTotal"></span> USDT</strong></p></div>
+
+      <button type="submit">إرسال الطلب</button>
+    </form>
+
+    <div class="payment">
+      <h3>💳 الدفع عبر Binance Pay</h3>
+      <img src="assets/binance_qr.png" alt="Binance QR">
+      <p>Binance ID: <strong id="binanceId">782102873</strong></p>
+      <button class="copy-btn" onclick="copyBinance()">نسخ Binance ID</button>
+    </div>
+
+    <a class="whatsapp" href="https://wa.me/213655643510" target="_blank">📲 تواصل معنا عبر واتساب</a>
+  </section>
+
+  <footer>
+    <p>© 2025 Fast10 - جميع الحقوق محفوظة</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
