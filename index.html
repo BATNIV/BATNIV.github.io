@@ -1,25 +1,231 @@
-<!DOCTYPE html>
-<html lang="ar">
+<!doctype html>
+
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>E-MARKET DZ</title>
-<link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>fast10 — خدمات نمو وإعلانات</title>
+  <style>
+    :root{--bg:#070707;--card:#0f0f12;--accent:#1e66ff;--muted:#9aa3ad}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter, 'Noto Sans Arabic',sans-serif;background:linear-gradient(180deg,#050506,#0a0a0a);color:#fff}
+    .container{max-width:1100px;margin:0 auto;padding:22px}
+    header{display:flex;align-items:center;justify-content:space-between}
+    .logo{display:flex;align-items:center;gap:12px}
+    .mark{width:52px;height:52px;border-radius:12px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:900}
+    nav ul{display:flex;gap:16px;list-style:none;margin:0;padding:0}
+    nav a{color:#e6eefc;text-decoration:none;font-weight:700}
+    .hero{display:flex;gap:24px;align-items:center;margin-top:18px}
+    .hero-left{flex:1}
+    .hero h1{font-size:36px;margin:0}
+    .hero p{color:var(--muted);margin:8px 0 16px}
+    .btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:800}
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:18px;margin-top:18px}
+    @media(max-width:920px){.grid{grid-template-columns:1fr}}
+    .card{background:linear-gradient(180deg,#0b0b0c,#0f1011);padding:16px;border-radius:12px}
+    .service-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px}
+    .service{background:rgba(255,255,255,0.02);padding:12px;border-radius:10px}
+    .footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:center}/* small helpers */
+label{display:block;margin:8px 0 6px;font-weight:700}
+input,select,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:#071017;color:#fff}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+.col{flex:1;min-width:140px}
+.note{color:var(--muted);font-size:13px}
+
+  </style>
 </head>
 <body>
-<header class="header">
-    <h1>E-MARKET DZ</h1>
-    <nav>
-        <a href="index.html">الرئيسية</a>
-        <a href="products.html">المنتجات</a>
-        <a href="contact.html">تواصل معنا</a>
-    </nav>
-</header>
-
-<section class="hero">
-    <h2>مرحبا بك في E-MARKET DZ</h2>
-    <p>أفضل المنتجات الرقمية بين يديك</p>
-    <a href="products.html" class="btn">عرض المنتجات</a>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <div class="mark">F10</div>
+        <div>
+          <div style="font-weight:900">fast10</div>
+          <div class="note">نمو حقيقي — إعلانات — إدارة حملات</div>
+        </div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#home">الرئيسية</a></li>
+          <li><a href="#services">الخدمات</a></li>
+          <li><a href="#ads">خدمة إعلانات</a></li>
+          <li><a href="#contact">تواصل</a></li>
+        </ul>
+      </nav>
+    </header><section id="home" class="hero">
+  <div class="hero-left">
+    <h1>خدمات نمو حقيقي وبيع باكيجات ترويجية</h1>
+    <p class="note">نقدّم حملات Facebook/Instagram Ads، تعاون مع إنفلونسرز، وحزم تحسين محتوى — نتائج حقيقية وشفافة.</p>
+    <a class="btn" href="#ads">اطلب حملة الآن</a>
+  </div>
+  <div style="width:360px">
+    <div class="card">
+      <strong>عرض توضيحي</strong>
+      <p class="note">أرقام توضيحية لواجهة الموقع فقط — ليست نتائج فعلية.</p>
+      <div style="display:flex;gap:8px;margin-top:8px">
+        <div style="flex:1">
+          <div style="font-size:22px;font-weight:900" id="demo-followers">2,345</div>
+          <div class="note">متابعين جدد (توضيحي)</div>
+        </div>
+        <div style="flex:1">
+          <div style="font-size:22px;font-weight:900" id="demo-reach">18,200</div>
+          <div class="note">وصول (توضيحي)</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
-</body>
-</html>
+
+<section id="services" class="card" style="margin-top:18px">
+  <h2>باكيجات جاهزة</h2>
+  <div class="service-list">
+    <div class="service">
+      <h3>باكيج تجريبي — Bronze</h3>
+      <p class="note">حملة إعلانية صغيرة — مناسب للاختبار (ميزانية مقترحة 15$).</p>
+      <div style="margin-top:8px"><strong>رسوم إدارة: 10$</strong></div>
+    </div>
+    <div class="service">
+      <h3>باكيج نمو — Silver</h3>
+      <p class="note">حملة + تحسين محتوى (ميزانية مقترحة 30$+).</p>
+      <div style="margin-top:8px"><strong>رسوم إدارة: 20$</strong></div>
+    </div>
+    <div class="service">
+      <h3>باكيج احترافي — Gold</h3>
+      <p class="note">حملة + إنفلونسر + تقرير مفصل.</p>
+      <div style="margin-top:8px"><strong>رسوم إدارة: 40$+</strong></div>
+    </div>
+  </div>
+</section>
+
+<div class="grid">
+  <main class="card">
+    <section id="ads">
+      <h2>طلب خدمة إعلانات (Ads)</h2>
+      <p class="note">املأ النموذج أدناه لتقديم طلب حملتك. سنراسلك لتأكيد الميزانية والتفاصيل.</p>
+      <!-- formsubmit action: استبدل EMAIL بالموجود عندك -->
+      <form id="adsForm" action="https://formsubmit.co/YOUR_EMAIL@EXAMPLE.COM" method="POST">
+        <label>رابط الحساب (صفحة/بروفايل):</label>
+        <input type="text" name="account" required placeholder="https://facebook.com/yourpage او @yourhandle">
+
+        <div class="row">
+          <div class="col">
+            <label>هدف الحملة:</label>
+            <select name="objective">
+              <option value="likes">زيادة متابعين</option>
+              <option value="reach">وصول</option>
+              <option value="traffic">زيارات</option>
+            </select>
+          </div>
+          <div class="col">
+            <label>بلد الاستهداف:</label>
+            <input type="text" name="country" placeholder="مثال: Algeria">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label>الميزانية الإعلانية المبدئية (دولار):</label>
+            <input type="number" name="budget" min="5" value="20">
+          </div>
+          <div class="col">
+            <label>مدة الحملة (أيام):</label>
+            <input type="number" name="days" min="1" value="7">
+          </div>
+        </div>
+
+        <label>بريد للتواصل:</label>
+        <input type="email" name="email" placeholder="example@mail.com">
+
+        <label>ملاحظات إضافية:</label>
+        <textarea name="notes" rows="4" placeholder="تفاصيل إضافية"></textarea>
+
+        <input type="hidden" name="_subject" value="طلب حملة - fast10">
+        <input type="hidden" name="_captcha" value="false">
+
+        <div style="margin-top:12px">
+          <button class="btn" type="submit">أنشئ الطلب</button>
+        </div>
+      </form>
+
+      <div style="margin-top:14px" class="note">ملاحظة: لإضافة دفع عبر Binance، استعمل قسم الدفع في الشريط الجانبي.
+      </div>
+    </section>
+
+    <section style="margin-top:18px">
+      <h3>إدارة الطلبات</h3>
+      <p class="note">نوصي بتخزين الطلبات في Google Sheets أو قاعدة بيانات بسيطة لتتبع الحالة وإرفاق لقطات شاشة من Ads Manager.</p>
+    </section>
+  </main>
+
+  <aside class="card">
+    <h3>طرق الدفع</h3>
+    <p class="note">يمكنك قبول مدفوعات عبر PayPal، USDT، أو تحويل بنكي. أدناه مكان لإضافة معرف Binance الخاص بك.</p>
+
+    <div style="margin-top:8px">
+      <div style="font-weight:800">Binance ID (لإيداع USDT)</div>
+      <div class="note" id="binanceDisplay">لم يتم تعيين معرف Binance بعد.</div>
+      <!-- لتحرير: استبدل النص داخل العنصر data-binance بمعرفك الحقيقي -->
+      <div style="display:none" id="binanceData" data-binance="BINANCE_ID_HERE"></div>
+      <div style="height:8px"></div>
+      <div class="note">تعليمات: بعد أن تزودنا بالمعرف، سنعرضه هنا مع زر للنسخ ورابط الدفع.</div>
+    </div>
+
+    <div style="margin-top:12px">
+      <h4>سريع: خطوات بعد الطلب</h4>
+      <ol class="note" style="padding-left:12px">
+        <li>تأكيد الميزانية وتفاصيل الحملة.</li>
+        <li>دفع رسوم الإدارة أو تزويدنا بميزانية الإعلانات.</li>
+        <li>بدء الحملة ومتابعة النتائج.</li>
+      </ol>
+    </div>
+
+    <div style="margin-top:12px">
+      <a class="btn" href="#contact">تواصل معنا</a>
+    </div>
+  </aside>
+</div>
+
+<footer class="footer" id="contact">
+  © fast10 — كل الحقوق محفوظة 2025 — للتواصل: <strong>فرحات بهاء الدين</strong>
+</footer>
+
+  </div>  <script>
+    // عرض الأرقام التوضيحية (أنيميشن)
+    function animate(id, start, end, ms){
+      const el = document.getElementById(id);
+      let startTime = null;
+      function frame(t){
+        if(!startTime) startTime = t;
+        const progress = Math.min((t-startTime)/ms,1);
+        el.textContent = Math.floor(progress*(end-start)+start).toLocaleString();
+        if(progress<1) requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    }
+    animate('demo-followers',0,2345,1400);
+    animate('demo-reach',0,18200,1400);
+
+    // إظهار معرف Binance إذا تم إدخاله في data attribute
+    (function(){
+      const binEl = document.getElementById('binanceData');
+      const display = document.getElementById('binanceDisplay');
+      const id = binEl.getAttribute('data-binance');
+      if(id && id !== 'BINANCE_ID_HERE'){
+        display.textContent = id;
+        // إمكانية إضافة زر نسخ
+        const btn = document.createElement('button');
+        btn.textContent = 'انسخ المعرف';
+        btn.className = 'btn';
+        btn.style.marginTop='8px';
+        btn.onclick = function(){ navigator.clipboard.writeText(id).then(()=>alert('تم نسخ المعرف')) };
+        display.parentNode.appendChild(btn);
+      }
+    })();
+  </script>  <!-- تعليمات النشر:
+    1) احفظ هذا الملف باسم index.html وابعه إلى استضافة (Netlify, Vercel, GitHub Pages) أو رفعه إلى السيرفر تاعك.
+    2) لتفعيل استلام الطلبات عبر البريد: استبدل action في الفورم برابط formsubmit.co/YOUR_EMAIL
+       أو اربط الفورم بسيرفرك عبر POST.
+    3) لإظهار معرف Binance على الصفحة: افتح الملف وابحث عن data-binance="BINANCE_ID_HERE" واستبدل BINANCE_ID_HERE بالمعرف تاعك.
+    4) إذا تحب نعدّلك الملف ونضع المعرف نيابة عنك، عطني المعرف ونضيفه (أنا خزّنت ملاحظة إنك طلبت ذلك).
+  --></body>
+    </html>
