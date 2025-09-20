@@ -47,22 +47,7 @@
   </section>
 
   <section class="services" id="services">
-    <div class="card">
-      <h3>زيادة متابعين فيسبوك</h3>
-      <p>باكيجات متنوعة بأسعار مناسبة</p>
-    </div>
-    <div class="card">
-      <h3>مشاهدات إنستغرام</h3>
-      <p>رفع التفاعل لحسابك بسرعة</p>
-    </div>
-    <div class="card">
-      <h3>مشاهدات TikTok</h3>
-      <p>خلي فيديوهاتك تنتشر أكثر</p>
-    </div>
-    <div class="card">
-      <h3>إعلانات ممولة</h3>
-      <p>خدمة ترويج احترافية لإعلاناتك</p>
-    </div>
+    <div class="card"><h3>خدمات متعددة لجميع المنصات</h3><p>اختر الخدمة أو الباقة الكاملة عند الطلب</p></div>
   </section>
 
   <section class="order-form" id="order">
@@ -73,10 +58,21 @@
       
       <select id="serviceSelect" name="service" required>
         <option value="">اختر الخدمة</option>
-        <option value="فيسبوك">زيادة متابعين فيسبوك</option>
-        <option value="إنستغرام">مشاهدات إنستغرام</option>
-        <option value="TikTok">مشاهدات TikTok</option>
-        <option value="إعلان">إعلانات ممولة</option>
+        <option value="إنستغرام متابعين">إنستغرام - زيادة المتابعين</option>
+        <option value="إنستغرام مشاهدات">إنستغرام - زيادة المشاهدات</option>
+        <option value="إنستغرام لايكات">إنستغرام - زيادة اللايكات</option>
+        <option value="تيك توك متابعين">تيك توك - زيادة المتابعين</option>
+        <option value="تيك توك مشاهدات">تيك توك - زيادة المشاهدات</option>
+        <option value="تيك توك لايكات">تيك توك - زيادة اللايكات</option>
+        <option value="يوتيوب مشتركين">يوتيوب - زيادة المشتركين</option>
+        <option value="يوتيوب مشاهدات">يوتيوب - زيادة المشاهدات</option>
+        <option value="يوتيوب لايكات">يوتيوب - زيادة اللايكات</option>
+        <option value="فيسبوك متابعين">فيسبوك - زيادة المتابعين</option>
+        <option value="فيسبوك لايكات">فيسبوك - زيادة اللايكات</option>
+        <option value="تويتر متابعين">تويتر - زيادة المتابعين</option>
+        <option value="تويتر لايكات">تويتر - زيادة اللايكات</option>
+        <option value="سناب شات متابعين">سناب شات - زيادة المتابعين</option>
+        <option value="الباقة الكاملة">💼 باقة كل الخدمات</option>
       </select>
       
       <select id="quantitySelect" name="quantity" required>
@@ -87,23 +83,20 @@
         <option value="5000">5000</option>
       </select>
       
-      <!-- الفاتورة التفاعلية -->
       <div class="invoice" id="invoice" style="display:none;">
         <h3>📄 فاتورتك</h3>
         <p>الخدمة: <span id="invService"></span></p>
         <p>العدد: <span id="invQuantity"></span></p>
-        <p>السعر للوحدة: <span id="invUnitPrice"></span> دينار</p>
-        <p>الإجمالي: <span id="invTotal"></span> دينار</p>
+        <p>السعر للوحدة: <span id="invUnitPrice"></span> USDT</p>
+        <p>الإجمالي: <span id="invTotal"></span> USDT</p>
       </div>
       
-      <!-- إعدادات التحويل بعد الإرسال -->
       <input type="hidden" name="_next" value="https://BATNIV.github.io/fast10/thank-you.html">
       <input type="hidden" name="_captcha" value="false">
 
       <button type="submit">إرسال الطلب</button>
     </form>
 
-    <!-- قسم الدفع -->
     <div class="payment">
       <h3>💳 الدفع عبر Binance Pay</h3>
       <img src="binance_qr.png" alt="Binance QR">
@@ -111,7 +104,6 @@
       <button class="copy-btn" onclick="copyBinance()">نسخ Binance ID</button>
     </div>
 
-    <!-- زر واتساب -->
     <a class="whatsapp" href="https://wa.me/213655643510" target="_blank">📲 تواصل معنا عبر واتساب</a>
   </section>
 
@@ -139,24 +131,21 @@
       const quantity = parseInt(quantitySelect.value) || 0;
       let pricePerUnit = 0;
 
-      if(service === "فيسبوك") pricePerUnit = 10;
-      else if(service === "إنستغرام") pricePerUnit = 8;
-      else if(service === "TikTok") pricePerUnit = 12;
-      else if(service === "إعلان") pricePerUnit = 20;
-
-      if(service && quantity > 0) {
-        invService.innerText = service;
-        invQuantity.innerText = quantity;
-        invUnitPrice.innerText = pricePerUnit;
-        invTotal.innerText = pricePerUnit * quantity;
-        invoice.style.display = "block";
-      } else {
-        invoice.style.display = "none";
-      }
-    }
-
-    serviceSelect.addEventListener("change", updateInvoice);
-    quantitySelect.addEventListener("change", updateInvoice);
-  </script>
-</body>
-</html>
+      // الأسعار بالـ USDT لكل خدمة
+      if(service.includes("إنستغرام متابعين")) pricePerUnit = 0.85/100;
+      else if(service.includes("إنستغرام مشاهدات")) pricePerUnit = 0.60/1000;
+      else if(service.includes("إنستغرام لايكات")) pricePerUnit = 0.50/100;
+      else if(service.includes("تيك توك متابعين")) pricePerUnit = 0.85/100;
+      else if(service.includes("تيك توك مشاهدات")) pricePerUnit = 0.60/1000;
+      else if(service.includes("تيك توك لايكات")) pricePerUnit = 0.50/100;
+      else if(service.includes("يوتيوب مشتركين")) pricePerUnit = 1.0/100;
+      else if(service.includes("يوتيوب مشاهدات")) pricePerUnit = 0.70/1000;
+      else if(service.includes("يوتيوب لايكات")) pricePerUnit = 0.50/100;
+      else if(service.includes("فيسبوك متابعين")) pricePerUnit = 0.70/100;
+      else if(service.includes("فيسبوك لايكات")) pricePerUnit = 0.50/100;
+      else if(service.includes("تويتر متابعين")) pricePerUnit = 0.60/100;
+      else if(service.includes("تويتر لايكات")) pricePerUnit = 0.50/100;
+      else if(service.includes("سناب شات متابعين")) pricePerUnit = 0.60/100;
+      else if(service.includes("الباقة الكاملة")) {
+        // حساب تقريبي للباقة الكاملة (جمع كل الخدمات)
+        pricePerUnit = (0.85/100 + 0.60/1000 + 0.50/100 + 0.85/100 + 0.60/1000 + 0.50/100 + 1.0/100 + 0.70/1000 + 0.50/100 + 0.70/100 + 0.50/100 + 0
