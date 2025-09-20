@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html lang="ar">
+<!DOCTYPE html><html lang="ar">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fast10 - خدمات الرشق والشحن</title>
+<title>Fast10 - الرشق والشحن</title>
 <style>
 body {font-family: Arial,sans-serif;margin:0;padding:0;background:linear-gradient(135deg,#0d1117,#0d2538);color:#fff;}
 header {background:#161b22;padding:15px;text-align:center;}
@@ -16,40 +15,33 @@ button {background:#00aaff;color:#fff;cursor:pointer;}
 button:hover{background:#0088cc;}
 .invoice,.balance{background:#161b22;padding:15px;border-radius:10px;margin-top:10px;text-align:center;}
 .card{background:#161b22;padding:15px;border-radius:12px;text-align:center;margin:10px 0;}
-.card h3{color:#00aaff;margin:5px 0;}
+.card h3{color:#00aaff;}
 a.whatsapp{text-align:center;display:block;margin-top:10px;color:#00ff84;text-decoration:none;font-weight:bold;}
+.table {width:100%;border-collapse:collapse;margin-top:10px;}
+.table th, .table td {border:1px solid #00aaff;padding:8px;text-align:center;}
+.admin {background:#161b22;padding:10px;margin-top:10px;border-radius:10px;}
 </style>
 </head>
-<body>
-
-<header>
+<body><header>
 <h1>Fast10</h1>
 <nav>
-<a onclick="showPage('order')">الرئيسية</a>
-<a onclick="showPage('wallet')">شحن رصيد</a>
+<a onclick="showOrder()">الرئيسية</a>
+<a onclick="showOrder()">الخدمات</a>
+<a onclick="showWallet()">شحن رصيد</a>
 </nav>
-</header>
-
-<!-- تسجيل حساب -->
-<div class="container" id="registerDiv">
+</header><!-- تسجيل حساب --><div class="container" id="registerDiv">
 <h2>إنشاء حساب</h2>
 <input type="text" id="regUser" placeholder="اسم المستخدم">
 <input type="password" id="regPass" placeholder="كلمة المرور">
 <button onclick="register()">تسجيل</button>
 <p>لديك حساب؟ <a onclick="showLogin()">تسجيل الدخول</a></p>
-</div>
-
-<!-- تسجيل دخول -->
-<div class="container" id="loginDiv" style="display:none;">
+</div><!-- تسجيل دخول --><div class="container" id="loginDiv" style="display:none;">
 <h2>تسجيل الدخول</h2>
 <input type="text" id="loginUser" placeholder="اسم المستخدم">
 <input type="password" id="loginPass" placeholder="كلمة المرور">
 <button onclick="login()">دخول</button>
 <p>لا تملك حساب؟ <a onclick="showRegister()">إنشاء حساب</a></p>
-</div>
-
-<!-- شحن الرصيد -->
-<div class="container" id="walletPage" style="display:none;">
+</div><!-- شحن الرصيد --><div class="container" id="walletPage" style="display:none;">
 <h2>💰 شحن رصيدك</h2>
 <p class="balance">رصيدك الحالي: <span id="balance">0</span> USDT</p>
 <input type="number" id="topupAmount" placeholder="المبلغ المراد شحنه" min="1">
@@ -59,38 +51,30 @@ a.whatsapp{text-align:center;display:block;margin-top:10px;color:#00ff84;text-de
 <option value="poste">البريد</option>
 </select>
 <button onclick="realTopUp()">شحن الآن</button>
-</div>
-
-<!-- صفحة الطلب -->
-<div class="container" id="orderPage" style="display:none;">
+</div><!-- صفحة الطلب --><div class="container" id="orderPage" style="display:none;">
 <h2>خدمات الرشق والإعلانات</h2>
-
-<div class="card"><h3>زيادة متابعين فيسبوك - 10 USDT لكل 100 متابع</h3></div>
-<div class="card"><h3>مشاهدات إنستغرام - 8 USDT لكل 100 مشاهدة</h3></div>
-<div class="card"><h3>مشاهدات TikTok - 12 USDT لكل 100 مشاهدة</h3></div>
-<div class="card"><h3>إعلانات ممولة - 20 USDT لكل 100 تفاعل</h3></div>
-
-<p class="balance">رصيدك الحالي: <span id="balanceOrder">0</span> USDT</p>
-
-<form id="orderForm" action="https://formsubmit.co/mafaity13@gmail.com" method="POST" target="_blank">
-<input type="text" name="name" placeholder="اسمك الكامل" required>
-<input type="email" name="email" placeholder="بريدك الإلكتروني" required>
-<select id="serviceSelect" name="service" required>
+<div class="card"><h3>زيادة متابعين فيسبوك</h3></div>
+<div class="card"><h3>مشاهدات إنستغرام</h3></div>
+<div class="card"><h3>مشاهدات TikTok</h3></div>
+<div class="card"><h3>إعلانات ممولة</h3></div><p class="balance">رصيدك الحالي: <span id="balanceOrder">0</span> USDT</p><form id="orderForm">
+<input type="text" id="orderName" placeholder="اسمك الكامل" required>
+<input type="email" id="orderEmail" placeholder="بريدك الإلكتروني" required>
+<select id="serviceSelect" required>
 <option value="">اختر الخدمة</option>
-<option value="فيسبوك">زيادة متابعين فيسبوك</option>
-<option value="إنستغرام">مشاهدات إنستغرام</option>
-<option value="TikTok">مشاهدات TikTok</option>
-<option value="إعلان">إعلانات ممولة</option>
+<option value="فيسبوك">زيادة متابعين فيسبوك - 10 USDT</option>
+<option value="إنستغرام">مشاهدات إنستغرام - 8 USDT</option>
+<option value="TikTok">مشاهدات TikTok - 12 USDT</option>
+<option value="إعلان">إعلانات ممولة - 20 USDT</option>
 </select>
-<select id="quantitySelect" name="quantity" required>
+<select id="quantitySelect" required>
 <option value="">اختر العدد</option>
 <option value="100">100</option>
 <option value="500">500</option>
 <option value="1000">1000</option>
 <option value="5000">5000</option>
+<option value="10000">10000</option>
 <option value="30000">30000</option>
 </select>
-
 <div class="invoice" id="invoice" style="display:none;">
 <h3>📄 فاتورتك</h3>
 <p>الخدمة: <span id="invService"></span></p>
@@ -98,7 +82,6 @@ a.whatsapp{text-align:center;display:block;margin-top:10px;color:#00ff84;text-de
 <p>السعر للوحدة: <span id="invUnitPrice"></span> USDT</p>
 <p>الإجمالي: <span id="invTotal"></span> USDT</p>
 </div>
-
 <div class="payment">
 <h3>💳 اختر طريقة الدفع</h3>
 <select id="payMethod">
@@ -110,21 +93,21 @@ a.whatsapp{text-align:center;display:block;margin-top:10px;color:#00ff84;text-de
 <button type="button" onclick="copyPayID()">نسخ رقم الدفع</button>
 <a class="whatsapp" href="https://wa.me/213655643510" target="_blank">📲 تواصل معنا عبر واتساب</a>
 </div>
-
-<button type="submit">إرسال الطلب</button>
+<button type="button" onclick="submitOrder()">إرسال الطلب</button>
 </form>
+</div><!-- لوحة تحكم المدير --><div class="container" id="adminPanel" style="display:none;">
+<h2>لوحة تحكم المدير</h2>
+<div class="admin">
+<h3>الطلبات الواردة</h3>
+<table class="table" id="ordersTable">
+<tr><th>الاسم</th><th>البريد</th><th>الخدمة</th><th>العدد</th><th>الإجمالي</th><th>حالة</th></tr>
+</table>
 </div>
+</div><script>
+let orders = [];
+const adminUser = 'admin';
+const adminPass = 'admin123';
 
-<script>
-// صفحات
-function showPage(page){
-  document.getElementById('orderPage').style.display='none';
-  document.getElementById('walletPage').style.display='none';
-  if(page==='order') showOrder();
-  else if(page==='wallet') showWallet();
-}
-
-// تسجيل / دخول
 function register(){
   const u=document.getElementById('regUser').value;
   const p=document.getElementById('regPass').value;
@@ -134,43 +117,51 @@ function register(){
     localStorage.setItem('fast10Balance',0);
     alert('تم إنشاء الحساب! سجل الدخول الآن.');
     showLogin();
-  }else alert('املأ كل الحقول');
+  } else alert('املأ كل الحقول');
 }
+
 function login(){
-  const u=localStorage.getItem('fast10User');
-  const p=localStorage.getItem('fast10Pass');
   const lu=document.getElementById('loginUser').value;
   const lp=document.getElementById('loginPass').value;
-  if(lu===u && lp===p){
-    alert('تم تسجيل الدخول!');
+  if(lu===adminUser && lp===adminPass){
+    alert('تم تسجيل دخول المدير');
     document.getElementById('loginDiv').style.display='none';
     document.getElementById('registerDiv').style.display='none';
-    showOrder();
-  }else alert('بيانات غير صحيحة');
+    document.getElementById('adminPanel').style.display='block';
+  } else {
+    const u=localStorage.getItem('fast10User');
+    const p=localStorage.getItem('fast10Pass');
+    if(lu===u && lp===p){
+      alert('تم تسجيل الدخول!');
+      document.getElementById('loginDiv').style.display='none';
+      document.getElementById('registerDiv').style.display='none';
+      showOrder();
+    } else alert('بيانات غير صحيحة');
+  }
 }
+
 function showLogin(){document.getElementById('registerDiv').style.display='none';document.getElementById('loginDiv').style.display='block';}
 function showRegister(){document.getElementById('loginDiv').style.display='none';document.getElementById('registerDiv').style.display='block';}
+function showOrder(){document.getElementById('orderPage').style.display='block';document.getElementById('walletPage').style.display='none';updateBalance();}
+function showWallet(){document.getElementById('walletPage').style.display='block';document.getElementById('orderPage').style.display='none';updateBalance();}
 
-// رصيد
 function updateBalance(){
   const b=parseFloat(localStorage.getItem('fast10Balance'))||0;
   document.getElementById('balance').innerText=b.toFixed(2);
   document.getElementById('balanceOrder').innerText=b.toFixed(2);
 }
 
-// شحن حقيقي
 function realTopUp(){
   const amt=parseFloat(document.getElementById('topupAmount').value);
   const m=document.getElementById('topupMethod').value;
   if(amt<=0)return alert('ادخل مبلغ صالح');
-  if(m==='binance') window.open('https://pay.binance.com/en/pay?amount='+amt,'_blank');
-  else if(m==='payeer') window.open('https://payeer.com/merchant/?amount='+amt,'_blank');
+  if(m==='binance')window.open('https://pay.binance.com/en/pay?amount='+amt,'_blank');
+  else if(m==='payeer')window.open('https://payeer.com/merchant/?amount='+amt,'_blank');
   else alert('اذهب لأقرب مكتب بريد وادفع: '+amt+' USDT');
   localStorage.setItem('fast10Balance',(parseFloat(localStorage.getItem('fast10Balance'))||0)+amt);
   updateBalance();
 }
 
-// فاتورة
 const serviceSelect=document.getElementById("serviceSelect");
 const quantitySelect=document.getElementById("quantitySelect");
 const invoice=document.getElementById("invoice");
@@ -183,10 +174,10 @@ function updateInvoice(){
   const s=serviceSelect.value;
   const q=parseInt(quantitySelect.value)||0;
   let p=0;
-  if(s==="فيسبوك")p=10;
-  else if(s==="إنستغرام")p=8;
-  else if(s==="TikTok")p=12;
-  else if(s==="إعلان")p=20;
+  if(s.includes("فيسبوك"))p=10;
+  else if(s.includes("إنستغرام"))p=8;
+  else if(s.includes("TikTok"))p=12;
+  else if(s.includes("إعلان"))p=20;
   if(s&&q>0){
     invService.innerText=s;
     invQuantity.innerText=q;
@@ -198,10 +189,33 @@ function updateInvoice(){
 serviceSelect.addEventListener("change",updateInvoice);
 quantitySelect.addEventListener("change",updateInvoice);
 
-// نسخ رقم الدفع
 function copyPayID(){
   navigator.clipboard.writeText(document.getElementById('payID').innerText);
   alert('تم نسخ رقم الدفع');
+}
+
+function submitOrder(){
+  const balance = parseFloat(localStorage.getItem('fast10Balance')) || 0;
+  const total = parseFloat(invTotal.innerText) || 0;
+  if(total>balance){alert('رصيدك غير كافي'); return;}
+  const order = {name:document.getElementById('orderName').value,email:document.getElementById('orderEmail').value,service:serviceSelect.value,quantity:quantitySelect.value,total:total,status:'في انتظار الموافقة'};
+  orders.push(order);
+  localStorage.setItem('fast10Balance',(balance-total).toFixed(2));
+  updateBalance();
+  alert('تم إرسال الطلب، في انتظار الموافقة');
+  addOrderToTable(order);
+}
+
+function addOrderToTable(order){
+  const table=document.getElementById('ordersTable');
+  const row=table.insertRow();
+  row.insertCell(0).innerText=order.name;
+  row.insertCell(1).innerText=order.email;
+  row.insertCell(2).innerText
+  row.insertCell(2).innerText = order.service;
+  row.insertCell(3).innerText = order.quantity;
+  row.insertCell(4).innerText = order.total.toFixed(2);
+  row.insertCell(5).innerText = order.status;
 }
 </script>
 
