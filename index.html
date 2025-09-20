@@ -12,14 +12,20 @@
     .banner {padding: 60px; text-align:center; background:#0d2538;}
     .banner h2 {font-size: 2em; color:#00aaff;}
     .services {display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 20px; padding: 40px;}
-    .card {background:#161b22; padding:20px; border-radius:12px; text-align:center;}
+    .card {background:#161b22; padding:20px; border-radius:12px; text-align:center; transition: transform 0.3s, box-shadow 0.3s;}
+    .card:hover {transform: translateY(-5px); box-shadow: 0 0 20px #00aaff;}
     .card h3 {color:#00aaff;}
     .order-form {padding: 40px; background:#0d2538; text-align:center;}
-    .order-form input, .order-form textarea {padding:10px; margin:10px; width:80%; max-width:400px; border:none; border-radius:8px;}
-    .order-form button {padding:12px 25px; background:#00aaff; border:none; border-radius:8px; color:#fff; cursor:pointer;}
+    .order-form select, .order-form input {padding:10px; margin:10px; width:80%; max-width:400px; border:none; border-radius:8px;}
+    .order-form button {padding:12px 25px; background:#00aaff; border:none; border-radius:8px; color:#fff; cursor:pointer; transition: background 0.3s;}
+    .order-form button:hover {background:#0088cc;}
     .payment {margin-top:30px; text-align:center;}
     .payment img {max-width:200px; margin:15px auto; display:block;}
-    .copy-btn {background:#161b22; border:1px solid #00aaff; color:#00aaff; padding:8px 12px; border-radius:6px; cursor:pointer;}
+    .copy-btn {background:#161b22; border:1px solid #00aaff; color:#00aaff; padding:8px 12px; border-radius:6px; cursor:pointer; transition: background 0.3s;}
+    .copy-btn:hover {background:#00aaff; color:#161b22;}
+    .invoice {background:#161b22; padding:20px; border-radius:12px; margin-top:20px; text-align:left; max-width:400px; margin-left:auto; margin-right:auto;}
+    .invoice h3 {color:#00aaff; margin-bottom:10px;}
+    .invoice p {margin:5px 0;}
     footer {background:#161b22; padding:20px; text-align:center;}
     a.whatsapp {display:inline-block; margin-top:15px; color:#00ff84; text-decoration:none; font-weight:bold;}
   </style>
@@ -61,10 +67,34 @@
 
   <section class="order-form" id="order">
     <h2>اطلب خدمتك الآن</h2>
-    <form action="https://formsubmit.co/mafaity13@gmail.com" method="POST">
+    <form action="https://formsubmit.co/mafaity13@gmail.com" method="POST" id="orderForm">
       <input type="text" name="name" placeholder="اسمك الكامل" required>
       <input type="email" name="email" placeholder="بريدك الإلكتروني" required>
-      <textarea name="service" placeholder="الخدمة المطلوبة (مثال: 1000 متابع فيسبوك)" required></textarea>
+      
+      <select id="serviceSelect" name="service" required>
+        <option value="">اختر الخدمة</option>
+        <option value="فيسبوك">زيادة متابعين فيسبوك</option>
+        <option value="إنستغرام">مشاهدات إنستغرام</option>
+        <option value="TikTok">مشاهدات TikTok</option>
+        <option value="إعلان">إعلانات ممولة</option>
+      </select>
+      
+      <select id="quantitySelect" name="quantity" required>
+        <option value="">اختر العدد</option>
+        <option value="100">100</option>
+        <option value="500">500</option>
+        <option value="1000">1000</option>
+        <option value="5000">5000</option>
+      </select>
+      
+      <!-- الفاتورة التفاعلية -->
+      <div class="invoice" id="invoice" style="display:none;">
+        <h3>📄 فاتورتك</h3>
+        <p>الخدمة: <span id="invService"></span></p>
+        <p>العدد: <span id="invQuantity"></span></p>
+        <p>السعر للوحدة: <span id="invUnitPrice"></span> دينار</p>
+        <p>الإجمالي: <span id="invTotal"></span> دينار</p>
+      </div>
       
       <!-- إعدادات التحويل بعد الإرسال -->
       <input type="hidden" name="_next" value="https://BATNIV.github.io/fast10/thank-you.html">
@@ -93,8 +123,40 @@
     function copyBinance() {
       const id = document.getElementById("binanceId").innerText;
       navigator.clipboard.writeText(id);
-      alert("تم نسخ Binance ID: "782102873");
+      alert("تم نسخ Binance ID: " + id);
     }
+
+    const serviceSelect = document.getElementById("serviceSelect");
+    const quantitySelect = document.getElementById("quantitySelect");
+    const invoice = document.getElementById("invoice");
+    const invService = document.getElementById("invService");
+    const invQuantity = document.getElementById("invQuantity");
+    const invUnitPrice = document.getElementById("invUnitPrice");
+    const invTotal = document.getElementById("invTotal");
+
+    function updateInvoice() {
+      const service = serviceSelect.value;
+      const quantity = parseInt(quantitySelect.value) || 0;
+      let pricePerUnit = 0;
+
+      if(service === "فيسبوك") pricePerUnit = 10;
+      else if(service === "إنستغرام") pricePerUnit = 8;
+      else if(service === "TikTok") pricePerUnit = 12;
+      else if(service === "إعلان") pricePerUnit = 20;
+
+      if(service && quantity > 0) {
+        invService.innerText = service;
+        invQuantity.innerText = quantity;
+        invUnitPrice.innerText = pricePerUnit;
+        invTotal.innerText = pricePerUnit * quantity;
+        invoice.style.display = "block";
+      } else {
+        invoice.style.display = "none";
+      }
+    }
+
+    serviceSelect.addEventListener("change", updateInvoice);
+    quantitySelect.addEventListener("change", updateInvoice);
   </script>
 </body>
 </html>
