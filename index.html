@@ -17,11 +17,7 @@
     .order-form {padding: 40px; background:#0d2538; text-align:center;}
     .order-form input, .order-form textarea {padding:10px; margin:10px; width:80%; max-width:400px; border:none; border-radius:8px;}
     .order-form button {padding:12px 25px; background:#00aaff; border:none; border-radius:8px; color:#fff; cursor:pointer;}
-    .payment {margin-top:30px; text-align:center;}
-    .payment img {max-width:200px; margin:15px auto; display:block;}
-    .copy-btn {background:#161b22; border:1px solid #00aaff; color:#00aaff; padding:8px 12px; border-radius:6px; cursor:pointer;}
     footer {background:#161b22; padding:20px; text-align:center;}
-    a.whatsapp {display:inline-block; margin-top:15px; color:#00ff84; text-decoration:none; font-weight:bold;}
   </style>
 </head>
 <body>
@@ -62,39 +58,19 @@
   <section class="order-form" id="order">
     <h2>اطلب خدمتك الآن</h2>
     <form action="https://formsubmit.co/mafaity13@gmail.com" method="POST">
+      <!-- هنا نوجه الزبون لصفحة الشكر -->
+      <input type="hidden" name="_next" value="https://BATNIV.github.io/fast10/thank-you.html">
       <input type="text" name="name" placeholder="اسمك الكامل" required>
       <input type="email" name="email" placeholder="بريدك الإلكتروني" required>
       <textarea name="service" placeholder="الخدمة المطلوبة (مثال: 1000 متابع فيسبوك)" required></textarea>
-      
-      <!-- إعدادات التحويل بعد الإرسال -->
-      <input type="hidden" name="_next" value="https://BATNIV.github.io/fast10/thank-you.html">
-      <input type="hidden" name="_captcha" value="false">
-
       <button type="submit">إرسال الطلب</button>
     </form>
-
-    <!-- قسم الدفع -->
-    <div class="payment">
-      <h3>💳 الدفع عبر Binance Pay</h3>
-      <img src="binance_qr.png" alt="Binance QR">
-      <p>Binance ID: <strong id="binanceId">782102873</strong></p>
-      <button class="copy-btn" onclick="copyBinance()">نسخ Binance ID</button>
-    </div>
-
-    <!-- زر واتساب -->
-    <a class="whatsapp" href="https://wa.me/213655643510" target="_blank">📲 تواصل معنا عبر واتساب</a>
   </section>
 
   <footer id="contact">
     <p>© 2025 Fast10 - جميع الحقوق محفوظة</p>
+    <p>Binance ID: 782102873</p>
+    <p>📞 واتساب: 0655643510</p>
   </footer>
-
-  <script>
-    function copyBinance() {
-      const id = document.getElementById("binanceId").innerText;
-      navigator.clipboard.writeText(id);
-      alert("تم نسخ Binance ID: " + id);
-    }
-  </script>
 </body>
 </html>
