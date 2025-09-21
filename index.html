@@ -94,10 +94,10 @@ const products=[
   {name:"📚 كورس شامل انجليزية", price:50, img:"https://picsum.photos/200/120?10"}
 ];
 
+// ---------- تسجيل حساب/دخول ----------
 function showRegister(){document.getElementById('registerDiv').style.display='block';document.getElementById('loginDiv').style.display='none';}
 function showLogin(){document.getElementById('loginDiv').style.display='block';document.getElementById('registerDiv').style.display='none';}
 
-// ---------- حسابات ----------
 function register(){
   let u=document.getElementById('regUser').value;
   let p=document.getElementById('regPass').value;
@@ -128,7 +128,7 @@ function login(){
   }
 }
 
-// ---------- منتجات ----------
+// ---------- عرض المنتجات ----------
 function renderProducts(){
   const container=document.getElementById('productsContainer');
   container.innerHTML='';
@@ -207,7 +207,7 @@ function renderCustomerOrders(){
   });
 }
 
-// ---------- المدير ----------
+// ---------- لوحة المدير ----------
 function changeStatus(i,s){
   let orders=JSON.parse(localStorage.getItem('fast10Orders')||'[]');
   orders[i].status=s;
