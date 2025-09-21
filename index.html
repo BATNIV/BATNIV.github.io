@@ -3,63 +3,74 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fast10 Production</title>
+  <title>Bahaa Store</title>
   <style>
-    body {font-family: Arial, sans-serif; background:#0d1117; color:white; margin:0; padding:0;}
-    header {background:#111; padding:15px; text-align:center; font-size:20px; font-weight:bold;}
+    body {font-family: Arial, sans-serif; margin:0; padding:0; background:#0d1117; color:#fff;}
+    header {background:#0a1a2f; color:#00aaff; padding:15px; text-align:center; font-size:22px; font-weight:bold;}
+    nav {background:#0a1a2f; display:flex; justify-content:center; padding:10px; position:sticky; top:0; z-index:1000;}
+    nav a {color:#fff; text-decoration:none; margin:0 15px; padding:6px 12px; border-radius:6px;}
+    nav a:hover {background:#00aaff; color:#fff;}
     .container {padding:20px;}
-    .product {background:#1c1c1c; border-radius:8px; padding:10px; margin:10px; display:inline-block; width:200px; text-align:center;}
-    .product img {width:100%; height:120px; object-fit:cover; border-radius:5px;}
-    button {padding:6px 12px; border:none; border-radius:5px; cursor:pointer; margin-top:5px;}
-    .status-btn {margin:2px; padding:4px 8px;}
-    .accept {background:green; color:white;}
-    .reject {background:red; color:white;}
-    .confirm {background:blue; color:white;}
-    .chat-box {background:#222; padding:8px; border-radius:8px; margin:5px 0; max-height:150px; overflow-y:auto;}
-    .admin-msg {color:#00ffea; margin:3px 0;}
-    .user-msg {color:#ffce54; margin:3px 0;}
-    #loginDiv, #registerDiv, #productsDiv, #cartDiv, #ordersDiv, #adminDiv {display:none;}
+    h2 {color:#00aaff;}
+    button {padding:8px 14px; border:none; border-radius:6px; cursor:pointer; background:#00aaff; color:white; margin:5px 0;}
+    input {padding:8px; margin:6px 0; border:none; border-radius:6px; width:90%;}
+    .card {background:#101820; border:1px solid #0a1a2f; border-radius:10px; padding:12px; margin:10px; display:inline-block; width:200px; vertical-align:top; text-align:center;}
+    .card img {width:100%; height:120px; object-fit:cover; border-radius:8px;}
+    .status-btn {margin:3px; padding:5px 10px; border-radius:5px;}
+    .accept {background:green;}
+    .reject {background:red;}
+    .confirm {background:blue;}
+    .chat-box {background:#0a1a2f; padding:10px; border-radius:10px; margin-top:8px; max-height:150px; overflow-y:auto; font-size:14px;}
+    .admin-msg {color:#00ffea;}
+    .user-msg {color:#ffce54;}
+    #loginDiv,#registerDiv,#productsDiv,#cartDiv,#ordersDiv,#adminDiv,#contactDiv {display:none;}
   </style>
 </head>
 <body>
-<header>🚀 Fast10 Production</header>
+<header>💎 Bahaa Store - منتجات رقمية</header>
+<nav>
+  <a href="#" onclick="showSection('authDiv')">🏠 الرئيسية</a>
+  <a href="#" onclick="showSection('productsDiv')">📦 المنتجات</a>
+  <a href="#" onclick="showSection('ordersDiv')">🛒 طلباتي</a>
+  <a href="#" onclick="showSection('contactDiv')">📞 تواصل معنا</a>
+</nav>
 
 <div class="container">
   <!-- تسجيل -->
   <div id="authDiv">
-    <h2>تسجيل الدخول أو إنشاء حساب</h2>
+    <h2>تسجيل الدخول / إنشاء حساب</h2>
     <button onclick="showRegister()">إنشاء حساب</button>
     <button onclick="showLogin()">تسجيل دخول</button>
   </div>
 
   <div id="registerDiv">
-    <h3>إنشاء حساب</h3>
+    <h3>إنشاء حساب جديد</h3>
     <input type="text" id="regUser" placeholder="اسم المستخدم"><br>
-    <input type="password" id="regPass" placeholder="كلمة السر"><br>
+    <input type="password" id="regPass" placeholder="كلمة المرور"><br>
     <button onclick="register()">تسجيل</button>
   </div>
 
   <div id="loginDiv">
-    <h3>تسجيل دخول</h3>
+    <h3>تسجيل الدخول</h3>
     <input type="text" id="logUser" placeholder="اسم المستخدم"><br>
-    <input type="password" id="logPass" placeholder="كلمة السر"><br>
+    <input type="password" id="logPass" placeholder="كلمة المرور"><br>
     <button onclick="login()">دخول</button>
   </div>
 
   <!-- منتجات -->
   <div id="productsDiv">
-    <h2>📦 منتجاتنا الرقمية</h2>
+    <h2>📦 المنتجات المتاحة</h2>
     <div id="productsContainer"></div>
   </div>
 
   <!-- الطلب -->
   <div id="cartDiv">
-    <h3>طلب منتج</h3>
+    <h3>طلب المنتج</h3>
     <p>المنتج: <span id="cartProduct"></span></p>
     <p>السعر: <span id="cartPrice"></span> USDT</p>
     <p>طرق الدفع:</p>
-    <p><img src="https://cryptologos.cc/logos/binance-coin-bnb-logo.png" width="20"> Binance Pay ID: <span id="binanceID">782102873</span> <button onclick="copyPayID('binance')">نسخ</button></p>
-    <p><img src="https://seeklogo.com/images/P/payeer-logo-FAF12A9F5E-seeklogo.com.png" width="20"> Payeer ID: <span id="payeerID">P1112102994</span> <button onclick="copyPayID('payeer')">نسخ</button></p>
+    <p>💳 Binance Pay ID: <b id="binanceID">782102873</b> <button onclick="copyPayID('binance')">نسخ</button></p>
+    <p>💳 Payeer ID: <b id="payeerID">P1112102994</b> <button onclick="copyPayID('payeer')">نسخ</button></p>
     <button onclick="placeOrder()">تأكيد الطلب</button>
   </div>
 
@@ -67,182 +78,144 @@
   <div id="ordersDiv">
     <h2>طلباتي</h2>
     <div id="customerOrders"></div>
+    <h3>💬 دردشة مع المدير</h3>
     <div class="chat-box" id="chatBox"></div>
-    <input type="text" id="chatInput" placeholder="اكتب رسالة للمدير">
+    <input type="text" id="chatInput" placeholder="اكتب رسالة...">
     <button onclick="sendUserMessage()">إرسال</button>
   </div>
 
   <!-- لوحة المدير -->
   <div id="adminDiv">
-    <h2>لوحة تحكم المدير</h2>
+    <h2>📋 لوحة المدير</h2>
     <div id="adminOrdersList"></div>
+  </div>
+
+  <!-- تواصل -->
+  <div id="contactDiv">
+    <h2>📞 تواصل معنا</h2>
+    <p>📧 البريد: bahaa.store@example.com</p>
+    <p>💬 واتساب: <a href="https://wa.me/213000000000" target="_blank">اضغط هنا</a></p>
   </div>
 </div>
 
 <script>
-// ---------- بيانات المنتجات ----------
 const products=[
   {name:"📘 كتاب تطوير الذات", price:10, img:"https://picsum.photos/200/120?1"},
   {name:"💻 كورس برمجة", price:25, img:"https://picsum.photos/200/120?2"},
   {name:"🎨 دورة تصميم", price:15, img:"https://picsum.photos/200/120?3"},
   {name:"📱 تطبيق جاهز", price:30, img:"https://picsum.photos/200/120?4"},
-  {name:"📊 كورس تسويق رقمي", price:20, img:"https://picsum.photos/200/120?5"},
-  {name:"🎵 مقاطع موسيقى حصرية", price:12, img:"https://picsum.photos/200/120?6"},
-  {name:"📑 باقة قوالب أعمال", price:18, img:"https://picsum.photos/200/120?7"},
-  {name:"🎮 كود لعبة بسيطة", price:14, img:"https://picsum.photos/200/120?8"},
-  {name:"🖥️ سكربت موقع", price:40, img:"https://picsum.photos/200/120?9"},
-  {name:"📚 كورس شامل انجليزية", price:50, img:"https://picsum.photos/200/120?10"}
+  {name:"📊 كورس تسويق", price:20, img:"https://picsum.photos/200/120?5"}
 ];
 
-// ---------- تسجيل حساب/دخول ----------
-function showRegister(){document.getElementById('registerDiv').style.display='block';document.getElementById('loginDiv').style.display='none';}
-function showLogin(){document.getElementById('loginDiv').style.display='block';document.getElementById('registerDiv').style.display='none';}
+// إظهار الأقسام
+function showSection(id){
+  ["authDiv","registerDiv","loginDiv","productsDiv","cartDiv","ordersDiv","adminDiv","contactDiv"]
+    .forEach(s=>document.getElementById(s).style.display='none');
+  document.getElementById(id).style.display='block';
+}
 
+// تسجيل
+function showRegister(){showSection('registerDiv');}
+function showLogin(){showSection('loginDiv');}
 function register(){
   let u=document.getElementById('regUser').value;
   let p=document.getElementById('regPass').value;
   if(!u||!p) return alert("املأ جميع الخانات");
-  let users=JSON.parse(localStorage.getItem('fast10Users')||'{}');
+  let users=JSON.parse(localStorage.getItem('bahaaUsers')||'{}');
   if(users[u]) return alert("المستخدم موجود");
-  users[u]=p;
-  localStorage.setItem('fast10Users',JSON.stringify(users));
+  users[u]=p;localStorage.setItem('bahaaUsers',JSON.stringify(users));
   alert("تم التسجيل، سجل دخول الآن");
 }
-
 function login(){
   let u=document.getElementById('logUser').value;
   let p=document.getElementById('logPass').value;
-  let users=JSON.parse(localStorage.getItem('fast10Users')||'{}');
-  if(u==="admin" && p==="admin123"){
-    localStorage.setItem('isAdmin','true');
-    document.getElementById('adminDiv').style.display='block';
-    renderAdminOrders();
-  }else if(users[u]===p){
-    localStorage.setItem('fast10CurrentUser',u);
-    document.getElementById('productsDiv').style.display='block';
-    document.getElementById('ordersDiv').style.display='block';
-    renderProducts();
-    renderCustomerOrders();
-  }else{
-    alert("بيانات خاطئة");
-  }
+  let users=JSON.parse(localStorage.getItem('bahaaUsers')||'{}');
+  if(u==="admin" && p==="admin123"){localStorage.setItem('isAdmin','true');showSection('adminDiv');renderAdminOrders();}
+  else if(users[u]===p){localStorage.setItem('bahaaCurrentUser',u);showSection('productsDiv');renderProducts();renderCustomerOrders();}
+  else alert("بيانات خاطئة");
 }
 
-// ---------- عرض المنتجات ----------
+// منتجات
 function renderProducts(){
-  const container=document.getElementById('productsContainer');
-  container.innerHTML='';
+  const container=document.getElementById('productsContainer');container.innerHTML='';
   products.forEach((p,i)=>{
-    const div=document.createElement('div');
-    div.className="product";
-    div.innerHTML=`<img src="${p.img}" alt="${p.name}"><h3>${p.name}</h3><p>${p.price} USDT</p><button onclick="selectProduct(${i})">اطلب</button>`;
-    container.appendChild(div);
+    container.innerHTML+=`<div class="card"><img src="${p.img}"><h3>${p.name}</h3><p>${p.price} USDT</p><button onclick="selectProduct(${i})">شراء</button></div>`;
   });
 }
 function selectProduct(i){
   let prod=products[i];
-  document.getElementById('cartDiv').style.display='block';
+  showSection('cartDiv');
   document.getElementById('cartProduct').innerText=prod.name;
   document.getElementById('cartPrice').innerText=prod.price;
-  localStorage.setItem('fast10SelectedProduct',JSON.stringify(prod));
+  localStorage.setItem('bahaaSelectedProduct',JSON.stringify(prod));
 }
 
-// ---------- نسخ معرف الدفع ----------
+// دفع
 function copyPayID(m){
   let id=(m==='binance')?document.getElementById('binanceID').innerText:document.getElementById('payeerID').innerText;
-  navigator.clipboard.writeText(id);
-  alert("تم نسخ: "+id);
+  navigator.clipboard.writeText(id);alert("تم نسخ: "+id);
 }
 
-// ---------- الطلب ----------
+// طلب
 function placeOrder(){
-  const user=localStorage.getItem('fast10CurrentUser');
-  const prod=JSON.parse(localStorage.getItem('fast10SelectedProduct')||'{}');
+  const user=localStorage.getItem('bahaaCurrentUser');
+  const prod=JSON.parse(localStorage.getItem('bahaaSelectedProduct')||'{}');
   if(!prod.name) return alert("اختر منتج");
-  let orders=JSON.parse(localStorage.getItem('fast10Orders')||'[]');
-  orders.push({user:user,product:prod.name,price:prod.price,status:"في الانتظار",chat:["Fast10: تم إنشاء الطلب"]});
-  localStorage.setItem('fast10Orders',JSON.stringify(orders));
-  alert("تم إرسال الطلب");
-  renderCustomerOrders();
-  updateChatBox();
+  let orders=JSON.parse(localStorage.getItem('bahaaOrders')||'[]');
+  orders.push({user:user,product:prod.name,price:prod.price,status:"في الانتظار",chat:["Bahaa Store: تم إنشاء الطلب"]});
+  localStorage.setItem('bahaaOrders',JSON.stringify(orders));
+  showSection('ordersDiv');renderCustomerOrders();updateChatBox();
 }
 
-// ---------- دردشة الزبون ----------
+// دردشة
 function sendUserMessage(){
-  let msg=document.getElementById('chatInput').value.trim();
-  if(!msg) return;
-  let user=localStorage.getItem('fast10CurrentUser');
-  let orders=JSON.parse(localStorage.getItem('fast10Orders')||'[]');
-  for(let i=orders.length-1;i>=0;i--){
-    if(orders[i].user===user){orders[i].chat.push(user+": "+msg);break;}
-  }
-  localStorage.setItem('fast10Orders',JSON.stringify(orders));
-  document.getElementById('chatInput').value='';
-  updateChatBox();
+  let msg=document.getElementById('chatInput').value.trim();if(!msg) return;
+  let user=localStorage.getItem('bahaaCurrentUser');
+  let orders=JSON.parse(localStorage.getItem('bahaaOrders')||'[]');
+  for(let i=orders.length-1;i>=0;i--){if(orders[i].user===user){orders[i].chat.push(user+": "+msg);break;}}
+  localStorage.setItem('bahaaOrders',JSON.stringify(orders));
+  document.getElementById('chatInput').value='';updateChatBox();
 }
 function updateChatBox(){
-  let user=localStorage.getItem('fast10CurrentUser');
-  let orders=JSON.parse(localStorage.getItem('fast10Orders')||'[]');
-  let div=document.getElementById('chatBox');
-  div.innerHTML='';
-  for(let i=orders.length-1;i>=0;i--){
-    if(orders[i].user===user){
-      orders[i].chat.forEach(m=>{
-        let cls=m.startsWith("Fast10")?"admin-msg":"user-msg";
-        div.innerHTML+=`<div class="${cls}">${m}</div>`;
-      });
-      break;
-    }
-  }
+  let user=localStorage.getItem('bahaaCurrentUser');
+  let orders=JSON.parse(localStorage.getItem('bahaaOrders')||'[]');
+  let div=document.getElementById('chatBox');div.innerHTML='';
+  for(let i=orders.length-1;i>=0;i--){if(orders[i].user===user){orders[i].chat.forEach(m=>{let cls=m.startsWith("Bahaa")?"admin-msg":"user-msg";div.innerHTML+=`<div class="${cls}">${m}</div>`;});break;}}
 }
 function renderCustomerOrders(){
-  const div=document.getElementById('customerOrders');
-  div.innerHTML='';
-  let user=localStorage.getItem('fast10CurrentUser');
-  let orders=JSON.parse(localStorage.getItem('fast10Orders')||'[]');
+  const div=document.getElementById('customerOrders');div.innerHTML='';
+  let user=localStorage.getItem('bahaaCurrentUser');
+  let orders=JSON.parse(localStorage.getItem('bahaaOrders')||'[]');
   orders.filter(o=>o.user===user).forEach(o=>{
-    div.innerHTML+=`<div style="background:#1c1c1c;margin:5px;padding:5px;border-radius:5px;">
-      <p>المنتج: ${o.product} | السعر: ${o.price} USDT | الحالة: ${o.status}</p>
-    </div>`;
+    div.innerHTML+=`<div class="card"><p>📦 ${o.product}</p><p>💰 ${o.price} USDT</p><p>📌 ${o.status}</p></div>`;
   });
 }
 
-// ---------- لوحة المدير ----------
+// مدير
 function changeStatus(i,s){
-  let orders=JSON.parse(localStorage.getItem('fast10Orders')||'[]');
-  orders[i].status=s;
-  orders[i].chat.push("Fast10: تم تغيير حالة الطلب إلى "+s);
-  localStorage.setItem('fast10Orders',JSON.stringify(orders));
-  renderAdminOrders();
+  let orders=JSON.parse(localStorage.getItem('bahaaOrders')||'[]');
+  orders[i].status=s;orders[i].chat.push("Bahaa Store: الحالة الآن "+s);
+  localStorage.setItem('bahaaOrders',JSON.stringify(orders));renderAdminOrders();
 }
 function sendAdminMessage(i){
-  const msg=document.getElementById('adminInput'+i).value.trim();
-  if(!msg) return;
-  let orders=JSON.parse(localStorage.getItem('fast10Orders')||'[]');
-  orders[i].chat.push("Fast10: "+msg);
-  localStorage.setItem('fast10Orders',JSON.stringify(orders));
-  document.getElementById('adminInput'+i).value='';
-  renderAdminOrders();
+  const msg=document.getElementById('adminInput'+i).value.trim();if(!msg) return;
+  let orders=JSON.parse(localStorage.getItem('bahaaOrders')||'[]');
+  orders[i].chat.push("Bahaa Store: "+msg);
+  localStorage.setItem('bahaaOrders',JSON.stringify(orders));
+  document.getElementById('adminInput'+i).value='';renderAdminOrders();
 }
 function renderAdminOrders(){
-  const div=document.getElementById('adminOrdersList');
-  div.innerHTML='';
-  let orders=JSON.parse(localStorage.getItem('fast10Orders')||'[]');
+  const div=document.getElementById('adminOrdersList');div.innerHTML='';
+  let orders=JSON.parse(localStorage.getItem('bahaaOrders')||'[]');
   orders.forEach((o,i)=>{
-    let chatHtml=o.chat.map(m=>{
-      let cls=m.startsWith("Fast10")?"admin-msg":"user-msg";
-      return `<div class="${cls}">${m}</div>`;
-    }).join('');
-    div.innerHTML+=`<div style="background:#1c1c1c;margin:10px;padding:10px;border-radius:8px;">
-      <p>👤 ${o.user} | 📦 ${o.product} | 💰 ${o.price} USDT</p>
-      <p>الحالة: ${o.status}</p>
+    let chatHtml=o.chat.map(m=>{let cls=m.startsWith("Bahaa")?"admin-msg":"user-msg";return `<div class="${cls}">${m}</div>`;}).join('');
+    div.innerHTML+=`<div class="card" style="width:95%;"><p>👤 ${o.user} | 📦 ${o.product} | 💰 ${o.price} USDT</p><p>📌 ${o.status}</p>
       <button class="status-btn accept" onclick="changeStatus(${i},'مدفوع')">مدفوع</button>
       <button class="status-btn reject" onclick="changeStatus(${i},'مرفوض')">مرفوض</button>
       <button class="status-btn confirm" onclick="changeStatus(${i},'مكتمل')">مكتمل</button>
       <div class="chat-box">${chatHtml}</div>
-      <input type="text" id="adminInput${i}" placeholder="اكتب رسالة للزبون">
-      <button onclick="sendAdminMessage(${i})">إرسال</button>
-    </div>`;
+      <input type="text" id="adminInput${i}" placeholder="رسالة للزبون">
+      <button onclick="sendAdminMessage(${i})">إرسال</button></div>`;
   });
 }
 </script>
