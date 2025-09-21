@@ -1,271 +1,96 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fast10 Production</title>
-<style>
-body {font-family: Arial,sans-serif;margin:0;padding:0;background:#0d1117;color:#fff;}
-header {background:#161b22;padding:15px;text-align:center;}
-header h1 {color:#00aaff;margin:0;}
-nav a {color:#fff;margin:0 10px;text-decoration:none;cursor:pointer;}
-nav a:hover{color:#00ff84;}
-.container {max-width:1000px;margin:20px auto;padding:20px;background:#161b22;border-radius:12px;}
-h2 {color:#00aaff;text-align:center;}
-.card{background:#222831;padding:15px;border-radius:12px;margin:15px;flex:1;text-align:center;transition: transform 0.3s, box-shadow 0.3s;}
-.card:hover{transform: translateY(-5px);box-shadow: 0 8px 20px rgba(0,170,255,0.6);}
-.card img{width:120px;height:120px;margin-bottom:10px;border-radius:8px;}
-button {background:#00aaff;color:#fff;cursor:pointer;padding:8px 12px;border:none;border-radius:8px;margin-top:8px;transition: background 0.3s;}
-button:hover{background:#0088cc;}
-.payment-icons{display:flex;justify-content:center;gap:15px;margin:10px 0;flex-wrap:wrap;}
-.payment-icons div{display:flex;align-items:center;gap:8px;background:#161b22;padding:10px;border-radius:10px;cursor:pointer;transition: background 0.3s;}
-.payment-icons div:hover{background:#0a7abc;}
-.payment-icons img{width:35px;height:35px;}
-a.whatsapp{text-align:center;display:block;margin-top:10px;color:#00ff84;text-decoration:none;font-weight:bold;}
-textarea{width:100%;padding:8px;margin:5px 0;border-radius:8px;border:none;background:#161b22;color:#fff;}
-input[type=text], input[type=password], input[type=number] {width:100%;padding:10px;margin:8px 0;border:none;border-radius:8px;}
-.flex-container{display:flex;flex-wrap:wrap;justify-content:center;}
-.chat-box{background:#161b22;padding:10px;border-radius:8px;margin-top:10px;max-height:200px;overflow-y:auto;}
-.status-btn{margin:2px;padding:5px 8px;border-radius:5px;border:none;cursor:pointer;}
-.accept{background:green;color:#fff;}
-.reject{background:red;color:#fff;}
-.confirm{background:orange;color:#fff;}
-</style>
-</head>
-<body>
-
-<header>
-<h1>Fast10 Production</h1>
-<nav>
-<a onclick="showOrder()">المنتجات</a>
-<a onclick="showCustomerOrders()">طلباتي</a>
-<a onclick="showAdminOrders()">لوحة المدير</a>
-</nav>
-</header>
-
-<!-- تسجيل حساب -->
-<div class="container" id="registerDiv">
-<h2>إنشاء حساب</h2>
-<input type="text" id="regUser" placeholder="اسم المستخدم">
-<input type="password" id="regPass" placeholder="كلمة المرور">
-<button onclick="register()">تسجيل</button>
-<p>لديك حساب؟ <a onclick="showLogin()">تسجيل الدخول</a></p>
-</div>
-
-<!-- تسجيل دخول -->
-<div class="container" id="loginDiv" style="display:none;">
-<h2>تسجيل الدخول</h2>
-<input type="text" id="loginUser" placeholder="اسم المستخدم">
-<input type="password" id="loginPass" placeholder="كلمة المرور">
-<button onclick="login()">دخول</button>
-<p>لا تملك حساب؟ <a onclick="showRegister()">إنشاء حساب</a></p>
-</div>
-
-<!-- صفحة المنتجات -->
-<div class="container" id="orderPage" style="display:none;">
-<h2>📦 منتجات رقمية وكورسات</h2>
-<div id="productsContainer" class="flex-container"></div>
-
-<div id="cartDiv" style="display:none;">
-<h3>🛒 طلبك</h3>
-<p>المنتج: <span id="cartProduct"></span></p>
-<p>السعر: <span id="cartPrice"></span> USDT</p>
-
-<h3>💳 الدفع عبر:</h3>
-<div class="payment-icons">
-  <div onclick="copyPayID('binance')"><img src="binance_icon.png" alt="Binance"> Binance ID: <span id="binanceID">782102873</span></div>
-  <div onclick="copyPayID('payeer')"><img src="payeer_icon.png" alt="Payeer"> Payeer ID: <span id="payeerID">P1112102994</span></div>
-</div>
-
-<a class="whatsapp" href="https://wa.me/213655643510" target="_blank">📲 تواصل عبر واتساب</a>
-<button onclick="placeOrder()">تم الدفع، أرسل الطلب للمدير</button>
-
-<h3>💬 دردشة مع Fast10</h3>
-<div class="chat-box" id="chatBox">Fast10: مرحبا بيكم في موقعنا Fast10 Production! 🌟</div>
-<textarea id="chatInput" placeholder="اكتب رسالتك هنا"></textarea>
-<button onclick="sendUserMessage()">إرسال</button>
-</div>
-</div>
-
-<!-- طلبات الزبون -->
-<div class="container" id="customerOrders" style="display:none;">
-<h2>📂 طلباتي</h2>
-<div id="myOrdersList"></div>
-</div>
-
-<!-- لوحة المدير -->
-<div class="container" id="adminOrders" style="display:none;">
-<h2>🛠 لوحة المدير - إدارة الطلبات</h2>
-<div id="adminOrdersList"></div>
-</div>
-
-<script>
-// ---------- تسجيل / دخول ----------
-function showLogin(){document.getElementById('registerDiv').style.display='none';document.getElementById('loginDiv').style.display='block';}
-function showRegister(){document.getElementById('loginDiv').style.display='none';document.getElementById('registerDiv').style.display='block';}
-
-function register(){
-  const u=document.getElementById('regUser').value;
-  const p=document.getElementById('regPass').value;
-  if(!u||!p){alert('املأ كل الحقول'); return;}
-  let users=JSON.parse(localStorage.getItem('fast10Users')||'{}');
-  if(users[u]){alert('هذا الاسم موجود مسبقاً'); return;}
-  users[u]=p;
-  localStorage.setItem('fast10Users',JSON.stringify(users));
-  alert('تم إنشاء الحساب! سجل الدخول الآن.');
-  showLogin();
-}
-
-function login(){
-  const u=document.getElementById('loginUser').value;
-  const p=document.getElementById('loginPass').value;
-  let users=JSON.parse(localStorage.getItem('fast10Users')||'{}');
-  if(users[u]&&users[u]===p){
-    localStorage.setItem('fast10CurrentUser',u);
-    localStorage.setItem('isAdmin',u==='admin');
-    alert('تم تسجيل الدخول!');
-    showOrder();
-  }else alert('بيانات غير صحيحة');
-}
-
-// ---------- المنتجات ----------
-const products=[
-{name:"دورة تطوير ويب",price:15,img:"web.png"},
-{name:"دورة بايثون",price:20,img:"python.png"},
-{name:"دورة فوتوشوب",price:18,img:"photoshop.png"},
-{name:"كتاب HTML",price:10,img:"html.png"},
-{name:"كتاب CSS",price:12,img:"css.png"},
-{name:"كتاب JS",price:14,img:"js.png"},
-{name:"قالب متجر",price:35,img:"store.png"},
-{name:"قالب كورس أونلاين",price:40,img:"course.png"},
-{name:"قالب تطبيق موبايل",price:50,img:"app.png"},
-{name:"كورس تعلم الذكاء الاصطناعي",price:45,img:"ai.png"},
-{name:"دورة سيو SEO",price:25,img:"seo.png"},
-{name:"كورس التسويق الرقمي",price:30,img:"marketing.png"},
-{name:"دورة التصوير الاحترافي",price:28,img:"photo.png"},
-{name:"كتاب تصميم الجرافيك",price:20,img:"design.png"},
-{name:"دورة التجارة الإلكترونية",price:32,img:"ecommerce.png"},
-{name:"قالب موقع العاب",price:48,img:"game.png"}
-];
-
-function renderProducts(){
-  const container=document.getElementById('productsContainer');
-  container.innerHTML='';
-  products.forEach((p,i)=>{
-    const div=document.createElement('div');
-    div.className='card';
-    div.innerHTML=`<img src="${p.img}" alt="${p.name}"><h3>${p.name}</h3><p>السعر: ${p.price} USDT</p><button onclick="addToCart(${i})">طلب المنتج</button>`;
-    container.appendChild(div);
-  });
-}
-renderProducts();
-
-// ---------- سلة الطلب ----------
-let currentCart=null;
-function addToCart(index){
-  currentCart=products[index];
-  document.getElementById('cartProduct').innerText=currentCart.name;
-  document.getElementById('cartPrice').innerText=currentCart.price;
-  document.getElementById('cartDiv').style.display='block';
-}
-
-// ---------- نسخ أيدي الدفع ----------
-function copyPayID(method){
-  let text=method==='binance'?"782102873":"P1112102994";
-  navigator.clipboard.writeText(text);
-  alert('تم نسخ رقم الدفع: '+text);
-}
-
-// ---------- إرسال الطلب ----------
-function placeOrder(){
-  if(!currentCart) return alert('لم تختار منتج!');
-  const user = localStorage.getItem('fast10CurrentUser')||'زبون';
-  let orders=JSON.parse(localStorage.getItem('fast10Orders')||'[]');
-  orders.push({user:user,product:currentCart.name,price:currentCart.price,status:'غير مدفوع',chat:['Fast10: مرحبا بيكم في موقعنا Fast10 Production! 🌟']});
-  localStorage.setItem('fast10Orders',JSON.stringify(orders));
-  alert('تم إرسال الطلب! سيتم التأكد من الدفع من قبل المدير.');
-  currentCart=null;
-  document.getElementById('cartDiv').style.display='none';
-  renderCustomerOrders();
-  renderAdminOrders();
-  updateChatBox();
-}
-
-// ---------- دردشة المستخدم ----------
-function sendUserMessage(){
-  const msg=document.getElementById('chatInput').value.trim();
-  if(!msg) return;
-  let orders=JSON.parse(localStorage.getItem('fast10Orders')||'[]');
-  const user=localStorage.getItem('fast10CurrentUser');
-  // الرسالة تضاف لآخر طلب لهذا الزبون
-  for(let i=orders.length-1;i>=0;i--){
-    if(orders[i].user===user){
-      orders[i].chat.push(user+': '+msg);
-      break;
-    }
-  }
-  localStorage.setItem('fast10Orders',JSON.stringify(orders));
-  document.getElementById('chatInput').value='';
-  updateChatBox();
-}
-
+// ---------- تحديث دردشة الزبون ----------
 function updateChatBox(){
-  let orders=JSON.parse(localStorage.getItem('fast10Orders')||'[]');
   const user=localStorage.getItem('fast10CurrentUser');
-  let chatDiv=document.getElementById('chatBox');
+  const chatDiv=document.getElementById('chatBox');
   chatDiv.innerHTML='';
+  let orders=JSON.parse(localStorage.getItem('fast10Orders')||'[]');
   for(let i=orders.length-1;i>=0;i--){
     if(orders[i].user===user){
-      orders[i].chat.forEach(m=>{chatDiv.innerHTML+=m+'<br>';});
+      orders[i].chat.forEach(m=>{
+        let cls=m.startsWith('Fast10:')?'admin-msg':'user-msg';
+        chatDiv.innerHTML+=`<div class="${cls}">${m}</div>`;
+      });
       break;
     }
   }
+  chatDiv.scrollTop=chatDiv.scrollHeight;
 }
-
-// ---------- طلبات الزبون ----------
-function showCustomerOrders(){document.getElementById('customerOrders').style.display='block';document.getElementById('orderPage').style.display='none';document.getElementById('adminOrders').style.display='none';renderCustomerOrders();updateChatBox();}
-function showOrder(){document.getElementById('orderPage').style.display='block';document.getElementById('customerOrders').style.display='none';document.getElementById('adminOrders').style.display='none';updateChatBox();}
-function showAdminOrders(){if(localStorage.getItem('isAdmin')!=='true'){alert('فقط المدير يمكنه الوصول');return;}document.getElementById('adminOrders').style.display='block';document.getElementById('orderPage').style.display='none';document.getElementById('customerOrders').style.display='none';renderAdminOrders();}
 
 // ---------- عرض طلبات الزبون ----------
 function renderCustomerOrders(){
   const user=localStorage.getItem('fast10CurrentUser');
-  const list=document.getElementById('myOrdersList');
-  list.innerHTML='';
+  const div=document.getElementById('myOrdersList');
+  div.innerHTML='';
   let orders=JSON.parse(localStorage.getItem('fast10Orders')||'[]');
   orders.forEach((o,i)=>{
     if(o.user===user){
-      list.innerHTML+=`<div style="background:#222831;padding:10px;margin:5px;border-radius:8px;">
-      المنتج: ${o.product} | السعر: ${o.price} USDT | الحالة: ${o.status}</div>`;
+      div.innerHTML+=`<div style="background:#222831;padding:10px;margin:5px;border-radius:8px;">
+        <p>المنتج: ${o.product}</p>
+        <p>السعر: ${o.price} USDT</p>
+        <p>الحالة: ${o.status}</p>
+      </div>`;
     }
   });
 }
 
-// ---------- لوحة المدير ----------
+// ---------- عرض لوحة المدير ----------
 function renderAdminOrders(){
-  const list=document.getElementById('adminOrdersList');
-  list.innerHTML='';
+  if(localStorage.getItem('isAdmin')!=='true') return;
+  const div=document.getElementById('adminOrdersList');
+  div.innerHTML='';
   let orders=JSON.parse(localStorage.getItem('fast10Orders')||'[]');
   orders.forEach((o,i)=>{
-    list.innerHTML+=`<div style="background:#222831;padding:10px;margin:5px;border-radius:8px;">
-    الزبون: ${o.user} | المنتج: ${o.product} | السعر: ${o.price} USDT | الحالة: ${o.status}<br>
-    <button class="status-btn accept" onclick="updateOrderStatus(${i},'مدفوع')">مدفوع</button>
-    <button class="status-btn reject" onclick="updateOrderStatus(${i},'مرفوض')">مرفوض</button>
-    <button class="status-btn confirm" onclick="updateOrderStatus(${i},'مكتمل')">مكتمل</button>
-    <br><strong>الدردشة:</strong><br>${o.chat.join('<br>')}</div>`;
+    let chatHtml=o.chat.map(m=>{
+      let cls=m.startsWith('Fast10:')?'admin-msg':'user-msg';
+      return `<div class="${cls}">${m}</div>`;
+    }).join('');
+    div.innerHTML+=`<div style="background:#222831;padding:10px;margin:5px;border-radius:8px;">
+      <p>الزبون: ${o.user}</p>
+      <p>المنتج: ${o.product}</p>
+      <p>السعر: ${o.price} USDT</p>
+      <p>الحالة: <b>${o.status}</b></p>
+      <button class="status-btn accept" onclick="changeStatus(${i},'مدفوع')">مدفوع</button>
+      <button class="status-btn reject" onclick="changeStatus(${i},'مرفوض')">مرفوض</button>
+      <button class="status-btn confirm" onclick="changeStatus(${i},'مكتمل')">مكتمل</button>
+      <div class="chat-box" id="adminChat${i}" style="max-height:150px;overflow-y:auto;margin-top:5px;">${chatHtml}</div>
+      <textarea id="adminInput${i}" placeholder="اكتب ردك هنا"></textarea>
+      <button onclick="sendAdminReply(${i})">إرسال</button>
+    </div>`;
   });
 }
 
-// ---------- تحديث الحالة من المدير ----------
-function updateOrderStatus(index,status){
+// ---------- تغيير حالة الطلب ----------
+function changeStatus(index,status){
   let orders=JSON.parse(localStorage.getItem('fast10Orders')||'[]');
   orders[index].status=status;
   localStorage.setItem('fast10Orders',JSON.stringify(orders));
   renderAdminOrders();
   renderCustomerOrders();
+}
+
+// ---------- إرسال رد المدير ----------
+function sendAdminReply(index){
+  const msg=document.getElementById('adminInput'+index).value.trim();
+  if(!msg) return;
+  let orders=JSON.parse(localStorage.getItem('fast10Orders')||'[]');
+  orders[index].chat.push('Fast10: '+msg);
+  localStorage.setItem('fast10Orders',JSON.stringify(orders));
+  document.getElementById('adminInput'+index).value='';
+  renderAdminOrders();
   updateChatBox();
 }
-</script>
 
-</body>
-</html>
+// ---------- التنقل بين الصفحات ----------
+function showOrder(){document.getElementById('orderPage').style.display='block';document.getElementById('customerOrders').style.display='none';document.getElementById('adminOrders').style.display='none';updateChatBox();}
+function showCustomerOrders(){document.getElementById('orderPage').style.display='none';document.getElementById('customerOrders').style.display='block';document.getElementById('adminOrders').style.display='none';renderCustomerOrders();}
+function showAdminOrders(){if(localStorage.getItem('isAdmin')!=='true'){alert('ليست لديك صلاحية المدير'); return;}document.getElementById('orderPage').style.display='none';document.getElementById('customerOrders').style.display='none';document.getElementById('adminOrders').style.display='block';renderAdminOrders();}
+
+// ---------- تحديث الدردشة تلقائي كل 2 ثانية ----------
+setInterval(()=>{
+  updateChatBox();
+  renderCustomerOrders();
+  renderAdminOrders();
+},2000);
+
+// ---------- تهيئة المستخدم عند فتح الموقع ----------
+if(localStorage.getItem('fast10CurrentUser')) showOrder();
