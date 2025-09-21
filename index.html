@@ -1,141 +1,285 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fast10 Production</title>
-  <style>
-    body {font-family: Arial, sans-serif; margin:0; padding:0; background:#0d1117; color:#fff; direction:rtl;}
-    header {background:#161b22; padding:20px; text-align:center;}
-    header h1 {margin:0; color:#00aaff;}
-    nav a {color:#fff; margin:0 10px; text-decoration:none;}
-    .container {max-width:1000px; margin:20px auto; padding:15px;}
-    .auth, .products, .payment {background:#161b22; padding:20px; border-radius:12px; margin-bottom:20px;}
-    input, button {width:100%; padding:10px; margin:8px 0; border:none; border-radius:8px;}
-    button {background:#00aaff; color:#fff; cursor:pointer;}
-    button:hover {background:#0088cc;}
-    .grid {display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:15px;}
-    .card {background:#0d2538; padding:15px; border-radius:12px; text-align:center;}
-    .card img {width:100%; height:150px; object-fit:cover; border-radius:8px; margin-bottom:10px;}
-    .card h3 {color:#00aaff;}
-    .card p {margin:5px 0;}
-    .price {color:#0f0; font-weight:bold;}
-    .hidden {display:none;}
-    .pay-options img {width:30px; vertical-align:middle; margin-right:8px;}
-    .footer {background:#161b22; text-align:center; padding:15px; margin-top:30px;}
-    a.whatsapp {display:inline-block; background:#25D366; padding:10px 15px; border-radius:8px; color:#fff; text-decoration:none; margin-top:10px;}
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Fast10 — متجر رقمي خفيف</title>
+<style>
+  :root{
+    --bg:#07101a; --panel:#0c1b26; --accent:#0db0ff; --muted:#9fb9c9; --radius:12px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,#020409,var(--bg));color:#eaf6ff;direction:rtl}
+  header{background:rgba(6,12,18,0.9);padding:14px 18px;position:sticky;top:0;z-index:20;border-bottom:1px solid rgba(255,255,255,0.02)}
+  .nav{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+  .brand{display:flex;gap:12px;align-items:center}
+  .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,#00394f,#006288);display:flex;align-items:center;justify-content:center;font-weight:800}
+  .brand h1{margin:0;color:var(--accent);font-size:18px}
+  .links{display:flex;gap:10px}
+  .links button{background:transparent;border:0;color:#fff;cursor:pointer;padding:8px;border-radius:8px}
+  .container{max-width:1100px;margin:20px auto;padding:12px}
+  .hero{display:flex;gap:18px;align-items:center;justify-content:space-between;padding:18px;border-radius:var(--radius);background:linear-gradient(180deg,#041018,#071827);border:1px solid rgba(255,255,255,0.02)}
+  .hero h2{margin:0;color:var(--accent)}
+  .muted{color:var(--muted);font-size:13px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-top:14px}
+  .card{background:linear-gradient(180deg,var(--panel),#081824);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02);box-shadow:0 8px 20px rgba(1,6,10,0.6);text-align:center}
+  .card img{width:100%;height:130px;object-fit:cover;border-radius:8px;margin-bottom:8px}
+  .card h3{margin:6px 0;color:var(--accent);font-size:15px}
+  .card p{margin:6px 0;color:var(--muted);font-size:13px}
+  .price{font-weight:900;color:#bfffbf}
+  .btn{background:var(--accent);color:#002b36;padding:9px 12px;border-radius:8px;border:none;cursor:pointer;font-weight:700}
+  .btn.secondary{background:transparent;color:var(--accent);border:1px solid rgba(13,40,60,0.5)}
+  .panel{background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
+  .modal-back{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;padding:20px;z-index:999}
+  .modal{width:100%;max-width:700px;background:linear-gradient(180deg,#041018,#071322);border-radius:12px;padding:16px;border:1px solid rgba(255,255,255,0.03)}
+  input,select,textarea{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px;border-radius:8px;color:#e6f6ff;width:100%}
+  .footer{padding:16px;text-align:center;color:var(--muted);margin-top:20px}
+  @media(max-width:720px){ .hero{flex-direction:column} .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))} }
+</style>
 </head>
-<body>
+<body onload="init()">
 
 <header>
-  <h1>Fast10 Production</h1>
-  <nav>
-    <a href="#" onclick="showSection('auth')">الحساب</a>
-    <a href="#" onclick="showSection('products')">المنتجات</a>
-    <a href="#" onclick="showSection('payment')">الدفع</a>
-  </nav>
+  <div class="nav">
+    <div class="brand">
+      <div class="logo">F10</div>
+      <div>
+        <h1>Fast10</h1>
+        <div class="muted">متجر رقمّي خفيف — بيع منتجات رقمية</div>
+      </div>
+    </div>
+    <div class="links">
+      <button onclick="show('products')">المنتجات</button>
+      <button onclick="show('pay')">الدفع</button>
+      <button id="authBtn" onclick="openAuth()">تسجيل / دخول</button>
+    </div>
+  </div>
 </header>
 
-<div class="container">
+<main class="container">
 
-  <!-- تسجيل / دخول -->
-  <div class="auth" id="auth">
-    <h2>تسجيل الدخول / إنشاء حساب</h2>
-    <input type="text" id="username" placeholder="اسم المستخدم">
-    <input type="password" id="password" placeholder="كلمة المرور">
-    <button onclick="register()">تسجيل حساب جديد</button>
-    <button onclick="login()">تسجيل الدخول</button>
-  </div>
-
-  <!-- المنتجات -->
-  <div class="products hidden" id="products">
-    <h2>🛒 المنتجات الرقمية</h2>
-    <div class="grid">
-      <div class="card">
-        <img src="https://via.placeholder.com/300x150?text=Course+Python" alt="Python">
-        <h3>كورس بايثون</h3>
-        <p class="price">20 USDT</p>
-        <button onclick="buy('كورس بايثون',20)">شراء</button>
-      </div>
-      <div class="card">
-        <img src="https://via.placeholder.com/300x150?text=Ebook+Business" alt="Ebook">
-        <h3>كتاب استراتيجيات البزنس</h3>
-        <p class="price">15 USDT</p>
-        <button onclick="buy('كتاب استراتيجيات البزنس',15)">شراء</button>
-      </div>
-      <div class="card">
-        <img src="https://via.placeholder.com/300x150?text=Design+Pack" alt="Design">
-        <h3>باك تصاميم احترافية</h3>
-        <p class="price">12 USDT</p>
-        <button onclick="buy('باك تصاميم احترافية',12)">شراء</button>
-      </div>
-      <div class="card">
-        <img src="https://via.placeholder.com/300x150?text=Marketing+Course" alt="Marketing">
-        <h3>كورس التسويق الرقمي</h3>
-        <p class="price">30 USDT</p>
-        <button onclick="buy('كورس التسويق الرقمي',30)">شراء</button>
-      </div>
+  <section class="hero">
+    <div>
+      <h2>منتجات رقمية جاهزة — اشتري واستلم الرابط بعد الدفع</h2>
+      <p class="muted">بعد الدفع: تواصل معنا عبر واتساب ليعطوك رابط التحميل مباشرة من المدير.</p>
     </div>
-  </div>
-
-  <!-- الدفع -->
-  <div class="payment hidden" id="payment">
-    <h2>💳 معلومات الدفع</h2>
-    <p>ادفع عبر أحد الخيارات التالية:</p>
-    <div class="pay-options">
-      <p><img src="https://img.icons8.com/color/48/binance-coin.png"> Binance Pay: <b id="binanceID">782102873</b> <button onclick="copyID('binanceID')">نسخ</button></p>
-      <p><img src="https://img.icons8.com/external-tal-revivo-color-tal-revivo/48/external-payeer-online-payment-processing-company-logo-color-tal-revivo.png"> Payeer: <b id="payeerID">P1112102994</b> <button onclick="copyID('payeerID')">نسخ</button></p>
+    <div style="min-width:220px">
+      <img src="https://picsum.photos/420/260?tech" alt="hero" style="width:100%;border-radius:10px">
     </div>
-    <a class="whatsapp" href="https://wa.me/213655643510" target="_blank">تواصل عبر واتساب</a>
-  </div>
+  </section>
 
+  <!-- PRODUCTS -->
+  <section id="products" style="margin-top:18px">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <h2>المنتجات</h2>
+      <div class="muted small">أسعار بالـ USDT — من 10$ إلى 50$</div>
+    </div>
+    <div id="productsGrid" class="grid"></div>
+  </section>
+
+  <!-- PAYMENT / NOTE -->
+  <section id="pay" style="margin-top:22px;display:none">
+    <div class="panel">
+      <h3>معلومات الدفع</h3>
+      <p class="muted">انسخ واحد من المعرفين وادفع. بعد الدفع، تواصل معنا على الواتساب لإرسال إثبات الدفع وسنرسل لك رابط المنتج.</p>
+      <p><strong>Binance Pay ID:</strong> <span id="binId">782102873</span> <button class="btn secondary" onclick="copy('binId')">نسخ</button></p>
+      <p><strong>Payeer ID:</strong> <span id="payId">P1112102994</span> <button class="btn secondary" onclick="copy('payId')">نسخ</button></p>
+      <p style="margin-top:10px;color:#ffdca3"><strong>ملاحظة مهمة:</strong> بعد الدفع يرجى التواصل عبر واتساب لتستلم رابط المنتج.</p>
+      <p style="margin-top:10px">
+        <a id="waSupport" class="btn" href="#" target="_blank">التواصل عبر واتساب — ارسال إثبات الدفع</a>
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<!-- modal -->
+<div id="modal" class="modal-back">
+  <div class="modal" id="modalContent"></div>
 </div>
 
-<div class="footer">
-  <p>© 2025 Fast10 Production | جميع الحقوق محفوظة</p>
-</div>
+<div class="footer">© 2025 Fast10 — تواصل: واتساب عند الطلب</div>
 
 <script>
-  // تبديل الأقسام
-  function showSection(id){
-    document.getElementById('auth').classList.add('hidden');
-    document.getElementById('products').classList.add('hidden');
-    document.getElementById('payment').classList.add('hidden');
-    document.getElementById(id).classList.remove('hidden');
-  }
+/* إعدادات (غيّر هذه القيم حسب ما تحب) */
+const BINANCE = "782102873";
+const PAYEER = "P1112102994";
+const WHATSAPP = "https://wa.me/213655643510";
 
-  // تسجيل / دخول
-  function register(){
-    const u=document.getElementById('username').value;
-    const p=document.getElementById('password').value;
-    if(u && p){
-      localStorage.setItem('user',u);
-      localStorage.setItem('pass',p);
-      alert('تم إنشاء الحساب!');
-    }else alert('املأ الحقول');
-  }
-  function login(){
-    const u=document.getElementById('username').value;
-    const p=document.getElementById('password').value;
-    if(u===localStorage.getItem('user') && p===localStorage.getItem('pass')){
-      alert('تم تسجيل الدخول');
-      showSection('products');
-    }else alert('بيانات خاطئة');
-  }
+/* بيانات منتجات كثيرة (أسعار بين 10 و 50) */
+const PRODUCTS = [
+  {id:'p1', title:"دورة بايثون عملي", price:20, img:"https://picsum.photos/400/300?1", desc:"مشاريع عملية"},
+  {id:'p2', title:"كورس تطوير ويب", price:45, img:"https://picsum.photos/400/300?2", desc:"HTML/CSS/JS"},
+  {id:'p3', title:"دورة SEO", price:28, img:"https://picsum.photos/400/300?3", desc:"تحسين محركات البحث"},
+  {id:'p4', title:"قالب متجر إلكتروني", price:40, img:"https://picsum.photos/400/300?4", desc:"جاهز للنشر"},
+  {id:'p5', title:"كتاب HTML+CSS", price:10, img:"https://picsum.photos/400/300?5", desc:"مرجع عملي"},
+  {id:'p6', title:"باك قوالب سوشيال", price:12, img:"https://picsum.photos/400/300?6", desc:"قوالب للمنشورات"},
+  {id:'p7', title:"دورة فوتوشوب", price:25, img:"https://picsum.photos/400/300?7", desc:"تصميم احترافي"},
+  {id:'p8', title:"كورس تسويق رقمي", price:30, img:"https://picsum.photos/400/300?8", desc:"استراتيجيات اعلان"},
+  {id:'p9', title:"قالب كورس أونلاين", price:34, img:"https://picsum.photos/400/300?9", desc:"نظام تعليمي"},
+  {id:'p10', title:"دورة التجارة الإلكترونية", price:32, img:"https://picsum.photos/400/300?10", desc:"بيع عبر الانترنت"},
+  {id:'p11', title:"كورس AI مبسّط", price:50, img:"https://picsum.photos/400/300?11", desc:"مشاريع الذكاء الاصطناعي"},
+  {id:'p12', title:"مجموعات صور وتأثيرات", price:14, img:"https://picsum.photos/400/300?12", desc:"للتصميم"},
+  {id:'p13', title:"قالب لعبة بسيطة", price:16, img:"https://picsum.photos/400/300?13", desc:"كود لعبة جاهز"},
+  {id:'p14', title:"دورة Excel عملي", price:18, img:"https://picsum.photos/400/300?14", desc:"تحليل بيانات"},
+  {id:'p15', title:"سجل أعمال احترافي", price:22, img:"https://picsum.photos/400/300?15", desc:"قالب بورتفوليو"},
+  {id:'p16', title:"باقة أيقونات", price:11, img:"https://picsum.photos/400/300?16", desc:"ايقونات جاهزة"},
+  {id:'p17', title:"دليل ريادة الأعمال", price:19, img:"https://picsum.photos/400/300?17", desc:"خطوات عملية"},
+  {id:'p18', title:"قالب Landing Page", price:26, img:"https://picsum.photos/400/300?18", desc:"صفحة هبوط جاهزة"},
+  {id:'p19', title:"دورة UX/UI", price:27, img:"https://picsum.photos/400/300?19", desc:"تصميم واجهات المستخدم"},
+  {id:'p20', title:"حزمة سكربتات صغيرة", price:15, img:"https://picsum.photos/400/300?20", desc:"أدوات جاهزة للمطورين"}
+];
 
-  // شراء
-  function buy(product,price){
-    alert('اخترت: '+product+' | السعر: '+price+' USDT. انتقل لصفحة الدفع.');
-    showSection('payment');
-  }
+/* LocalStorage keys */
+const KEY_USER = "fast10_user_v1";
 
-  // نسخ معرف الدفع
-  function copyID(id){
-    navigator.clipboard.writeText(document.getElementById(id).innerText);
-    alert('تم نسخ المعرف');
-  }
+/* INIT */
+function init(){
+  document.getElementById('binId').innerText = BINANCE;
+  document.getElementById('payId').innerText = PAYEER;
+  const waBtn = document.getElementById('waSupport');
+  waBtn.href = WHATSAPP;
+  renderProducts();
+  updateAuthBtn();
+}
+
+/* عرض منتجات */
+function renderProducts(){
+  const grid = document.getElementById('productsGrid');
+  grid.innerHTML = '';
+  PRODUCTS.forEach(p=>{
+    const div = document.createElement('div'); div.className = 'card';
+    div.innerHTML = `
+      <img src="${p.img}" alt="${p.title}">
+      <h3>${p.title}</h3>
+      <p class="muted">${p.desc}</p>
+      <div style="display:flex;align-items:center;gap:8px;margin-top:8px">
+        <div class="price">${p.price} USDT</div>
+        <button class="btn" style="margin-left:auto" onclick='openBuy("${p.id}")'>اطلب الآن</button>
+      </div>
+    `;
+    grid.appendChild(div);
+  });
+}
+
+/* NAV */
+function show(id){
+  document.getElementById('products').style.display='none';
+  document.getElementById('pay').style.display='none';
+  if(id==='products') document.getElementById('products').style.display='block';
+  if(id==='pay') document.getElementById('pay').style.display='block';
+}
+
+/* AUTH (بسيطة بLocalStorage) */
+function openAuth(){
+  const html = `
+    <h3>تسجيل / تسجيل دخول</h3>
+    <div style="display:flex;gap:8px;margin-top:8px">
+      <input id="authUser" placeholder="اسم المستخدم">
+      <input id="authPass" type="password" placeholder="كلمة المرور">
+    </div>
+    <div style="display:flex;gap:8px;margin-top:10px">
+      <button class="btn" onclick="doRegister()">إنشاء حساب</button>
+      <button class="btn secondary" onclick="doLogin()">دخول</button>
+      <button class="btn secondary" style="margin-left:auto" onclick="closeModal()">إغلاق</button>
+    </div>
+    <p class="muted" style="margin-top:10px">ملاحظة: بيانات تُخزن محلياً على متصفحك (LocalStorage).</p>
+  `;
+  showModalWith(html);
+}
+function doRegister(){
+  const u = document.getElementById('authUser').value?.trim();
+  const p = document.getElementById('authPass').value?.trim();
+  if(!u||!p){ alert('املأ اسم المستخدم وكلمة المرور'); return; }
+  localStorage.setItem(KEY_USER, JSON.stringify({user:u,pass:p}));
+  closeModal(); alert('تم إنشاء الحساب وتسجيل الدخول كـ '+u); updateAuthBtn();
+}
+function doLogin(){
+  const u = document.getElementById('authUser').value?.trim();
+  const p = document.getElementById('authPass').value?.trim();
+  const stored = JSON.parse(localStorage.getItem(KEY_USER)||'null');
+  if(stored && stored.user===u && stored.pass===p){ closeModal(); alert('تم تسجيل الدخول كـ '+u); updateAuthBtn(); }
+  else if(u=== 'admin' && p==='admin123'){ closeModal(); localStorage.setItem(KEY_USER, JSON.stringify({user:'admin',pass:'admin123'})); localStorage.setItem('f10_is_admin','true'); alert('تم تسجيل الدخول كمدير'); updateAuthBtn(); }
+  else alert('بيانات غير صحيحة');
+}
+function logout(){ localStorage.removeItem(KEY_USER); localStorage.removeItem('f10_is_admin'); alert('تم تسجيل الخروج'); updateAuthBtn(); }
+function updateAuthBtn(){ const btn = document.getElementById('authBtn'); const s = JSON.parse(localStorage.getItem(KEY_USER)||'null'); if(s && s.user){ btn.innerText = 'تسجيل الخروج ('+s.user+')'; btn.onclick = logout; } else { btn.innerText = 'تسجيل / دخول'; btn.onclick = openAuth; } }
+
+/* Modal helpers */
+function showModalWith(html){ document.getElementById('modalContent').innerHTML = html; document.getElementById('modal').style.display = 'flex'; }
+function closeModal(){ document.getElementById('modal').style.display = 'none'; }
+
+/* BUY flow */
+function openBuy(pid){
+  const p = PRODUCTS.find(x=>x.id===pid);
+  const html = `
+    <h3>طلب: ${p.title}</h3>
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div class="muted">${p.desc}</div>
+      <div style="font-weight:900">${p.price} USDT</div>
+    </div>
+    <div style="margin-top:10px">
+      <label class="muted">الكمية</label>
+      <input id="buyQty" type="number" value="1" min="1">
+    </div>
+    <div style="margin-top:8px">
+      <label class="muted">ملاحظة (اختياري)</label>
+      <input id="buyNote" placeholder="مثال: ايدي حسابي في المنصة">
+    </div>
+    <div style="margin-top:12px;display:flex;gap:8px">
+      <button class="btn" onclick='prepareBuy("${p.id}")'>الانتقال للدفع</button>
+      <button class="btn secondary" onclick="closeModal()">إلغاء</button>
+    </div>
+    <p class="muted" style="margin-top:10px;color:#ffdca3"><strong>ملاحظة:</strong> بعد الدفع تواصل عبر واتساب لإرسال إثبات الدفع وسنرسل لك رابط المنتج.</p>
+  `;
+  showModalWith(html);
+}
+
+/* prepare order -> open payment instructions with prefilled whatsapp message */
+function prepareBuy(productId){
+  const qty = Math.max(1, parseInt(document.getElementById('buyQty').value)||1);
+  const note = document.getElementById('buyNote').value||'';
+  const prod = PRODUCTS.find(x=>x.id===productId);
+  const total = (prod.price * qty).toFixed(2);
+  // create a lightweight "order" object local only (optional)
+  const order = { id: 'o'+Date.now().toString(36), product:prod.title, qty, total, note, user: (JSON.parse(localStorage.getItem(KEY_USER)||'null')||{}).user || 'زائر' };
+  closeModal();
+  // open payment instructions modal with Whatsapp prefilled link
+  const waText = encodeURIComponent(`طلب: ${order.product}\nالكمية: ${order.qty}\nالإجمالي: ${order.total} USDT\nالاسم: ${order.user}\nملاحظة: ${order.note}\n\nأرسلت الإيصال هنا.`)
+  const html = `
+    <h3>تعليمات الدفع — ${prod.title}</h3>
+    <div class="panel" style="margin-top:8px">
+      <p class="muted">انسخ أحد المعرفين وادفع المبلغ. بعد الدفع تواصل عبر الواتساب لإرسال إثبات الدفع وسنرسل لك رابط المنتج.</p>
+      <p><strong>Binance Pay:</strong> <b>${BINANCE}</b> <button class="btn secondary" onclick="copy('binId')">نسخ</button></p>
+      <p><strong>Payeer:</strong> <b>${PAYEER}</b> <button class="btn secondary" onclick="copy('payId')">نسخ</button></p>
+      <p style="margin-top:8px;color:#ffe">ملاحظة: بعد الدفع — <b>تواصل عبر الواتساب لتسلم رابط المنتج</b>.</p>
+      <div style="margin-top:12px;display:flex;gap:8px">
+        <a class="btn" href="${WHATSAPP}?text=${waText}" target="_blank">فتح واتساب — ارسال إثبات الدفع</a>
+        <button class="btn secondary" onclick="closeModal()">حسناً</button>
+      </div>
+    </div>
+  `;
+  showModalWith(html);
+}
+
+/* copy helpers */
+function copy(id){ const t = document.getElementById(id).innerText; navigator.clipboard.writeText(t); alert('تم النسخ: '+t); }
+
+/* alias constants for modal */
+const BINANCE = BINANCE || '782102873';
+const PAYEER = PAYEER || 'P1112102994';
+const WHATSAPP = WHATSAPP || 'https://wa.me/213655643510';
+
+/* init wrapper to expose constants to template */
+function init(){
+  // put ids
+  document.getElementById('binId').innerText = BINANCE;
+  document.getElementById('payId').innerText = PAYEER;
+  document.getElementById('waSupport').href = WHATSAPP;
+  renderProducts();
+  show('products');
+  updateAuthBtn();
+}
 </script>
-
 </body>
 </html>
