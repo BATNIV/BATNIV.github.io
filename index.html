@@ -3,50 +3,47 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Fast10 Production — متجر رقمي</title>
+<title>Fast10 — متجر رقمي خفيف</title>
 <style>
   :root{
     --bg:#07101a; --panel:#0c1b26; --accent:#0db0ff; --muted:#9fb9c9;
+    --card:#0f2430; --radius:12px;
   }
   *{box-sizing:border-box}
-  body{margin:0;font-family:system-ui,Arial,Helvetica; background:linear-gradient(180deg,#020409,var(--bg)); color:#eaf6ff; direction:rtl}
-  header{background:rgba(6,12,18,0.95);padding:14px 18px;position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(255,255,255,0.02)}
+  body{margin:0;font-family:system-ui,Arial,Helvetica,sans-serif;background:linear-gradient(180deg,#020409,var(--bg));color:#eaf6ff;direction:rtl}
+  header{background:rgba(6,12,18,0.95);padding:12px 18px;position:sticky;top:0;z-index:20;border-bottom:1px solid rgba(255,255,255,0.03)}
   .nav{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
-  .brand{display:flex;gap:12px;align-items:center}
-  .logo{width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,#00394f,#006288);display:flex;align-items:center;justify-content:center;font-weight:800}
+  .brand{display:flex;align-items:center;gap:12px}
+  .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,#00394f,#006288);display:flex;align-items:center;justify-content:center;font-weight:800}
   .brand h1{margin:0;color:var(--accent);font-size:18px}
   .links{display:flex;gap:8px;align-items:center}
-  .links button{background:transparent;border:1px solid rgba(255,255,255,0.03);color:#fff;padding:8px 12px;border-radius:8px;cursor:pointer}
-  .container{max-width:1100px;margin:18px auto;padding:12px}
-  .hero{display:flex;gap:18px;align-items:center;justify-content:space-between;padding:18px;border-radius:10px;background:linear-gradient(180deg,#041018,#071827);border:1px solid rgba(255,255,255,0.02)}
+  .links button{background:transparent;border:1px solid rgba(255,255,255,0.04);color:#fff;padding:8px 12px;border-radius:8px;cursor:pointer}
+  .links button:hover{background:rgba(13,40,60,0.4)}
+  main{max-width:1100px;margin:18px auto;padding:12px}
+  .hero{display:flex;gap:18px;align-items:center;justify-content:space-between;padding:18px;border-radius:var(--radius);background:linear-gradient(180deg,#041018,#071827);border:1px solid rgba(255,255,255,0.02)}
   .hero h2{margin:0;color:var(--accent)}
   .muted{color:var(--muted);font-size:13px}
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-top:14px}
-  .card{background:linear-gradient(180deg,var(--panel),#081824);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 18px rgba(1,6,10,0.6);text-align:center}
+  .card{background:linear-gradient(180deg,var(--card),#071722);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);text-align:center}
   .card img{width:100%;height:140px;object-fit:cover;border-radius:8px;margin-bottom:10px}
-  .card h3{margin:6px 0;color:var(--accent);font-size:16px}
+  .card h3{margin:6px 0;color:var(--accent);font-size:15px}
   .card p{margin:6px 0;color:var(--muted);font-size:13px}
-  .price{font-weight:900;color:#bfffbf}
-  .btn{background:var(--accent);color:#042433;padding:9px 12px;border-radius:8px;border:none;cursor:pointer;font-weight:700}
-  .btn.secondary{background:transparent;color:var(--accent);border:1px solid rgba(13,40,60,0.5)}
+  .price{font-weight:800;color:#bfffbf}
+  .btn{background:var(--accent);color:#002b36;padding:9px 12px;border-radius:8px;border:none;cursor:pointer;font-weight:700}
+  .btn.ghost{background:transparent;color:var(--accent);border:1px solid rgba(13,40,60,0.5)}
   .panel{background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
-  .orders-list{display:flex;flex-direction:column;gap:12px}
-  .order-item{background:linear-gradient(180deg,#06121a,#071722);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
-  .badge{padding:6px 8px;border-radius:8px;font-weight:700;font-size:12px}
-  .badge.pending{background:#203640;color:#9fd3ff}
-  .badge.paid{background:#2ecc71;color:#042433}
-  .badge.completed{background:#0a6b8a;color:#eaffff}
-  .badge.rejected{background:#ff5c5c;color:#fff}
-  .modal-back{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;padding:20px;z-index:999}
-  .modal{width:100%;max-width:760px;background:linear-gradient(180deg,#041018,#071322);border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.03)}
-  input,select,textarea{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px;border-radius:8px;color:#e6f6ff;width:100%}
-  textarea{min-height:80px;resize:vertical}
-  footer{padding:18px;text-align:center;color:var(--muted);font-size:13px;margin-top:22px}
-  .hidden{display:none}
-  @media(max-width:720px){ .hero{flex-direction:column} .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))} }
+  .note{color:#ffdca3;margin-top:10px}
+  .modal-back{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;padding:20px;z-index:99}
+  .modal{width:100%;max-width:720px;background:linear-gradient(180deg,#041018,#071322);border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.03)}
+  input,select,textarea{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px;border-radius:8px;color:#e6f6ff;width:100%;margin-top:8px}
+  .orders-list{display:flex;flex-direction:column;gap:10px}
+  .order-row{background:#06121a;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.02);display:flex;justify-content:space-between;align-items:center}
+  .order-actions button{margin-left:6px}
+  footer{padding:14px;text-align:center;color:var(--muted);margin-top:20px}
+  @media(max-width:720px){ .hero{flex-direction:column} .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))} .nav{padding:8px} }
 </style>
 </head>
-<body onload="initApp()">
+<body onload="appInit()">
 
 <header>
   <div class="nav">
@@ -54,100 +51,99 @@
       <div class="logo">F10</div>
       <div>
         <h1>Fast10 Production</h1>
-        <div class="muted">متجر منتجات رقمية — خفيف وعملي</div>
+        <div class="muted">متجر منتجات رقمية — خفيف</div>
       </div>
     </div>
     <div class="links">
-      <button onclick="show('products')">المنتجات</button>
-      <button onclick="show('pay')">الدفع</button>
-      <button id="ordersBtn" class="hidden" onclick="show('orders')">طلبات</button>
+      <button onclick="showSection('products')">المنتجات</button>
+      <button onclick="showSection('pay')">الدفع</button>
+      <button id="ordersBtn" class="hidden" onclick="showSection('orders')">طلبات</button>
       <button id="authBtn" onclick="openAuth()">تسجيل / دخول</button>
     </div>
   </div>
 </header>
 
-<main class="container">
+<main>
   <section class="hero">
     <div>
-      <h2>منتجات رقمية جاهزة — اطلب واستلم الرابط بعد الدفع</h2>
-      <p class="muted">بعد الدفع تواصل عبر الواتساب وسوف نزوّدك برابط التحميل من المدير.</p>
+      <h2>منتجات رقمية جاهزة — خفيف وسهل</h2>
+      <p class="muted">اختر المنتج وادفع خارجياً. بعد الدفع تواصل عبر واتساب ليتم إرسال رابط التحميل.</p>
     </div>
     <div style="min-width:220px">
-      <img src="https://picsum.photos/420/260?tech" alt="hero" style="width:100%;border-radius:10px">
+      <img src="https://picsum.photos/420/260?digital" alt="hero" style="width:100%;border-radius:10px">
     </div>
   </section>
 
   <!-- PRODUCTS -->
-  <section id="products" style="margin-top:18px">
+  <section id="section-products" style="margin-top:18px">
     <div style="display:flex;justify-content:space-between;align-items:center">
       <h2>المنتجات</h2>
-      <div class="muted small">أسعار بالـ USDT — من 0$ إلى 50$</div>
+      <div class="muted">أسعار بالـ USDT — من 0$ إلى 50$</div>
     </div>
     <div id="productsGrid" class="grid"></div>
   </section>
 
   <!-- PAYMENT -->
-  <section id="pay" class="hidden" style="margin-top:22px">
+  <section id="section-pay" class="hidden" style="margin-top:18px">
     <div class="panel">
       <h3>معلومات الدفع</h3>
-      <p class="muted">انسخ أحد المعرفين وادفع، ثم تواصل عبر الواتساب لإرسال إيصال الدفع.</p>
-      <p><strong>Binance ID:</strong> <b id="binId">782102873</b> <button class="btn secondary" onclick="copyText('binId')">نسخ</button></p>
-      <p><strong>Payeer ID:</strong> <b id="payId">P1112102994</b> <button class="btn secondary" onclick="copyText('payId')">نسخ</button></p>
-      <p style="margin-top:8px;color:#ffdca3"><strong>ملاحظة:</strong> بعد الدفع يرجى التواصل عبر الواتساب لتستلم رابط المنتج.</p>
-      <div style="margin-top:12px">
-        <a class="btn" id="waLink" href="#" target="_blank">فتح واتساب — ارسال إثبات الدفع</a>
+      <p class="muted">انسخ أحد المعرفين وادفع. بعد الدفع تواصل عبر واتساب لإرسال إثبات الدفع.</p>
+      <p><strong>Binance ID:</strong> <b id="binId">782102873</b> <button class="btn ghost" onclick="copyText('binId')">نسخ</button></p>
+      <p><strong>Payeer ID:</strong> <b id="payId">P1112102994</b> <button class="btn ghost" onclick="copyText('payId')">نسخ</button></p>
+      <p class="note"><strong>ملاحظة:</strong> بعد الدفع يرجى التواصل عبر واتساب لتستلم رابط المنتج.</p>
+      <div style="margin-top:10px">
+        <a id="waBtn" class="btn" href="#" target="_blank">افتح واتساب — إرسال إثبات الدفع</a>
       </div>
     </div>
   </section>
 
   <!-- ORDERS (admin only) -->
-  <section id="orders" class="hidden" style="margin-top:22px">
+  <section id="section-orders" class="hidden" style="margin-top:18px">
     <div style="display:flex;justify-content:space-between;align-items:center">
-      <h2>🗂️ إدارة الطلبات</h2>
-      <div class="muted small">الأمراء يظهرون هنا — للمدير فقط</div>
+      <h2>إدارة الطلبات</h2>
+      <div class="muted">تظهر للمدير فقط</div>
     </div>
-    <div id="ordersList" style="margin-top:12px"></div>
+    <div id="ordersList" class="orders-list" style="margin-top:12px"></div>
   </section>
-
 </main>
 
 <!-- modal -->
 <div id="modal" class="modal-back"><div class="modal" id="modalContent"></div></div>
 
-<footer>© Fast10 Production — تواصل عبر واتساب بعد الدفع</footer>
+<footer>© Fast10 Production — بعد الدفع تواصل عبر واتساب</footer>
 
 <script>
-/* ====== إعدادات ====== */
+/* ====== إعدادات سريعة ====== */
 const BINANCE = "782102873";
 const PAYEER = "P1112102994";
-const WHATSAPP = "https://wa.me/213655643510";
+const WHATSAPP_BASE = "https://wa.me/213655643510"; // غيّر رقمك هنا
 const ADMIN_USER = "admin";
 const ADMIN_PASS = "12345";
 
-/* ====== منتجات (أضفت "كارط فيزا مجانية") ====== */
+/* ====== منتجات (خفيفة) ====== */
 const PRODUCTS = [
-  {id:'p1', title:"كورس برمجة", price:20, img:"https://picsum.photos/400/300?1", desc:"تعلم بناء مواقع وتطبيقات"},
-  {id:'p2', title:"كورس فوتوشوب متقدم", price:25, img:"https://picsum.photos/400/300?2", desc:"تصميم احترافي وتحرير الصور"},
-  {id:'p3', title:"كتاب استراتيجيات تداول", price:18, img:"https://picsum.photos/400/300?3", desc:"استراتيجيات عملية للتداول"},
-  {id:'p4', title:"باقة قوالب سوشيال ميديا", price:12, img:"https://picsum.photos/400/300?4", desc:"قوالب جاهزة للمنشورات"},
-  {id:'p5', title:"أدوات إدارة مشاريع", price:15, img:"https://picsum.photos/400/300?5", desc:"قوالب وأدوات للـ PM"},
-  {id:'p6', title:"دورة تسويق رقمي", price:30, img:"https://picsum.photos/400/300?6", desc:"حملات ناجحة على السوشيال"},
-  {id:'p7', title:"قالب متجر إلكتروني جاهز", price:40, img:"https://picsum.photos/400/300?7", desc:"قالب قابل للتخصيص"},
-  {id:'p8', title:"كورس ذكاء اصطناعي", price:50, img:"https://picsum.photos/400/300?8", desc:"مشاريع ونماذج عملية"},
-  {id:'p9', title:"سجل أعمال احترافي (Portfolio)", price:22, img:"https://picsum.photos/400/300?9", desc:"قالب بورتفوليو نظيف"},
-  {id:'p10', title:"باقة أيقونات وتصاميم", price:11, img:"https://picsum.photos/400/300?10", desc:"ايقونات عالية الجودة"},
-  {id:'p11', title:"قارورة قوالب HTML", price:34, img:"https://picsum.photos/400/300?11", desc:"قوالب مواقع جاهزة"},
-  {id:'p12', title:"كورس Excel عملي", price:18, img:"https://picsum.photos/400/300?12", desc:"تحليل بيانات عملي"},
-  {id:'p13', title:"قالب لعبة بسيطة (HTML5)", price:16, img:"https://picsum.photos/400/300?13", desc:"لعبة قابلة للتعديل"},
-  {id:'p14', title:"كارط فيزا مجانية", price:0, img:"https://picsum.photos/400/300?14", desc:"عرض خاص — تابع الشروط في الواتساب"},
+  {id:'p1', title:"كورس برمجة عملي", price:20, img:"https://picsum.photos/400/300?1", desc:"مشاريع تطبيقية"},
+  {id:'p2', title:"كورس فوتوشوب", price:25, img:"https://picsum.photos/400/300?2", desc:"تصميم وتعديل صور"},
+  {id:'p3', title:"كتاب تداول متقدم", price:18, img:"https://picsum.photos/400/300?3", desc:"استراتيجيات عملية"},
+  {id:'p4', title:"قوالب سوشيال ميديا", price:12, img:"https://picsum.photos/400/300?4", desc:"قوالب جاهزة"},
+  {id:'p5', title:"أدوات إدارة مشاريع", price:15, img:"https://picsum.photos/400/300?5", desc:"قوالب للـ PM"},
+  {id:'p6', title:"كورس تسويق رقمي", price:30, img:"https://picsum.photos/400/300?6", desc:"استراتيجيات إعلانية"},
+  {id:'p7', title:"قالب متجر إلكتروني", price:40, img:"https://picsum.photos/400/300?7", desc:"قالب قابل للتخصيص"},
+  {id:'p8', title:"كورس ذكاء اصطناعي", price:50, img:"https://picsum.photos/400/300?8", desc:"مشاريع ونماذج"},
+  {id:'p9', title:"سجل أعمال (Portfolio)", price:22, img:"https://picsum.photos/400/300?9", desc:"قالب بورتفوليو"},
+  {id:'p10', title:"باقة أيقونات", price:11, img:"https://picsum.photos/400/300?10", desc:"أيقونات عالية الجودة"},
+  {id:'p11', title:"قوالب HTML جاهزة", price:34, img:"https://picsum.photos/400/300?11", desc:"قوالب مواقع"},
+  {id:'p12', title:"كورس Excel عملي", price:18, img:"https://picsum.photos/400/300?12", desc:"تحليل بيانات"},
+  {id:'p13', title:"قالب لعبة بسيطة", price:16, img:"https://picsum.photos/400/300?13", desc:"HTML5 قابلة للتعديل"},
+  {id:'p14', title:"كارط فيزا مجانية", price:0, img:"https://picsum.photos/400/300?14", desc:"عرض خاص — تواصل عبر الواتساب للشروط"}
 ];
 
-/* ====== تخزين محلي ====== */
-const KEY_USERS = "f10_users_v2";
-const KEY_ORDERS = "f10_orders_v2";
-const KEY_CURRENT = "f10_current_v2";
+/* ====== مفاتيح localStorage ====== */
+const KEY_USERS = "f10_v_users";
+const KEY_ORDERS = "f10_v_orders";
+const KEY_CURRENT = "f10_v_current";
 
-/* ====== مساعدات ====== */
+/* ====== وظائف مساعدة ====== */
 function uid(){ return 'o'+Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
 function now(){ return new Date().toLocaleString(); }
 function getUsers(){ return JSON.parse(localStorage.getItem(KEY_USERS)||'{}'); }
@@ -157,214 +153,178 @@ function setOrders(o){ localStorage.setItem(KEY_ORDERS, JSON.stringify(o)); }
 function getCurrent(){ return JSON.parse(localStorage.getItem(KEY_CURRENT)||'null'); }
 function setCurrent(u){ if(u) localStorage.setItem(KEY_CURRENT, JSON.stringify(u)); else localStorage.removeItem(KEY_CURRENT); }
 
-/* ====== INIT ====== */
-function initApp(){
-  document.getElementById('binId').innerText = BINANCE;
-  document.getElementById('payId').innerText = PAYEER;
-  document.getElementById('waLink').href = WHATSAPP;
-
-  // ensure admin exists in users map (for convenience we also allow explicit admin login)
+/* ====== بدء التطبيق ====== */
+function appInit(){
+  // ensure admin exists
   const users = getUsers();
   if(!users[ADMIN_USER]){ users[ADMIN_USER] = ADMIN_PASS; setUsers(users); }
 
+  document.getElementById('binId').innerText = BINANCE;
+  document.getElementById('payId').innerText = PAYEER;
+  document.getElementById('waBtn').href = WHATSAPP_BASE;
+
   renderProducts();
-  show('products');
+  showSection('products');
   refreshUI();
 }
 
-/* ====== عرض منتجات ====== */
+/* ====== عرض المنتجات ====== */
 function renderProducts(){
   const grid = document.getElementById('productsGrid');
-  grid.innerHTML = "";
+  grid.innerHTML = '';
   PRODUCTS.forEach(p=>{
-    const el = document.createElement('div');
-    el.className = 'card';
-    el.innerHTML = `
+    const div = document.createElement('div'); div.className='card';
+    div.innerHTML = `
       <img src="${p.img}" alt="${p.title}">
       <h3>${p.title}</h3>
       <p class="muted">${p.desc}</p>
       <div style="display:flex;align-items:center;gap:10px;margin-top:8px">
         <div class="price">${p.price} USDT</div>
-        <button class="btn" style="margin-left:auto" onclick='openBuy("${p.id||p.title}")'>اطلب الآن</button>
-      </div>
-    `;
-    grid.appendChild(el);
+        <button class="btn" style="margin-left:auto" onclick='openOrderModal("${p.id||p.title}")'>اطلب الآن</button>
+      </div>`;
+    grid.appendChild(div);
   });
 }
 
-/* ====== عرض صفحة ====== */
-function show(sectionId){
-  document.getElementById('products').classList.add('hidden');
-  document.getElementById('pay').classList.add('hidden');
-  document.getElementById('orders').classList.add('hidden');
-  document.getElementById('modal').style.display = 'none';
-  if(sectionId === 'products') document.getElementById('products').classList.remove('hidden');
-  if(sectionId === 'pay') document.getElementById('pay').classList.remove('hidden');
-  if(sectionId === 'orders') document.getElementById('orders').classList.remove('hidden');
+/* ====== تبويب العرض ====== */
+function showSection(s){
+  document.getElementById('section-products').classList.add('hidden');
+  document.getElementById('section-pay').classList.add('hidden');
+  document.getElementById('section-orders').classList.add('hidden');
+  if(s==='products') document.getElementById('section-products').classList.remove('hidden');
+  if(s==='pay') document.getElementById('section-pay').classList.remove('hidden');
+  if(s==='orders') document.getElementById('section-orders').classList.remove('hidden');
 }
 
-/* ====== مودال تسجيل/دخول / شراء ====== */
+/* ====== مودال تسجيل/دخول وطلب ====== */
 function openAuth(){
   const html = `
     <h3>تسجيل / تسجيل دخول</h3>
-    <div style="display:flex;gap:8px;margin-top:8px">
-      <input id="authUser" placeholder="اسم المستخدم">
-      <input id="authPass" type="password" placeholder="كلمة المرور">
-    </div>
+    <input id="auth_user" placeholder="اسم المستخدم">
+    <input id="auth_pass" placeholder="كلمة المرور" type="password">
     <div style="display:flex;gap:8px;margin-top:10px">
-      <button class="btn" onclick="doRegister()">إنشاء حساب</button>
-      <button class="btn secondary" onclick="doLogin()">دخول</button>
-      <button class="btn secondary" style="margin-left:auto" onclick="closeModal()">إغلاق</button>
+      <button class="btn" onclick="registerUser()">سجل</button>
+      <button class="btn ghost" onclick="loginUser()">دخول</button>
+      <button class="btn ghost" style="margin-left:auto" onclick="closeModal()">إغلاق</button>
     </div>
-    <p class="muted" style="margin-top:8px">ملاحظة: المدير: <b>${ADMIN_USER}</b> / <b>${ADMIN_PASS}</b></p>
+    <p class="muted" style="margin-top:8px">ملاحظة: مدير النظام: <b>${ADMIN_USER}</b> / <b>${ADMIN_PASS}</b></p>
   `;
   showModal(html);
 }
-
-function showModal(html){ document.getElementById('modalContent').innerHTML = html; document.getElementById('modal').style.display = 'flex'; }
-function closeModal(){ document.getElementById('modal').style.display = 'none'; }
-
-/* ====== auth ====== */
-function doRegister(){
-  const u = document.getElementById('authUser').value?.trim();
-  const p = document.getElementById('authPass').value?.trim();
-  if(!u||!p){ alert('املأ اسم المستخدم وكلمة المرور'); return; }
-  const users = getUsers();
-  if(users[u]){ alert('اسم المستخدم موجود'); return; }
-  users[u] = p; setUsers(users);
-  setCurrent({user:u,isAdmin:false});
-  closeModal(); alert('تم التسجيل وتسجيل الدخول كـ '+u); refreshUI();
-}
-function doLogin(){
-  const u = document.getElementById('authUser').value?.trim();
-  const p = document.getElementById('authPass').value?.trim();
-  if(!u||!p){ alert('املأ اسم وكلمة المرور'); return; }
-  if(u===ADMIN_USER && p===ADMIN_PASS){
-    setCurrent({user:ADMIN_USER,isAdmin:true});
-    closeModal(); alert('تم تسجيل الدخول كمدير'); refreshUI(); show('orders');
-    return;
-  }
-  const users = getUsers();
-  if(users[u] && users[u]===p){
-    setCurrent({user:u,isAdmin:false});
-    closeModal(); alert('تم تسجيل الدخول كـ '+u); refreshUI(); show('products');
-    return;
-  }
-  alert('بيانات غير صحيحة');
-}
-
-/* ====== شراء / إنشاء طلب ====== */
-function openBuy(pid){
-  // find product by title or id
-  const prod = PRODUCTS.find(p => (p.id && p.id===pid) || p.title===pid || (p.id===undefined && p.title===pid));
-  if(!prod) return alert('خطأ في المنتج');
+function openOrderModal(pid){
+  const prod = PRODUCTS.find(p => p.id===pid || p.title===pid || (!p.id && p.title===pid));
+  if(!prod) return alert('خطأ المنتج');
   const html = `
-    <h3>طلب المنتج: ${prod.title}</h3>
+    <h3>طلب — ${prod.title}</h3>
     <div style="display:flex;justify-content:space-between;align-items:center">
       <div class="muted">${prod.desc}</div>
       <div style="font-weight:900">${prod.price} USDT</div>
     </div>
-    <div style="margin-top:10px">
-      <label class="muted">الكمية</label>
-      <input id="ordQty" type="number" value="1" min="1">
-    </div>
-    <div style="margin-top:8px">
-      <label class="muted">ملاحظة (اختياري)</label>
-      <input id="ordNote" placeholder="مثال: ايدي حسابي">
-    </div>
-    <div style="margin-top:12px;display:flex;gap:8px">
+    <input id="order_qty" type="number" value="1" min="1">
+    <input id="order_note" placeholder="ملاحظة (اختياري)">
+    <div style="display:flex;gap:8px;margin-top:10px">
       <button class="btn" onclick='createOrder("${prod.title}")'>إنشاء الطلب</button>
-      <button class="btn secondary" onclick="closeModal()">إلغاء</button>
+      <button class="btn ghost" onclick="closeModal()">إلغاء</button>
     </div>
-    <p class="muted" style="margin-top:8px;color:#ffdca3">ملاحظة: بعد إنشاء الطلب، انتقل إلى صفحة الدفع واتصل عبر واتساب بعد الدفع.</p>
+    <p class="note">بعد إنشاء الطلب: انتقل للدفع ثم تواصل عبر واتساب لإرسال إثبات الدفع.</p>
   `;
   showModal(html);
 }
+function showModal(html){ document.getElementById('modalContent').innerHTML = html; document.getElementById('modal').style.display = 'flex'; }
+function closeModal(){ document.getElementById('modal').style.display = 'none'; }
 
-function createOrder(title){
+/* ====== تسجيل / دخول مستخدم محلي ====== */
+function registerUser(){
+  const u = document.getElementById('auth_user').value?.trim();
+  const p = document.getElementById('auth_pass').value?.trim();
+  if(!u||!p) return alert('املأ الحقول');
+  const users = getUsers();
+  if(users[u]) return alert('اسم المستخدم موجود');
+  users[u] = p; setUsers(users); setCurrent({user:u,isAdmin:false}); closeModal(); alert('تم التسجيل وتسجيل الدخول'); refreshUI(); showSection('products');
+}
+function loginUser(){
+  const u = document.getElementById('auth_user').value?.trim();
+  const p = document.getElementById('auth_pass').value?.trim();
+  if(!u||!p) return alert('املأ الحقول');
+  if(u===ADMIN_USER && p===ADMIN_PASS){ setCurrent({user:ADMIN_USER,isAdmin:true}); closeModal(); alert('تم تسجيل الدخول كمدير'); refreshUI(); showSection('orders'); return; }
+  const users = getUsers();
+  if(users[u] && users[u]===p){ setCurrent({user:u,isAdmin:false}); closeModal(); alert('تم تسجيل الدخول'); refreshUI(); showSection('products'); return; }
+  alert('بيانات غير صحيحة');
+}
+
+/* ====== إنشاء طلب ====== */
+function createOrder(prodTitle){
   const cur = getCurrent();
   if(!cur){ closeModal(); openAuth(); return alert('سجل الدخول أولاً'); }
-  const qty = Math.max(1, parseInt(document.getElementById('ordQty').value)||1);
-  const note = (document.getElementById('ordNote').value||'').trim();
-  const prod = PRODUCTS.find(p=>p.title===title);
+  const qty = Math.max(1, parseInt(document.getElementById('order_qty').value)||1);
+  const note = document.getElementById('order_note').value || '';
+  const prod = PRODUCTS.find(p=>p.title===prodTitle);
   const total = +(prod.price * qty).toFixed(2);
   const order = { id: uid(), user: cur.user, product: prod.title, qty, total, note, status:'pending', createdAt: new Date().toISOString() };
   const orders = getOrders(); orders.push(order); setOrders(orders);
   closeModal();
-  alert('تم إنشاء الطلب #' + order.id + ' — انتقل للدفع وتواصل عبر واتساب.');
-  show('pay');
+  alert('تم إنشاء الطلب #' + order.id);
+  // prepare whatsapp message with order details
+  const waText = encodeURIComponent(`طلب: ${order.product}\nالكمية: ${order.qty}\nالإجمالي: ${order.total} USDT\nالاسم: ${order.user}\nملاحظات: ${order.note}\n\nأرسلت الإيصال هنا.`);
+  window.open(WHATSAPP_BASE + '?text=' + waText, '_blank');
   refreshUI();
 }
 
-/* ====== admin: إدارة الطلبات ====== */
+/* ====== إدارة الطلبات (admin) ====== */
 function renderOrders(){
-  const list = document.getElementById('ordersList'); list.innerHTML = '';
+  const list = document.getElementById('ordersList');
+  list.innerHTML = '';
   const orders = getOrders().slice().reverse();
-  if(!orders.length){ list.innerHTML = '<div class="panel muted">لا توجد طلبات حتى الآن</div>'; return; }
+  if(!orders.length){ list.innerHTML = '<div class="panel muted">لا توجد طلبات</div>'; return; }
   orders.forEach(o=>{
-    const div = document.createElement('div'); div.className = 'order-item';
-    const badge = (o.status==='pending')?'<span class="badge pending">في الانتظار</span>':
-                  (o.status==='paid')?'<span class="badge paid">مدفوع</span>':
-                  (o.status==='completed')?'<span class="badge completed">مكتمل</span>':
-                  '<span class="badge rejected">مرفوض</span>';
-    div.innerHTML = `
-      <div style="display:flex;justify-content:space-between;gap:12px;align-items:center">
-        <div>
-          <div style="font-weight:900">${o.product}</div>
-          <div class="muted small">الزبون: ${o.user} — الطلب: ${o.qty} · الإجمالي: ${o.total} USDT</div>
-          <div class="muted small">ملاحظة: ${o.note || '—'}</div>
-        </div>
-        <div style="text-align:right">
-          ${badge}
-          <div style="margin-top:8px;display:flex;flex-direction:column;gap:6px">
-            <button class="btn" onclick="markPaid('${o.id}')">تأكيد مدفوع</button>
-            <button class="btn secondary" onclick="completeOrder('${o.id}')">تسليم (مكتمل)</button>
-            <button class="btn secondary" style="background:#ff5c5c;color:#fff" onclick="rejectOrder('${o.id}')">رفض</button>
-          </div>
+    const row = document.createElement('div'); row.className='order-row';
+    row.innerHTML = `
+      <div>
+        <div style="font-weight:800">${o.product} — ${o.total} USDT</div>
+        <div class="muted">الزبون: ${o.user} · ${new Date(o.createdAt).toLocaleString()}</div>
+        <div class="muted">ملاحظة: ${o.note || '—'}</div>
+      </div>
+      <div class="order-actions">
+        <div style="text-align:right"><small class="muted">الحالة: <b>${o.status}</b></small></div>
+        <div style="margin-top:8px">
+          <button class="btn" onclick="changeStatus('${o.id}','paid')">تأكيد دفع</button>
+          <button class="btn ghost" onclick="changeStatus('${o.id}','completed')">تسليم</button>
+          <button class="btn ghost" style="background:#ff5c5c;color:#fff" onclick="changeStatus('${o.id}','rejected')">رفض</button>
         </div>
       </div>
     `;
-    list.appendChild(div);
+    list.appendChild(row);
   });
 }
-
-function markPaid(id){
-  const orders = getOrders(); const i = orders.findIndex(x=>x.id===id); if(i<0)return;
-  orders[i].status='paid'; setOrders(orders); renderOrders(); refreshUI();
-}
-function completeOrder(id){
-  const orders = getOrders(); const i = orders.findIndex(x=>x.id===id); if(i<0)return;
-  const link = prompt('أدخل رابط أو نص التسليم (سيشاهده الزبون):','https://example.com/download/...');
-  if(link) orders[i].delivery = link;
-  orders[i].status='completed'; setOrders(orders); renderOrders(); refreshUI();
-}
-function rejectOrder(id){
-  const orders = getOrders(); const i = orders.findIndex(x=>x.id===id); if(i<0)return;
-  orders[i].status='rejected'; setOrders(orders); renderOrders(); refreshUI();
+function changeStatus(id,status){
+  const orders = getOrders(); const i = orders.findIndex(x=>x.id===id); if(i<0) return;
+  orders[i].status = status;
+  if(status==='completed'){
+    const link = prompt('أدخل رابط/نص التسليم (سيشاهده الزبون):','https://example.com/download/...');
+    if(link) orders[i].delivery = link;
+  }
+  setOrders(orders); renderOrders(); refreshUI();
 }
 
-/* ====== UI / auth helpers ====== */
+/* ====== UI refresh / helpers ====== */
 function refreshUI(){
   const cur = getCurrent();
   const authBtn = document.getElementById('authBtn');
   const ordersBtn = document.getElementById('ordersBtn');
   if(cur && cur.user){
-    authBtn.innerText = `تسجيل الخروج (${cur.user})`; authBtn.onclick = logout;
+    authBtn.innerText = `تسجيل الخروج (${cur.user})`;
+    authBtn.onclick = () => { setCurrent(null); refreshUI(); showSection('products'); };
     if(cur.isAdmin) ordersBtn.classList.remove('hidden'); else ordersBtn.classList.add('hidden');
   } else {
-    authBtn.innerText = 'تسجيل / دخول'; authBtn.onclick = openAuth; ordersBtn.classList.add('hidden');
+    authBtn.innerText = 'تسجيل / دخول';
+    authBtn.onclick = openAuth;
+    ordersBtn.classList.add('hidden');
   }
-  // if admin page visible, render orders
-  if(!document.getElementById('orders').classList.contains('hidden')) renderOrders();
+  // if orders section visible and admin logged -> render list
+  if(!document.getElementById('section-orders').classList.contains('hidden') && getCurrent() && getCurrent().isAdmin) renderOrders();
 }
 
-/* ====== auth via top button (open modal) ====== */
-function openAuth(){ openModalAuth(); }
-function openModalAuth(){ openAuth(); } // alias
-
-function logout(){ setCurrent(null); localStorage.removeItem('f10_is_admin'); refreshUI(); show('products'); }
-
-/* ====== helpers ====== */
+/* ====== copy helper ====== */
 function copyText(id){ const t = document.getElementById(id).innerText; navigator.clipboard.writeText(t); alert('تم النسخ: '+t); }
 
 /* ====== storage helpers ====== */
@@ -372,35 +332,40 @@ function getOrders(){ return JSON.parse(localStorage.getItem(KEY_ORDERS)||'[]');
 function setOrders(o){ localStorage.setItem(KEY_ORDERS, JSON.stringify(o)); }
 function getUsers(){ return JSON.parse(localStorage.getItem(KEY_USERS)||'{}'); }
 function setUsers(u){ localStorage.setItem(KEY_USERS, JSON.stringify(u)); }
+function getCurrent(){ return JSON.parse(localStorage.getItem(KEY_CURRENT)||'null'); }
+function setCurrent(obj){ if(obj) localStorage.setItem(KEY_CURRENT, JSON.stringify(obj)); else localStorage.removeItem(KEY_CURRENT); }
 
-/* ====== small wrapper for auth modal functions (to avoid name conflict) ====== */
-function openAuth(){
-  const html = `
-    <h3>تسجيل / تسجيل دخول</h3>
-    <div style="display:flex;gap:8px;margin-top:8px">
-      <input id="authUser" placeholder="اسم المستخدم">
-      <input id="authPass" type="password" placeholder="كلمة المرور">
-    </div>
-    <div style="display:flex;gap:8px;margin-top:10px">
-      <button class="btn" onclick="registerLocal()">إنشاء حساب</button>
-      <button class="btn secondary" onclick="loginLocal()">دخول</button>
-      <button class="btn secondary" style="margin-left:auto" onclick="closeModal()">إغلاق</button>
-    </div>
-    <p class="muted" style="margin-top:8px">المدير: <b>${ADMIN_USER}</b> / <b>${ADMIN_PASS}</b></p>
-  `;
-  showModal(html);
-}
-function closeModal(){ document.getElementById('modal').style.display='none'; }
-function showModal(html){ document.getElementById('modalContent').innerHTML = html; document.getElementById('modal').style.display='flex'; }
+/* ====== constants available in functions ====== */
+const WHATSAPP_BASE = "https://wa.me/213655643510";
 
-/* register / login local */
-function registerLocal(){
-  const u = document.getElementById('authUser').value?.trim();
-  const p = document.getElementById('authPass').value?.trim();
-  if(!u||!p) return alert('املأ الحقول');
-  const users = getUsers();
-  if(users[u]) return alert('المستخدم موجود');
-  users[u] = p; setUsers(users); setCurrent({user:u,isAdmin:false}); closeModal(); alert('تم التسجيل وتسجيل الدخول'); refreshUI(); show('products');
+/* ====== init ====== */
+function appInit(){ appInit = function(){}; /* prevent double init */ 
+  // ensure admin default
+  const us = getUsers();
+  if(!us[ADMIN_USER]){ us[ADMIN_USER] = ADMIN_PASS; setUsers(us); }
+  document.getElementById('binId').innerText = BINANCE;
+  document.getElementById('payId').innerText = PAYEER;
+  document.getElementById('waBtn').href = WHATSAPP_BASE;
+  renderProducts();
+  showSection('products');
+  refreshUI();
 }
-function loginLocal(){
-  const u = document.getElementById('authUser').value?.trim(
+function renderProducts(){ renderProducts = function(){};
+  const grid = document.getElementById('productsGrid');
+  grid.innerHTML='';
+  PRODUCTS.forEach(p=>{
+    const el = document.createElement('div'); el.className='card';
+    el.innerHTML = `<img src="${p.img}" alt=""><h3>${p.title}</h3><p class="muted">${p.desc}</p>
+      <div style="display:flex;align-items:center;gap:10px;margin-top:8px">
+        <div class="price">${p.price} USDT</div>
+        <button class="btn" style="margin-left:auto" onclick='openOrderModal("${p.title}")'>اطلب الآن</button>
+      </div>`;
+    grid.appendChild(el);
+  });
+}
+
+/* run init */
+appInit();
+</script>
+</body>
+</html>
