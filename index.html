@@ -1,371 +1,161 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Fast10 — متجر رقمي خفيف</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fast10 Production - منتجات رقمية</title>
 <style>
-  :root{
-    --bg:#07101a; --panel:#0c1b26; --accent:#0db0ff; --muted:#9fb9c9;
-    --card:#0f2430; --radius:12px;
-  }
-  *{box-sizing:border-box}
-  body{margin:0;font-family:system-ui,Arial,Helvetica,sans-serif;background:linear-gradient(180deg,#020409,var(--bg));color:#eaf6ff;direction:rtl}
-  header{background:rgba(6,12,18,0.95);padding:12px 18px;position:sticky;top:0;z-index:20;border-bottom:1px solid rgba(255,255,255,0.03)}
-  .nav{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
-  .brand{display:flex;align-items:center;gap:12px}
-  .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,#00394f,#006288);display:flex;align-items:center;justify-content:center;font-weight:800}
-  .brand h1{margin:0;color:var(--accent);font-size:18px}
-  .links{display:flex;gap:8px;align-items:center}
-  .links button{background:transparent;border:1px solid rgba(255,255,255,0.04);color:#fff;padding:8px 12px;border-radius:8px;cursor:pointer}
-  .links button:hover{background:rgba(13,40,60,0.4)}
-  main{max-width:1100px;margin:18px auto;padding:12px}
-  .hero{display:flex;gap:18px;align-items:center;justify-content:space-between;padding:18px;border-radius:var(--radius);background:linear-gradient(180deg,#041018,#071827);border:1px solid rgba(255,255,255,0.02)}
-  .hero h2{margin:0;color:var(--accent)}
-  .muted{color:var(--muted);font-size:13px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-top:14px}
-  .card{background:linear-gradient(180deg,var(--card),#071722);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);text-align:center}
-  .card img{width:100%;height:140px;object-fit:cover;border-radius:8px;margin-bottom:10px}
-  .card h3{margin:6px 0;color:var(--accent);font-size:15px}
-  .card p{margin:6px 0;color:var(--muted);font-size:13px}
-  .price{font-weight:800;color:#bfffbf}
-  .btn{background:var(--accent);color:#002b36;padding:9px 12px;border-radius:8px;border:none;cursor:pointer;font-weight:700}
-  .btn.ghost{background:transparent;color:var(--accent);border:1px solid rgba(13,40,60,0.5)}
-  .panel{background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
-  .note{color:#ffdca3;margin-top:10px}
-  .modal-back{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;padding:20px;z-index:99}
-  .modal{width:100%;max-width:720px;background:linear-gradient(180deg,#041018,#071322);border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.03)}
-  input,select,textarea{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px;border-radius:8px;color:#e6f6ff;width:100%;margin-top:8px}
-  .orders-list{display:flex;flex-direction:column;gap:10px}
-  .order-row{background:#06121a;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.02);display:flex;justify-content:space-between;align-items:center}
-  .order-actions button{margin-left:6px}
-  footer{padding:14px;text-align:center;color:var(--muted);margin-top:20px}
-  @media(max-width:720px){ .hero{flex-direction:column} .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))} .nav{padding:8px} }
+body{font-family:Arial,sans-serif;margin:0;background:#0d1117;color:#fff;}
+header{background:#161b22;padding:15px;text-align:center;}
+header h1{color:#00aaff;margin:0;}
+nav a{color:#fff;margin:0 10px;text-decoration:none;font-weight:bold;}
+.container{max-width:800px;margin:20px auto;padding:15px;}
+.card{background:#161b22;padding:15px;border-radius:10px;margin:10px 0;text-align:center;}
+.card img{width:100%;max-height:150px;object-fit:cover;border-radius:8px;}
+.card h3{color:#00aaff;margin:10px 0;}
+button{padding:10px;width:100%;background:#00aaff;color:#fff;border:none;border-radius:8px;cursor:pointer;}
+button:hover{background:#0088cc;}
+input,select{width:100%;padding:8px;margin:6px 0;border:none;border-radius:6px;}
+.balance,.note{background:#161b22;padding:10px;border-radius:8px;margin-top:10px;text-align:center;}
+.admin{background:#111;padding:10px;border-radius:8px;}
 </style>
 </head>
-<body onload="appInit()">
+<body>
 
 <header>
-  <div class="nav">
-    <div class="brand">
-      <div class="logo">F10</div>
-      <div>
-        <h1>Fast10 Production</h1>
-        <div class="muted">متجر منتجات رقمية — خفيف</div>
-      </div>
-    </div>
-    <div class="links">
-      <button onclick="showSection('products')">المنتجات</button>
-      <button onclick="showSection('pay')">الدفع</button>
-      <button id="ordersBtn" class="hidden" onclick="showSection('orders')">طلبات</button>
-      <button id="authBtn" onclick="openAuth()">تسجيل / دخول</button>
-    </div>
-  </div>
+  <h1>🚀 Fast10 Production</h1>
+  <nav>
+    <a href="#" onclick="showProducts()">المنتجات</a>
+    <a href="#" onclick="showLogin()">تسجيل الدخول</a>
+    <a href="#" onclick="showRegister()">إنشاء حساب</a>
+    <a href="#" id="adminLink" style="display:none;" onclick="showOrders()">إدارة الطلبات</a>
+  </nav>
 </header>
 
-<main>
-  <section class="hero">
-    <div>
-      <h2>منتجات رقمية جاهزة — خفيف وسهل</h2>
-      <p class="muted">اختر المنتج وادفع خارجياً. بعد الدفع تواصل عبر واتساب ليتم إرسال رابط التحميل.</p>
-    </div>
-    <div style="min-width:220px">
-      <img src="https://picsum.photos/420/260?digital" alt="hero" style="width:100%;border-radius:10px">
-    </div>
-  </section>
+<div class="container">
 
-  <!-- PRODUCTS -->
-  <section id="section-products" style="margin-top:18px">
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <h2>المنتجات</h2>
-      <div class="muted">أسعار بالـ USDT — من 0$ إلى 50$</div>
+  <!-- تسجيل -->
+  <div id="registerDiv">
+    <h2>إنشاء حساب</h2>
+    <input id="regUser" placeholder="اسم المستخدم">
+    <input id="regPass" type="password" placeholder="كلمة المرور">
+    <button onclick="register()">تسجيل</button>
+  </div>
+
+  <div id="loginDiv" style="display:none;">
+    <h2>تسجيل الدخول</h2>
+    <input id="loginUser" placeholder="اسم المستخدم">
+    <input id="loginPass" type="password" placeholder="كلمة المرور">
+    <button onclick="login()">دخول</button>
+  </div>
+
+  <!-- المنتجات -->
+  <div id="productsPage" style="display:none;">
+    <h2>🛍️ منتجاتنا الرقمية</h2>
+
+    <div class="card">
+      <img src="https://via.placeholder.com/300x150" alt="">
+      <h3>كورس برمجة</h3>
+      <p>السعر: 25 USDT</p>
+      <button onclick="makeOrder('كورس برمجة',25)">طلب المنتج</button>
     </div>
-    <div id="productsGrid" class="grid"></div>
-  </section>
 
-  <!-- PAYMENT -->
-  <section id="section-pay" class="hidden" style="margin-top:18px">
-    <div class="panel">
-      <h3>معلومات الدفع</h3>
-      <p class="muted">انسخ أحد المعرفين وادفع. بعد الدفع تواصل عبر واتساب لإرسال إثبات الدفع.</p>
-      <p><strong>Binance ID:</strong> <b id="binId">782102873</b> <button class="btn ghost" onclick="copyText('binId')">نسخ</button></p>
-      <p><strong>Payeer ID:</strong> <b id="payId">P1112102994</b> <button class="btn ghost" onclick="copyText('payId')">نسخ</button></p>
-      <p class="note"><strong>ملاحظة:</strong> بعد الدفع يرجى التواصل عبر واتساب لتستلم رابط المنتج.</p>
-      <div style="margin-top:10px">
-        <a id="waBtn" class="btn" href="#" target="_blank">افتح واتساب — إرسال إثبات الدفع</a>
-      </div>
+    <div class="card">
+      <img src="https://via.placeholder.com/300x150" alt="">
+      <h3>كورس فوتوشوب</h3>
+      <p>السعر: 20 USDT</p>
+      <button onclick="makeOrder('كورس فوتوشوب',20)">طلب المنتج</button>
     </div>
-  </section>
 
-  <!-- ORDERS (admin only) -->
-  <section id="section-orders" class="hidden" style="margin-top:18px">
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <h2>إدارة الطلبات</h2>
-      <div class="muted">تظهر للمدير فقط</div>
+    <div class="card">
+      <img src="https://via.placeholder.com/300x150" alt="">
+      <h3>كتاب استراتيجيات تداول</h3>
+      <p>السعر: 15 USDT</p>
+      <button onclick="makeOrder('كتاب استراتيجيات تداول',15)">طلب المنتج</button>
     </div>
-    <div id="ordersList" class="orders-list" style="margin-top:12px"></div>
-  </section>
-</main>
 
-<!-- modal -->
-<div id="modal" class="modal-back"><div class="modal" id="modalContent"></div></div>
+    <div class="card">
+      <img src="https://via.placeholder.com/300x150" alt="">
+      <h3>قوالب سوشيال ميديا</h3>
+      <p>السعر: 12 USDT</p>
+      <button onclick="makeOrder('قوالب سوشيال ميديا',12)">طلب المنتج</button>
+    </div>
 
-<footer>© Fast10 Production — بعد الدفع تواصل عبر واتساب</footer>
+    <div class="card">
+      <img src="https://via.placeholder.com/300x150" alt="">
+      <h3>بطاقة فيزا مجانية</h3>
+      <p>السعر: 10 USDT</p>
+      <button onclick="makeOrder('بطاقة فيزا مجانية',10)">طلب المنتج</button>
+    </div>
+
+    <div class="balance">
+      <h3>💳 طرق الدفع</h3>
+      <p><img src="https://upload.wikimedia.org/wikipedia/commons/5/57/Binance_Logo.png" width="25"> Binance ID: <b>782102873</b></p>
+      <p><img src="https://payeer.com/upload/medialibrary/3c5/payeer-logo.svg" width="60"> Payeer ID: <b>P1112102994</b></p>
+      <div class="note">📌 ملاحظة: بعد الدفع، تواصل معنا عبر <a href="https://wa.me/213655643510" style="color:#00ff84;">واتساب</a> لتصلك روابط منتجاتك.</div>
+    </div>
+  </div>
+
+  <!-- الطلبات (للأدمين فقط) -->
+  <div id="ordersPage" style="display:none;">
+    <h2>📦 إدارة الطلبات</h2>
+    <div id="ordersList" class="admin"></div>
+  </div>
+
+</div>
 
 <script>
-/* ====== إعدادات سريعة ====== */
-const BINANCE = "782102873";
-const PAYEER = "P1112102994";
-const WHATSAPP_BASE = "https://wa.me/213655643510"; // غيّر رقمك هنا
-const ADMIN_USER = "admin";
-const ADMIN_PASS = "12345";
+function showProducts(){hideAll();document.getElementById('productsPage').style.display='block';}
+function showLogin(){hideAll();document.getElementById('loginDiv').style.display='block';}
+function showRegister(){hideAll();document.getElementById('registerDiv').style.display='block';}
+function showOrders(){hideAll();document.getElementById('ordersPage').style.display='block';loadOrders();}
+function hideAll(){['registerDiv','loginDiv','productsPage','ordersPage'].forEach(id=>document.getElementById(id).style.display='none');}
 
-/* ====== منتجات (خفيفة) ====== */
-const PRODUCTS = [
-  {id:'p1', title:"كورس برمجة عملي", price:20, img:"https://picsum.photos/400/300?1", desc:"مشاريع تطبيقية"},
-  {id:'p2', title:"كورس فوتوشوب", price:25, img:"https://picsum.photos/400/300?2", desc:"تصميم وتعديل صور"},
-  {id:'p3', title:"كتاب تداول متقدم", price:18, img:"https://picsum.photos/400/300?3", desc:"استراتيجيات عملية"},
-  {id:'p4', title:"قوالب سوشيال ميديا", price:12, img:"https://picsum.photos/400/300?4", desc:"قوالب جاهزة"},
-  {id:'p5', title:"أدوات إدارة مشاريع", price:15, img:"https://picsum.photos/400/300?5", desc:"قوالب للـ PM"},
-  {id:'p6', title:"كورس تسويق رقمي", price:30, img:"https://picsum.photos/400/300?6", desc:"استراتيجيات إعلانية"},
-  {id:'p7', title:"قالب متجر إلكتروني", price:40, img:"https://picsum.photos/400/300?7", desc:"قالب قابل للتخصيص"},
-  {id:'p8', title:"كورس ذكاء اصطناعي", price:50, img:"https://picsum.photos/400/300?8", desc:"مشاريع ونماذج"},
-  {id:'p9', title:"سجل أعمال (Portfolio)", price:22, img:"https://picsum.photos/400/300?9", desc:"قالب بورتفوليو"},
-  {id:'p10', title:"باقة أيقونات", price:11, img:"https://picsum.photos/400/300?10", desc:"أيقونات عالية الجودة"},
-  {id:'p11', title:"قوالب HTML جاهزة", price:34, img:"https://picsum.photos/400/300?11", desc:"قوالب مواقع"},
-  {id:'p12', title:"كورس Excel عملي", price:18, img:"https://picsum.photos/400/300?12", desc:"تحليل بيانات"},
-  {id:'p13', title:"قالب لعبة بسيطة", price:16, img:"https://picsum.photos/400/300?13", desc:"HTML5 قابلة للتعديل"},
-  {id:'p14', title:"كارط فيزا مجانية", price:0, img:"https://picsum.photos/400/300?14", desc:"عرض خاص — تواصل عبر الواتساب للشروط"}
-];
-
-/* ====== مفاتيح localStorage ====== */
-const KEY_USERS = "f10_v_users";
-const KEY_ORDERS = "f10_v_orders";
-const KEY_CURRENT = "f10_v_current";
-
-/* ====== وظائف مساعدة ====== */
-function uid(){ return 'o'+Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
-function now(){ return new Date().toLocaleString(); }
-function getUsers(){ return JSON.parse(localStorage.getItem(KEY_USERS)||'{}'); }
-function setUsers(u){ localStorage.setItem(KEY_USERS, JSON.stringify(u)); }
-function getOrders(){ return JSON.parse(localStorage.getItem(KEY_ORDERS)||'[]'); }
-function setOrders(o){ localStorage.setItem(KEY_ORDERS, JSON.stringify(o)); }
-function getCurrent(){ return JSON.parse(localStorage.getItem(KEY_CURRENT)||'null'); }
-function setCurrent(u){ if(u) localStorage.setItem(KEY_CURRENT, JSON.stringify(u)); else localStorage.removeItem(KEY_CURRENT); }
-
-/* ====== بدء التطبيق ====== */
-function appInit(){
-  // ensure admin exists
-  const users = getUsers();
-  if(!users[ADMIN_USER]){ users[ADMIN_USER] = ADMIN_PASS; setUsers(users); }
-
-  document.getElementById('binId').innerText = BINANCE;
-  document.getElementById('payId').innerText = PAYEER;
-  document.getElementById('waBtn').href = WHATSAPP_BASE;
-
-  renderProducts();
-  showSection('products');
-  refreshUI();
+// تسجيل
+function register(){
+  localStorage.setItem('user',document.getElementById('regUser').value);
+  localStorage.setItem('pass',document.getElementById('regPass').value);
+  alert('تم التسجيل، سجل الدخول الآن');
+  showLogin();
+}
+function login(){
+  const u=document.getElementById('loginUser').value;
+  const p=document.getElementById('loginPass').value;
+  if(u===localStorage.getItem('user')&&p===localStorage.getItem('pass')){
+    alert('تم تسجيل الدخول');
+    showProducts();
+  }else if(u==="admin"&&p==="admin123"){
+    alert('تسجيل دخول كأدمين');
+    document.getElementById('adminLink').style.display='inline';
+    showOrders();
+  }else alert('بيانات خاطئة');
 }
 
-/* ====== عرض المنتجات ====== */
-function renderProducts(){
-  const grid = document.getElementById('productsGrid');
-  grid.innerHTML = '';
-  PRODUCTS.forEach(p=>{
-    const div = document.createElement('div'); div.className='card';
-    div.innerHTML = `
-      <img src="${p.img}" alt="${p.title}">
-      <h3>${p.title}</h3>
-      <p class="muted">${p.desc}</p>
-      <div style="display:flex;align-items:center;gap:10px;margin-top:8px">
-        <div class="price">${p.price} USDT</div>
-        <button class="btn" style="margin-left:auto" onclick='openOrderModal("${p.id||p.title}")'>اطلب الآن</button>
-      </div>`;
-    grid.appendChild(div);
+// الطلبات
+function makeOrder(prod,price){
+  let orders=JSON.parse(localStorage.getItem('orders')||"[]");
+  orders.push({p:prod,pr:price,status:"قيد المراجعة"});
+  localStorage.setItem('orders',JSON.stringify(orders));
+  alert("تم إرسال طلبك! الرجاء الدفع والتواصل عبر واتساب");
+}
+function loadOrders(){
+  let orders=JSON.parse(localStorage.getItem('orders')||"[]");
+  let list="";
+  orders.forEach((o,i)=>{
+    list+=`<p>طلب: ${o.p} - ${o.pr} USDT - الحالة: ${o.status} 
+    <button onclick="setStatus(${i},'مقبول')">قبول</button> 
+    <button onclick="setStatus(${i},'مرفوض')">رفض</button> 
+    <button onclick="setStatus(${i},'مكتمل')">مكتمل</button></p>`;
   });
+  document.getElementById('ordersList').innerHTML=list;
 }
-
-/* ====== تبويب العرض ====== */
-function showSection(s){
-  document.getElementById('section-products').classList.add('hidden');
-  document.getElementById('section-pay').classList.add('hidden');
-  document.getElementById('section-orders').classList.add('hidden');
-  if(s==='products') document.getElementById('section-products').classList.remove('hidden');
-  if(s==='pay') document.getElementById('section-pay').classList.remove('hidden');
-  if(s==='orders') document.getElementById('section-orders').classList.remove('hidden');
+function setStatus(i,s){
+  let orders=JSON.parse(localStorage.getItem('orders')||"[]");
+  orders[i].status=s;
+  localStorage.setItem('orders',JSON.stringify(orders));
+  loadOrders();
 }
-
-/* ====== مودال تسجيل/دخول وطلب ====== */
-function openAuth(){
-  const html = `
-    <h3>تسجيل / تسجيل دخول</h3>
-    <input id="auth_user" placeholder="اسم المستخدم">
-    <input id="auth_pass" placeholder="كلمة المرور" type="password">
-    <div style="display:flex;gap:8px;margin-top:10px">
-      <button class="btn" onclick="registerUser()">سجل</button>
-      <button class="btn ghost" onclick="loginUser()">دخول</button>
-      <button class="btn ghost" style="margin-left:auto" onclick="closeModal()">إغلاق</button>
-    </div>
-    <p class="muted" style="margin-top:8px">ملاحظة: مدير النظام: <b>${ADMIN_USER}</b> / <b>${ADMIN_PASS}</b></p>
-  `;
-  showModal(html);
-}
-function openOrderModal(pid){
-  const prod = PRODUCTS.find(p => p.id===pid || p.title===pid || (!p.id && p.title===pid));
-  if(!prod) return alert('خطأ المنتج');
-  const html = `
-    <h3>طلب — ${prod.title}</h3>
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <div class="muted">${prod.desc}</div>
-      <div style="font-weight:900">${prod.price} USDT</div>
-    </div>
-    <input id="order_qty" type="number" value="1" min="1">
-    <input id="order_note" placeholder="ملاحظة (اختياري)">
-    <div style="display:flex;gap:8px;margin-top:10px">
-      <button class="btn" onclick='createOrder("${prod.title}")'>إنشاء الطلب</button>
-      <button class="btn ghost" onclick="closeModal()">إلغاء</button>
-    </div>
-    <p class="note">بعد إنشاء الطلب: انتقل للدفع ثم تواصل عبر واتساب لإرسال إثبات الدفع.</p>
-  `;
-  showModal(html);
-}
-function showModal(html){ document.getElementById('modalContent').innerHTML = html; document.getElementById('modal').style.display = 'flex'; }
-function closeModal(){ document.getElementById('modal').style.display = 'none'; }
-
-/* ====== تسجيل / دخول مستخدم محلي ====== */
-function registerUser(){
-  const u = document.getElementById('auth_user').value?.trim();
-  const p = document.getElementById('auth_pass').value?.trim();
-  if(!u||!p) return alert('املأ الحقول');
-  const users = getUsers();
-  if(users[u]) return alert('اسم المستخدم موجود');
-  users[u] = p; setUsers(users); setCurrent({user:u,isAdmin:false}); closeModal(); alert('تم التسجيل وتسجيل الدخول'); refreshUI(); showSection('products');
-}
-function loginUser(){
-  const u = document.getElementById('auth_user').value?.trim();
-  const p = document.getElementById('auth_pass').value?.trim();
-  if(!u||!p) return alert('املأ الحقول');
-  if(u===ADMIN_USER && p===ADMIN_PASS){ setCurrent({user:ADMIN_USER,isAdmin:true}); closeModal(); alert('تم تسجيل الدخول كمدير'); refreshUI(); showSection('orders'); return; }
-  const users = getUsers();
-  if(users[u] && users[u]===p){ setCurrent({user:u,isAdmin:false}); closeModal(); alert('تم تسجيل الدخول'); refreshUI(); showSection('products'); return; }
-  alert('بيانات غير صحيحة');
-}
-
-/* ====== إنشاء طلب ====== */
-function createOrder(prodTitle){
-  const cur = getCurrent();
-  if(!cur){ closeModal(); openAuth(); return alert('سجل الدخول أولاً'); }
-  const qty = Math.max(1, parseInt(document.getElementById('order_qty').value)||1);
-  const note = document.getElementById('order_note').value || '';
-  const prod = PRODUCTS.find(p=>p.title===prodTitle);
-  const total = +(prod.price * qty).toFixed(2);
-  const order = { id: uid(), user: cur.user, product: prod.title, qty, total, note, status:'pending', createdAt: new Date().toISOString() };
-  const orders = getOrders(); orders.push(order); setOrders(orders);
-  closeModal();
-  alert('تم إنشاء الطلب #' + order.id);
-  // prepare whatsapp message with order details
-  const waText = encodeURIComponent(`طلب: ${order.product}\nالكمية: ${order.qty}\nالإجمالي: ${order.total} USDT\nالاسم: ${order.user}\nملاحظات: ${order.note}\n\nأرسلت الإيصال هنا.`);
-  window.open(WHATSAPP_BASE + '?text=' + waText, '_blank');
-  refreshUI();
-}
-
-/* ====== إدارة الطلبات (admin) ====== */
-function renderOrders(){
-  const list = document.getElementById('ordersList');
-  list.innerHTML = '';
-  const orders = getOrders().slice().reverse();
-  if(!orders.length){ list.innerHTML = '<div class="panel muted">لا توجد طلبات</div>'; return; }
-  orders.forEach(o=>{
-    const row = document.createElement('div'); row.className='order-row';
-    row.innerHTML = `
-      <div>
-        <div style="font-weight:800">${o.product} — ${o.total} USDT</div>
-        <div class="muted">الزبون: ${o.user} · ${new Date(o.createdAt).toLocaleString()}</div>
-        <div class="muted">ملاحظة: ${o.note || '—'}</div>
-      </div>
-      <div class="order-actions">
-        <div style="text-align:right"><small class="muted">الحالة: <b>${o.status}</b></small></div>
-        <div style="margin-top:8px">
-          <button class="btn" onclick="changeStatus('${o.id}','paid')">تأكيد دفع</button>
-          <button class="btn ghost" onclick="changeStatus('${o.id}','completed')">تسليم</button>
-          <button class="btn ghost" style="background:#ff5c5c;color:#fff" onclick="changeStatus('${o.id}','rejected')">رفض</button>
-        </div>
-      </div>
-    `;
-    list.appendChild(row);
-  });
-}
-function changeStatus(id,status){
-  const orders = getOrders(); const i = orders.findIndex(x=>x.id===id); if(i<0) return;
-  orders[i].status = status;
-  if(status==='completed'){
-    const link = prompt('أدخل رابط/نص التسليم (سيشاهده الزبون):','https://example.com/download/...');
-    if(link) orders[i].delivery = link;
-  }
-  setOrders(orders); renderOrders(); refreshUI();
-}
-
-/* ====== UI refresh / helpers ====== */
-function refreshUI(){
-  const cur = getCurrent();
-  const authBtn = document.getElementById('authBtn');
-  const ordersBtn = document.getElementById('ordersBtn');
-  if(cur && cur.user){
-    authBtn.innerText = `تسجيل الخروج (${cur.user})`;
-    authBtn.onclick = () => { setCurrent(null); refreshUI(); showSection('products'); };
-    if(cur.isAdmin) ordersBtn.classList.remove('hidden'); else ordersBtn.classList.add('hidden');
-  } else {
-    authBtn.innerText = 'تسجيل / دخول';
-    authBtn.onclick = openAuth;
-    ordersBtn.classList.add('hidden');
-  }
-  // if orders section visible and admin logged -> render list
-  if(!document.getElementById('section-orders').classList.contains('hidden') && getCurrent() && getCurrent().isAdmin) renderOrders();
-}
-
-/* ====== copy helper ====== */
-function copyText(id){ const t = document.getElementById(id).innerText; navigator.clipboard.writeText(t); alert('تم النسخ: '+t); }
-
-/* ====== storage helpers ====== */
-function getOrders(){ return JSON.parse(localStorage.getItem(KEY_ORDERS)||'[]'); }
-function setOrders(o){ localStorage.setItem(KEY_ORDERS, JSON.stringify(o)); }
-function getUsers(){ return JSON.parse(localStorage.getItem(KEY_USERS)||'{}'); }
-function setUsers(u){ localStorage.setItem(KEY_USERS, JSON.stringify(u)); }
-function getCurrent(){ return JSON.parse(localStorage.getItem(KEY_CURRENT)||'null'); }
-function setCurrent(obj){ if(obj) localStorage.setItem(KEY_CURRENT, JSON.stringify(obj)); else localStorage.removeItem(KEY_CURRENT); }
-
-/* ====== constants available in functions ====== */
-const WHATSAPP_BASE = "https://wa.me/213655643510";
-
-/* ====== init ====== */
-function appInit(){ appInit = function(){}; /* prevent double init */ 
-  // ensure admin default
-  const us = getUsers();
-  if(!us[ADMIN_USER]){ us[ADMIN_USER] = ADMIN_PASS; setUsers(us); }
-  document.getElementById('binId').innerText = BINANCE;
-  document.getElementById('payId').innerText = PAYEER;
-  document.getElementById('waBtn').href = WHATSAPP_BASE;
-  renderProducts();
-  showSection('products');
-  refreshUI();
-}
-function renderProducts(){ renderProducts = function(){};
-  const grid = document.getElementById('productsGrid');
-  grid.innerHTML='';
-  PRODUCTS.forEach(p=>{
-    const el = document.createElement('div'); el.className='card';
-    el.innerHTML = `<img src="${p.img}" alt=""><h3>${p.title}</h3><p class="muted">${p.desc}</p>
-      <div style="display:flex;align-items:center;gap:10px;margin-top:8px">
-        <div class="price">${p.price} USDT</div>
-        <button class="btn" style="margin-left:auto" onclick='openOrderModal("${p.title}")'>اطلب الآن</button>
-      </div>`;
-    grid.appendChild(el);
-  });
-}
-
-/* run init */
-appInit();
 </script>
+
 </body>
 </html>
