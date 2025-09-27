@@ -1,161 +1,341 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fast10 Production - منتجات رقمية</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Fast10 Blog — مقالات، أدوات وموارد رقمية</title>
+<meta name="description" content="Fast10 Blog — مقالات مفيدة في التقنية، التسويق، الربح من الانترنت، أدوات ومصادر رقمية. تصفح، اقرأ، وتعلم.">
+<meta property="og:title" content="Fast10 Blog — مقالات مفيدة" />
+<meta property="og:description" content="موارد ومقالات عملية تساعدك تربح وتتعلم." />
+<meta property="og:image" content="https://picsum.photos/1200/630?tech" />
 <style>
-body{font-family:Arial,sans-serif;margin:0;background:#0d1117;color:#fff;}
-header{background:#161b22;padding:15px;text-align:center;}
-header h1{color:#00aaff;margin:0;}
-nav a{color:#fff;margin:0 10px;text-decoration:none;font-weight:bold;}
-.container{max-width:800px;margin:20px auto;padding:15px;}
-.card{background:#161b22;padding:15px;border-radius:10px;margin:10px 0;text-align:center;}
-.card img{width:100%;max-height:150px;object-fit:cover;border-radius:8px;}
-.card h3{color:#00aaff;margin:10px 0;}
-button{padding:10px;width:100%;background:#00aaff;color:#fff;border:none;border-radius:8px;cursor:pointer;}
-button:hover{background:#0088cc;}
-input,select{width:100%;padding:8px;margin:6px 0;border:none;border-radius:6px;}
-.balance,.note{background:#161b22;padding:10px;border-radius:8px;margin-top:10px;text-align:center;}
-.admin{background:#111;padding:10px;border-radius:8px;}
+  :root{
+    --bg:#07101a; --panel:#0c1b26; --accent:#0db0ff; --muted:#9fb9c9; --card:#0f2430;
+    --radius:12px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,Arial,Segoe UI,Roboto; background:linear-gradient(180deg,#020409,var(--bg));color:#eaf6ff;direction:rtl}
+  header{position:sticky;top:0;background:rgba(6,12,18,0.9);backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,0.03);z-index:40}
+  .nav{max-width:1200px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .brand{display:flex;gap:12px;align-items:center}
+  .logo{width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,#00394f,#006288);display:flex;align-items:center;justify-content:center;font-weight:800}
+  h1{margin:0;color:var(--accent);font-size:18px}
+  .nav-right{display:flex;gap:8px;align-items:center}
+  .btn{background:var(--accent);color:#012126;padding:8px 12px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+  .btn.ghost{background:transparent;color:var(--accent);border:1px solid rgba(13,40,60,0.5)}
+  .container{max-width:1200px;margin:20px auto;padding:12px}
+  .hero{display:flex;gap:18px;align-items:center;justify-content:space-between;padding:18px;border-radius:var(--radius);background:linear-gradient(180deg,#041018,#071827);border:1px solid rgba(255,255,255,0.02)}
+  .hero h2{margin:0;color:var(--accent)}
+  .layout{display:grid;grid-template-columns: 1fr 320px;gap:18px;margin-top:18px}
+  .list{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+  .card{background:linear-gradient(180deg,var(--card),#071722);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 18px rgba(1,6,10,0.6)}
+  .card img{width:100%;height:160px;object-fit:cover;border-radius:8px;margin-bottom:10px}
+  .card h3{margin:6px 0;color:var(--accent);font-size:16px}
+  .card p{margin:6px 0;color:var(--muted);font-size:14px}
+  .meta{font-size:12px;color:var(--muted);margin-top:6px}
+  aside .panel{background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
+  .search{display:flex;gap:8px}
+  input.search{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#eaf6ff}
+  .cats{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .chip{padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.02);cursor:pointer;border:1px solid rgba(255,255,255,0.02)}
+  .chip.active{background:var(--accent);color:#012126}
+  .read-article{background:linear-gradient(180deg,#071726,#06121a);padding:18px;border-radius:12px}
+  .article img{width:100%;border-radius:8px;max-height:360px;object-fit:cover}
+  .small{font-size:13px;color:var(--muted)}
+  footer{margin-top:30px;padding:14px;text-align:center;color:var(--muted)}
+  .admin-bar{display:flex;gap:8px;align-items:center}
+  .hidden{display:none}
+  @media(max-width:980px){ .layout{grid-template-columns:1fr} aside{order:-1} .list{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))} .hero{flex-direction:column;text-align:center} }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>🚀 Fast10 Production</h1>
-  <nav>
-    <a href="#" onclick="showProducts()">المنتجات</a>
-    <a href="#" onclick="showLogin()">تسجيل الدخول</a>
-    <a href="#" onclick="showRegister()">إنشاء حساب</a>
-    <a href="#" id="adminLink" style="display:none;" onclick="showOrders()">إدارة الطلبات</a>
-  </nav>
+  <div class="nav">
+    <div class="brand">
+      <div class="logo">F10</div>
+      <div>
+        <h1>Fast10 Blog</h1>
+        <div class="small" style="color:var(--muted)">مقالات، موارد وأدوات رقمية مفيدة</div>
+      </div>
+    </div>
+    <div class="nav-right">
+      <div class="admin-bar">
+        <button class="btn ghost" id="newPostBtn">+ مقال جديد</button>
+        <button class="btn" id="authBtn">تسجيل / دخول</button>
+      </div>
+    </div>
+  </div>
 </header>
 
-<div class="container">
+<main class="container">
 
-  <!-- تسجيل -->
-  <div id="registerDiv">
-    <h2>إنشاء حساب</h2>
-    <input id="regUser" placeholder="اسم المستخدم">
-    <input id="regPass" type="password" placeholder="كلمة المرور">
-    <button onclick="register()">تسجيل</button>
+  <section class="hero">
+    <div>
+      <h2>مقالات عملية تساعدك تربح وتتعلّم</h2>
+      <p class="small">دليل موارد، دروس، ونصائح في البرمجة، التسويق، ريادة الأعمال والربح من الإنترنت — محتوى عملي يجي بالنتيجة.</p>
+      <div style="margin-top:12px">
+        <button class="btn" onclick="showSection('blog')">تصفح المقالات</button>
+        <button class="btn ghost" onclick="showSection('about')">من نحن</button>
+      </div>
+    </div>
+    <div style="min-width:240px">
+      <img src="https://picsum.photos/520/300?tech" alt="hero" style="width:100%;border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,0.6)">
+    </div>
+  </section>
+
+  <div class="layout">
+
+    <div>
+      <!-- controls -->
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+        <div class="search" style="width:100%;">
+          <input class="search" id="searchInput" placeholder="ابحث عن مقالة أو كلمة..." oninput="applyFilters()">
+          <select id="sortSelect" onchange="applyFilters()" style="margin-left:8px;padding:10px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:#eaf6ff">
+            <option value="new">الأحدث أولاً</option>
+            <option value="old">الأقدم أولاً</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- posts list -->
+      <div id="postsList" class="list" style="margin-top:14px"></div>
+
+      <!-- pagination -->
+      <div id="pagination" style="margin-top:18px;text-align:center"></div>
+    </div>
+
+    <aside>
+      <div class="panel">
+        <h3>التصنيفات</h3>
+        <div class="cats" id="cats"></div>
+
+        <h3 style="margin-top:14px">الأكثر قراءة</h3>
+        <div id="popular"></div>
+
+        <h3 style="margin-top:14px">تابعنا</h3>
+        <p class="small">📲 تواصل عبر واتساب: <a id="waLink" href="#" style="color:var(--accent)">اضغط هنا</a></p>
+
+        <h3 style="margin-top:10px">نبذة</h3>
+        <p class="small">Fast10 Blog — مقالات قيمة ومباشرة تساعدك تبدأ مشروعك الرقمي وتطوّره.</p>
+      </div>
+    </aside>
+
   </div>
 
-  <div id="loginDiv" style="display:none;">
-    <h2>تسجيل الدخول</h2>
-    <input id="loginUser" placeholder="اسم المستخدم">
-    <input id="loginPass" type="password" placeholder="كلمة المرور">
-    <button onclick="login()">دخول</button>
+  <!-- article reader modal / area -->
+  <div id="reader" class="read-article hidden" style="margin-top:18px">
+    <button class="btn ghost" onclick="closeReader()" style="float:left">رجوع</button>
+    <div id="articleContent"></div>
   </div>
 
-  <!-- المنتجات -->
-  <div id="productsPage" style="display:none;">
-    <h2>🛍️ منتجاتنا الرقمية</h2>
-
-    <div class="card">
-      <img src="https://via.placeholder.com/300x150" alt="">
-      <h3>كورس برمجة</h3>
-      <p>السعر: 25 USDT</p>
-      <button onclick="makeOrder('كورس برمجة',25)">طلب المنتج</button>
-    </div>
-
-    <div class="card">
-      <img src="https://via.placeholder.com/300x150" alt="">
-      <h3>كورس فوتوشوب</h3>
-      <p>السعر: 20 USDT</p>
-      <button onclick="makeOrder('كورس فوتوشوب',20)">طلب المنتج</button>
-    </div>
-
-    <div class="card">
-      <img src="https://via.placeholder.com/300x150" alt="">
-      <h3>كتاب استراتيجيات تداول</h3>
-      <p>السعر: 15 USDT</p>
-      <button onclick="makeOrder('كتاب استراتيجيات تداول',15)">طلب المنتج</button>
-    </div>
-
-    <div class="card">
-      <img src="https://via.placeholder.com/300x150" alt="">
-      <h3>قوالب سوشيال ميديا</h3>
-      <p>السعر: 12 USDT</p>
-      <button onclick="makeOrder('قوالب سوشيال ميديا',12)">طلب المنتج</button>
-    </div>
-
-    <div class="card">
-      <img src="https://via.placeholder.com/300x150" alt="">
-      <h3>بطاقة فيزا مجانية</h3>
-      <p>السعر: 10 USDT</p>
-      <button onclick="makeOrder('بطاقة فيزا مجانية',10)">طلب المنتج</button>
-    </div>
-
-    <div class="balance">
-      <h3>💳 طرق الدفع</h3>
-      <p><img src="https://upload.wikimedia.org/wikipedia/commons/5/57/Binance_Logo.png" width="25"> Binance ID: <b>782102873</b></p>
-      <p><img src="https://payeer.com/upload/medialibrary/3c5/payeer-logo.svg" width="60"> Payeer ID: <b>P1112102994</b></p>
-      <div class="note">📌 ملاحظة: بعد الدفع، تواصل معنا عبر <a href="https://wa.me/213655643510" style="color:#00ff84;">واتساب</a> لتصلك روابط منتجاتك.</div>
+  <!-- New post modal -->
+  <div id="modal" class="modal-back hidden" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:99">
+    <div style="width:100%;max-width:820px;background:linear-gradient(180deg,#041018,#071322);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);">
+      <h3 id="modalTitle">إنشاء مقال جديد</h3>
+      <input id="postTitle" placeholder="عنوان المقال">
+      <input id="postImage" placeholder="رابط صورة الغلاف (اختياري)">
+      <select id="postCat"><option value="تقنية">تقنية</option><option value="تسويق">تسويق</option><option value="تعليم">تعليم</option><option value="مال">مال</option><option value="أدوات">أدوات</option></select>
+      <textarea id="postExcerpt" placeholder="ملخص قصير"></textarea>
+      <textarea id="postBody" placeholder="محتوى المقال (يمكنك كتابة فقرات مفصولة)"></textarea>
+      <div style="display:flex;gap:8px;margin-top:10px">
+        <button class="btn" onclick="savePost()">حفظ المقال</button>
+        <button class="btn ghost" onclick="closeModal()">إلغاء</button>
+      </div>
     </div>
   </div>
 
-  <!-- الطلبات (للأدمين فقط) -->
-  <div id="ordersPage" style="display:none;">
-    <h2>📦 إدارة الطلبات</h2>
-    <div id="ordersList" class="admin"></div>
-  </div>
-
-</div>
+  <footer>© 2025 Fast10 Blog — موارد ومقالات مفيدة</footer>
+</main>
 
 <script>
-function showProducts(){hideAll();document.getElementById('productsPage').style.display='block';}
-function showLogin(){hideAll();document.getElementById('loginDiv').style.display='block';}
-function showRegister(){hideAll();document.getElementById('registerDiv').style.display='block';}
-function showOrders(){hideAll();document.getElementById('ordersPage').style.display='block';loadOrders();}
-function hideAll(){['registerDiv','loginDiv','productsPage','ordersPage'].forEach(id=>document.getElementById(id).style.display='none');}
+/* ===== إعدادات سريعة ===== */
+const SITE_URL = window.location.href.split('#')[0];
+const WHATSAPP = 'https://wa.me/213655643510'; // عدّل رقمك
+const POSTS_PER_PAGE = 6;
 
-// تسجيل
-function register(){
-  localStorage.setItem('user',document.getElementById('regUser').value);
-  localStorage.setItem('pass',document.getElementById('regPass').value);
-  alert('تم التسجيل، سجل الدخول الآن');
-  showLogin();
-}
-function login(){
-  const u=document.getElementById('loginUser').value;
-  const p=document.getElementById('loginPass').value;
-  if(u===localStorage.getItem('user')&&p===localStorage.getItem('pass')){
-    alert('تم تسجيل الدخول');
-    showProducts();
-  }else if(u==="admin"&&p==="admin123"){
-    alert('تسجيل دخول كأدمين');
-    document.getElementById('adminLink').style.display='inline';
-    showOrders();
-  }else alert('بيانات خاطئة');
-}
+/* ===== بيانات مقالات افتراضية ===== */
+let POSTS = [
+  {id:'a1',title:'كيف تبدأ مشروع رقمي من الصفر',cat:'أعمال',excerpt:'خطوات عملية لإنشاء منتج رقمي وبيعه عبر الانترنت.',img:'https://picsum.photos/600/360?1',body:`<p>البدء بمشروع رقمي يحتاج فكرة واضحة، اختبار السوق، وتصميم منتج يحل مشكلة حقيقية...</p><h4>خطوات مبدئية</h4><ol><li>اختيار نيتش</li><li>صناعة منتج MVP</li><li>التسويق عبر السوشيال</li></ol>`,views:120,created:Date.now()-1000*60*60*24*5},
+  {id:'a2',title:'أفضل 10 أدوات مجانية للتصميم',cat:'أدوات',excerpt:'قائمة أدوات تصميم مجانية تساعدك في إنشاء صور ومحتوى جذاب.',img:'https://picsum.photos/600/360?2',body:`<p>هنا مجموعة من الأدوات المجانية مثل Canva، Figma، GIMP...</p>`,views:90,created:Date.now()-1000*60*60*24*10},
+  {id:'a3,title':'خطوات بسيطة للـSEO','cat':'تسويق','excerpt':'كيف تحسّن موقعك ليتصدر نتائج البحث','img':'https://picsum.photos/600/360?3','body':'<p>استخدام الكلمات المفتاحية، تحسين الـmeta tags، بناء روابط... </p>','views':80,'created':Date.now()-1000*60*60*24*20},
+  // (سطر سابق فيه خطأ مقصود لتجعل التعديل لاحق سهل) — سنبدله أدناه بتمرير متعدد
+];
 
-// الطلبات
-function makeOrder(prod,price){
-  let orders=JSON.parse(localStorage.getItem('orders')||"[]");
-  orders.push({p:prod,pr:price,status:"قيد المراجعة"});
-  localStorage.setItem('orders',JSON.stringify(orders));
-  alert("تم إرسال طلبك! الرجاء الدفع والتواصل عبر واتساب");
+/* إصلاح/استبدال السطر الخاطئ أعلاه بإضافة مجموعة مقالات جاهزة صحيحة */
+POSTS = [
+  {id:'p1',title:'كيف تبدأ مشروع رقمي من الصفر',cat:'أعمال',excerpt:'خطوات عملية لإنشاء منتج رقمي وبيعه عبر الانترنت.',img:'https://picsum.photos/600/360?10',body:`<p>البدء بمشروع رقمي يحتاج فكرة واضحة، اختبار السوق، وتصميم منتج يحل مشكلة حقيقية.</p><h4>خطوات مبدئية</h4><ol><li>اختيار نيتش مناسب</li><li>صناعة منتج MVP بسيط</li><li>التسويق عن طريق مدونة وقنوات سوشيال</li></ol>`,views:120,created:Date.now()-1000*60*60*24*50},
+  {id:'p2',title:'أفضل أدوات مجانية للتصميم',cat:'أدوات',excerpt:'Canva, Figma, GIMP وأدوات أخرى مفيدة للمصممين.',img:'https://picsum.photos/600/360?20',body:`<p>Canva مفيد للغير مصممين، Figma للتصميم التعاوني، GIMP بديل مجاني للفوتوشوب...</p>`,views:90,created:Date.now()-1000*60*60*24*40},
+  {id:'p3',title:'نصائح سريعة للـ SEO في 2025',cat:'تسويق',excerpt:'تكتيكات بسيطة لتحسين ظهور موقعك في محركات البحث.',img:'https://picsum.photos/600/360?30',body:`<p>اكتب للزائر أولاً، حسّن العناوين والميتا، وركّز على تجربة المستخدم.</p>`,views:200,created:Date.now()-1000*60*60*24*30},
+  {id:'p4',title:'كيف تبيع كورساتك عبر الإنترنت',cat:'تعليم',excerpt:'منصات، تسعير، وتسويق الكورس الخاص بك.',img:'https://picsum.photos/600/360?40',body:`<p>اختر منصة (مثل Teachable)، حضّر محتوى قصير وجذّاب، ومارس التسويق بالبريد الإلكتروني.</p>`,views:75,created:Date.now()-1000*60*60*24*25},
+  {id:'p5',title:'الدخل السلبي: أفكار يمكن البدء بها اليوم',cat:'مال',excerpt:'مصادر دخل سلبي بسيطة مناسبة للمبتدئين.',img:'https://picsum.photos/600/360?50',body:`<p>بيع منتجات رقمية، الأرباح من الإعلانات، الاشتراكات الشهرية...</p>`,views:88,created:Date.now()-1000*60*60*24*18},
+  {id:'p6',title:'قائمة أدوات لمطور الويب',cat:'أدوات',excerpt:'مكتبات وأدوات تسهل تطوير الواجهات والـAPI.',img:'https://picsum.photos/600/360?60',body:`<p>VSCode, Postman, Chrome DevTools, Git — أدوات أساسية لتطوير سريع.</p>`,views:64,created:Date.now()-1000*60*60*24*12},
+  {id:'p7',title:'كيف تكتب مقالة تقنع القارئ وتبيع المنتج',cat:'تسويق',excerpt:'نمط كتابة تفصيلي لتحويل الزوار إلى مشترين.',img:'https://picsum.photos/600/360?70',body:`<p>ابدأ بمشكلة القارئ، قدّم الحل، ثم اعرض المنتج مع CTA قوي.</p>`,views:150,created:Date.now()-1000*60*60*24*9},
+  {id:'p8',title:'أسرار الإنتاجية للمستقلين',cat:'تعليم',excerpt:'روتين يومي وأدوات لرفع إنتاجيتك كمستقل.',img:'https://picsum.photos/600/360?80',body:`<p>استخدم تقنية Pomodoro، قوائم مهام بسيطة، ووقت مخصص للتعلم.</p>`,views:44,created:Date.now()-1000*60*60*24*7},
+  {id:'p9',title:'دليل المبتدئ لتعلم الذكاء الاصطناعي',cat:'تقنية',excerpt:'مسار تعلّم واضح للمبتدئين في AI وML.',img:'https://picsum.photos/600/360?90',body:`<p>ابدأ بالبايثون، الجبر الخطي، ثم اتجه لمكتبات مثل TensorFlow وPyTorch.</p>`,views:210,created:Date.now()-1000*60*60*24*3},
+  {id:'p10',title:'طرق آمنة لاستخدام البطاقات الافتراضية',cat:'مال',excerpt:'نصائح لحماية بطاقتك الافتراضية عند الشراء عبر الإنترنت.',img:'https://picsum.photos/600/360?100',body:`<p>لا تشارك تفاصيل البطاقة، استخدم 3D Secure، وراقب التحويلات بانتظام.</p>`,views:39,created:Date.now()-1000*60*60*24*1}
+];
+
+/* ===== localStorage keys ===== */
+const KEY_POSTS = 'f10_blog_posts_v1';
+const KEY_USER = 'f10_blog_user_v1';
+
+/* ===== utilities ===== */
+function qs(id){ return document.getElementById(id); }
+function savePosts(){ localStorage.setItem(KEY_POSTS, JSON.stringify(POSTS)); }
+function loadPosts(){ const raw = localStorage.getItem(KEY_POSTS); if(raw) POSTS = JSON.parse(raw); }
+
+/* ===== init UI ===== */
+let state = {page:1,filter:'كل',q:'',sort:'new'};
+function appInit(){
+  loadPosts();
+  // render categories
+  renderCategories();
+  renderPopular();
+  renderList();
+  qs('waLink').href = WHATSAPP;
+  document.getElementById('newPostBtn').onclick = () => { openNewPost(); };
+  document.getElementById('authBtn').onclick = () => { openAuth(); };
+  // show modal close by clicking outside
+  document.getElementById('modal').onclick = e => { if(e.target.id==='modal') closeModal(); };
 }
-function loadOrders(){
-  let orders=JSON.parse(localStorage.getItem('orders')||"[]");
-  let list="";
-  orders.forEach((o,i)=>{
-    list+=`<p>طلب: ${o.p} - ${o.pr} USDT - الحالة: ${o.status} 
-    <button onclick="setStatus(${i},'مقبول')">قبول</button> 
-    <button onclick="setStatus(${i},'مرفوض')">رفض</button> 
-    <button onclick="setStatus(${i},'مكتمل')">مكتمل</button></p>`;
+appInit();
+
+/* ===== categories ===== */
+function getCats(){
+  const cats = new Set(POSTS.map(p=>p.cat));
+  return ['كل',...cats];
+}
+function renderCategories(){
+  const cats = getCats();
+  const container = qs('cats'); container.innerHTML='';
+  cats.forEach(c=>{
+    const el = document.createElement('div'); el.className='chip' + (state.filter===c?' active':''); el.textContent=c;
+    el.onclick = ()=>{ state.filter = c; state.page=1; applyFilters(); };
+    container.appendChild(el);
   });
-  document.getElementById('ordersList').innerHTML=list;
 }
-function setStatus(i,s){
-  let orders=JSON.parse(localStorage.getItem('orders')||"[]");
-  orders[i].status=s;
-  localStorage.setItem('orders',JSON.stringify(orders));
-  loadOrders();
-}
-</script>
 
+/* ===== popular ===== */
+function renderPopular(){
+  const popular = [...POSTS].sort((a,b)=>b.views - a.views).slice(0,5);
+  const container = qs('popular'); container.innerHTML='';
+  popular.forEach(p=>{
+    const div = document.createElement('div'); div.style.marginBottom='8px';
+    div.innerHTML = `<a href="#" onclick="openArticle('${p.id}')" style="color:var(--accent);text-decoration:none">${p.title}</a><div class="small">${p.views} مشاهدة</div>`;
+    container.appendChild(div);
+  });
+}
+
+/* ===== filters / search / sort ===== */
+function applyFilters(){
+  state.q = qs('searchInput').value.trim();
+  state.sort = qs('sortSelect').value;
+  state.page = 1;
+  renderList();
+}
+
+/* ===== render posts list with pagination ===== */
+function renderList(){
+  loadPosts();
+  let list = [...POSTS];
+  // filter
+  if(state.filter && state.filter!=='كل') list = list.filter(p=>p.cat===state.filter);
+  // search
+  if(state.q) list = list.filter(p=> (p.title + ' ' + p.excerpt + ' ' + p.body).toLowerCase().includes(state.q.toLowerCase()));
+  // sort
+  list.sort((a,b)=> state.sort==='new' ? b.created - a.created : a.created - b.created);
+  // pagination
+  const total = list.length;
+  const pages = Math.max(1, Math.ceil(total / POSTS_PER_PAGE));
+  if(state.page>pages) state.page=pages;
+  const start = (state.page-1)*POSTS_PER_PAGE;
+  const slice = list.slice(start, start+POSTS_PER_PAGE);
+  // render
+  const container = qs('postsList'); container.innerHTML='';
+  slice.forEach(p=>{
+    const card = document.createElement('article'); card.className='card';
+    card.innerHTML = `<img src="${p.img}" alt="${p.title}"><h3>${p.title}</h3><p class="muted">${p.excerpt}</p>
+      <div class="meta">${p.cat} • ${new Date(p.created).toLocaleDateString()} • ${p.views} قراءة</div>
+      <div style="margin-top:8px;display:flex;gap:8px">
+        <button class="btn" onclick="openArticle('${p.id}')">اقرأ</button>
+        <button class="btn ghost" onclick="shareWhatsApp('${p.id}')">مشاركة</button>
+      </div>`;
+    container.appendChild(card);
+  });
+  // pagination controls
+  const pagDiv = qs('pagination'); pagDiv.innerHTML='';
+  for(let i=1;i<=pages;i++){
+    const b = document.createElement('button'); b.className = i===state.page? 'btn' : 'btn ghost';
+    b.style.margin='4px'; b.textContent=i; b.onclick = ()=>{ state.page=i; renderList(); };
+    pagDiv.appendChild(b);
+  }
+}
+
+/* ===== open article reader ===== */
+function openArticle(id){
+  const post = POSTS.find(p=>p.id===id);
+  if(!post) return alert('المقال غير موجود');
+  // increment view
+  post.views = (post.views||0) + 1; savePosts(); renderPopular(); renderList();
+  // build content
+  const cont = qs('articleContent'); cont.innerHTML = `<h2 style="color:var(--accent)">${post.title}</h2>
+    <img src="${post.img}" alt="${post.title}" style="margin-top:12px">
+    <div class="small" style="margin-top:8px">${post.cat} • ${new Date(post.created).toLocaleDateString()} • ${post.views} قراءة</div>
+    <div style="margin-top:12px">${post.body}</div>
+    <div style="margin-top:16px">
+      <button class="btn" onclick="shareWhatsApp('${post.id}')">مشاركة عبر واتساب</button>
+      <a class="btn ghost" href="${SITE_URL}#${post.id}" style="margin-left:8px">رابط مباشر</a>
+    </div>`;
+  qs('reader').classList.remove('hidden');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ===== close reader ===== */
+function closeReader(){ qs('reader').classList.add('hidden'); }
+
+/* ===== share to whatsapp (prefilled) ===== */
+function shareWhatsApp(id){
+  const p = POSTS.find(x=>x.id===id);
+  const text = encodeURIComponent(`${p.title}\n${p.excerpt}\n\nاقرأ المزيد: ${SITE_URL}#${p.id}`);
+  window.open(`${WHATSAPP}?text=${text}`,'_blank');
+}
+
+/* ===== new post modal & save ===== */
+function openNewPost(){
+  qs('modal').classList.remove('hidden');
+  qs('postTitle').value=''; qs('postImage').value=''; qs('postExcerpt').value=''; qs('postBody').value='';
+}
+function closeModal(){ qs('modal').classList.add('hidden'); }
+function savePost(){
+  const title = qs('postTitle').value.trim();
+  if(!title) return alert('أدخل عنوان المقال');
+  const img = qs('postImage').value.trim() || 'https://picsum.photos/800/450?random=' + Math.floor(Math.random()*1000);
+  const cat = qs('postCat').value;
+  const excerpt = qs('postExcerpt').value.trim() || title;
+  const body = qs('postBody').value.trim() || '<p>لا توجد تفاصيل.</p>';
+  const newPost = { id: 'p'+Date.now().toString(36), title, img, cat, excerpt, body, views:0, created: Date.now() };
+  POSTS.unshift(newPost);
+  savePosts();
+  closeModal();
+  renderCategories(); renderPopular(); renderList();
+  alert('تم حفظ المقال');
+}
+
+/* ===== auth placeholder (option to protect new-article) ===== */
+function openAuth(){
+  const name = prompt('ادخل اسم المستخدم (admin لحماية)') || '';
+  if(name === 'admin'){
+    const pass = prompt('كلمة السر') || '';
+    if(pass === '12345'){ alert('مرحباً المدير'); openNewPost(); } else alert('خطأ'); 
+  } else {
+    alert('يمكن للمستخدم الإضافة دون حماية (هذا مجرد مثال محلي).'); openNewPost();
+  }
+}
+
+/* export initial posts to storage only if not present */
+if(!localStorage.getItem(KEY_POSTS)) savePosts();
+
+</script>
 </body>
 </html>
