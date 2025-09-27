@@ -1,257 +1,124 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>مقالات مفيدة - Fast10</title>
-<meta name="description" content="Fast10 — مقالات عملية ومفيدة في التقنية، الصحة، الإنتاجية، المال والأعمال. نصائح عملية لتبدأ اليوم." />
-<meta name="author" content="Fast10" />
-<meta property="og:title" content="Fast10 — مقالات مفيدة" />
-<meta property="og:description" content="مقالات عملية ومباشرة تساعدك تتعلم وتطور مشروعك." />
-<meta property="og:image" content="https://picsum.photos/1200/630?random=1" />
-<style>
-  :root{--bg:#ffffff;--card:#f6fbff;--accent:#0b77d1;--muted:#556;--radius:12px}
-  *{box-sizing:border-box}
-  body{margin:0;font-family:Tahoma,Arial,Helvetica,sans-serif;background:var(--bg);color:#111;direction:rtl}
-  header{background:linear-gradient(90deg,var(--accent),#046aa8);color:#fff;padding:14px 16px;position:sticky;top:0;z-index:50}
-  .nav{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
-  .brand{display:flex;align-items:center;gap:12px}
-  .logo{width:44px;height:44px;border-radius:8px;background:#fff;color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:800}
-  .brand h1{margin:0;font-size:18px}
-  .nav a{color:#fff;text-decoration:none;padding:8px;border-radius:8px;font-weight:600}
-  main{max-width:1100px;margin:20px auto;padding:12px}
-  .hero{display:flex;gap:16px;align-items:center;justify-content:space-between;background:var(--card);padding:18px;border-radius:12px}
-  .hero h2{margin:0;color:var(--accent)}
-  .layout{display:grid;grid-template-columns:1fr 320px;gap:18px;margin-top:18px}
-  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
-  .card{background:#fff;border-radius:10px;padding:12px;border:1px solid #eee;box-shadow:0 6px 18px rgba(12,40,80,0.04)}
-  .card img{width:100%;height:160px;object-fit:cover;border-radius:8px}
-  .card h3{margin:8px 0;color:var(--accent);font-size:16px}
-  .excerpt{color:var(--muted);font-size:14px;margin-bottom:8px}
-  .meta{font-size:12px;color:#888}
-  .btn{background:var(--accent);color:#fff;padding:8px 12px;border-radius:8px;border:none;cursor:pointer;font-weight:700}
-  .btn.ghost{background:transparent;border:1px solid var(--accent);color:var(--accent);font-weight:700}
-  aside .panel{background:var(--card);padding:12px;border-radius:10px;border:1px solid #eee}
-  input.search{width:100%;padding:10px;border-radius:10px;border:1px solid #e6eef9;background:#fff}
-  .cats{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-  .chip{padding:6px 10px;border-radius:999px;border:1px solid #e6eef9;background:#fff;color:var(--muted);cursor:pointer}
-  .chip.active{background:var(--accent);color:#fff;border-color:var(--accent)}
-  footer{margin-top:30px;padding:18px;text-align:center;color:#666;background:#f8fbff;border-top:1px solid #eee}
-  /* reader */
-  .reader{background:#fff;padding:16px;border-radius:12px;border:1px solid #eee;box-shadow:0 10px 24px rgba(12,40,80,0.04)}
-  .reader img{width:100%;border-radius:8px;margin-bottom:12px}
-  .small{font-size:13px;color:#666}
-  @media(max-width:980px){ .layout{grid-template-columns:1fr} .hero{flex-direction:column;text-align:center} aside{order:-1} }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fast10 Blog - المعرفة بين يديك</title>
+  <style>
+    body {font-family: Tahoma, sans-serif; margin:0; background:#0d1117; color:#eee; line-height:1.8;}
+    header {background:#111827; padding:20px; text-align:center; color:#00aaff; font-size:26px; font-weight:bold;}
+    nav {background:#1f2937; padding:10px; text-align:center;}
+    nav a {color:#fff; margin:0 12px; text-decoration:none; font-weight:bold;}
+    nav a:hover {color:#00aaff;}
+    main {padding:20px; max-width:950px; margin:auto;}
+    article {background:#1a1a1a; margin-bottom:25px; padding:20px; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,0.3);}
+    article h2 {color:#00aaff; margin-top:0;}
+    footer {background:#111827; color:#aaa; text-align:center; padding:15px; margin-top:20px;}
+    .ads {margin:20px auto; text-align:center;}
+  </style>
+
+  <!-- كود AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2732665843567592"
+     crossorigin="anonymous"></script>
 </head>
 <body>
 
 <header>
-  <div class="nav">
-    <div class="brand">
-      <div class="logo">F10</div>
-      <div>
-        <h1>Fast10</h1>
-        <div class="small" style="color:#def">مقالات مفيدة — تعلم واطبق</div>
-      </div>
-    </div>
-    <div>
-      <a href="#" onclick="showSection('home')">الرئيسية</a>
-      <a href="#" onclick="showSection('about')">من نحن</a>
-      <a href="#" onclick="showSection('contact')">اتصل بنا</a>
-      <a href="#" onclick="showSection('privacy')">الخصوصية</a>
-    </div>
-  </div>
+  🌐 Fast10 Blog - مقالات مفيدة في كل المجالات
 </header>
 
+<nav>
+  <a href="#">الرئيسية</a>
+  <a href="#">تكنولوجيا</a>
+  <a href="#">الصحة</a>
+  <a href="#">أعمال</a>
+  <a href="#">تعليم</a>
+  <a href="#">تنمية ذاتية</a>
+</nav>
+
 <main>
-  <section class="hero">
-    <div style="text-align:right">
-      <h2>مقالات قصيرة، عملية، تجيب نتيجة</h2>
-      <p class="small">مقالات عملية في التقنية، التسويق، الربح، الصحة والإنتاجية — ابدأ اليوم بطبق نصيحة واحدة فقط.</p>
-    </div>
-    <div style="min-width:220px">
-      <img src="https://picsum.photos/420/260?sig=1" alt="hero" style="width:100%;border-radius:10px">
-    </div>
-  </section>
 
-  <div class="layout">
+  <article>
+    <h2>أهمية التعلم المستمر في حياتنا اليومية</h2>
+    <p>في عالم سريع التغير، أصبح التعلم المستمر ضرورة ملحة وليس خياراً إضافياً. فالمهارات التي كانت مطلوبة قبل سنوات أصبحت الآن قديمة، بينما ظهرت مجالات جديدة تحتاج إلى معرفة حديثة. لذلك فإن القراءة، حضور الدورات، وتجربة أساليب جديدة للعمل تمنحنا فرصة لمواكبة هذا التغيير.</p>
+    <p>الأشخاص الناجحون هم الذين لم يتوقفوا يوماً عن التعلم، سواء عبر الكتب، الدورات الإلكترونية، أو حتى النقاشات مع الآخرين. فالمعرفة قوة حقيقية تجعلنا أكثر استعداداً لمواجهة تحديات الحياة.</p>
+  </article>
 
-    <div>
-      <!-- controls -->
-      <div style="display:flex;gap:10px;align-items:center;margin-top:14px">
-        <input id="search" class="search" placeholder="ابحث عن مقالة..." oninput="applyFilters()">
-        <select id="sort" onchange="applyFilters()" style="padding:10px;border-radius:8px;border:1px solid #e6eef9;background:#fff">
-          <option value="new">الأحدث أولاً</option>
-          <option value="popular">الأكثر قراءة</option>
-        </select>
-      </div>
-
-      <!-- posts -->
-      <div id="posts" class="cards" style="margin-top:14px"></div>
-    </div>
-
-    <aside>
-      <div class="panel">
-        <h3>التصنيفات</h3>
-        <div id="cats" class="cats"></div>
-
-        <h3 style="margin-top:12px">مقالات مميزة</h3>
-        <div id="popular" class="small"></div>
-
-        <h3 style="margin-top:12px">تابعنا</h3>
-        <p class="small">📲 تواصل عبر واتساب: <a id="waLink" href="#" target="_blank">اضغط هنا</a></p>
-
-        <h3 style="margin-top:12px">عن الموقع</h3>
-        <p class="small">موقع خفيف للمقالات العملية — هدفنا نشر محتوى يفيد الزائر ويطوّر مهاراته.</p>
-      </div>
-    </aside>
-
+  <div class="ads">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-2732665843567592"
+         data-ad-slot="1234567890"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   </div>
 
-  <!-- reader area -->
-  <div id="readerArea" style="margin-top:18px"></div>
+  <article>
+    <h2>الصحة النفسية وأثرها على الإنتاجية</h2>
+    <p>الصحة النفسية جزء أساسي من حياة أي إنسان. الشخص الذي يعاني من ضغط نفسي مزمن يجد صعوبة في التركيز واتخاذ القرارات السليمة. ولهذا السبب أصبح الاهتمام بالصحة العقلية والنفسية من أولويات المجتمعات الحديثة.</p>
+    <p>ممارسة الرياضة، النوم الكافي، والتواصل مع الأصدقاء والعائلة تعتبر عوامل مهمة للحفاظ على التوازن النفسي. كما أن طلب المساعدة من مختصين لم يعد عيباً بل هو خطوة شجاعة نحو التعافي.</p>
+  </article>
 
-  <!-- pages: about/contact/privacy -->
-  <section id="pageArea" style="margin-top:18px"></section>
+  <article>
+    <h2>أهمية تنظيم الوقت لتحقيق النجاح</h2>
+    <p>الوقت هو المورد الأكثر قيمة الذي لا يمكن تعويضه. كثير من الأشخاص يضيعون ساعات طويلة يومياً في أنشطة غير مفيدة، مما يقلل من فرصهم في التقدم. تنظيم الوقت يسمح لنا باستغلال كل دقيقة بشكل فعّال لتحقيق أهدافنا.</p>
+    <p>من أهم تقنيات تنظيم الوقت: تحديد أولويات واضحة، وضع جدول يومي، واستخدام أدوات رقمية للتذكير بالمهام. بهذه الطريقة يمكن تحقيق إنجازات عظيمة في وقت قصير.</p>
+  </article>
+
+  <article>
+    <h2>التكنولوجيا ومستقبل الذكاء الاصطناعي</h2>
+    <p>الذكاء الاصطناعي لم يعد مجرد فكرة من أفلام الخيال العلمي، بل أصبح واقعاً يؤثر على حياتنا اليومية. من المساعدات الصوتية في الهواتف إلى السيارات ذاتية القيادة، يتوسع تأثير هذه التكنولوجيا بشكل هائل.</p>
+    <p>يتوقع الخبراء أن الذكاء الاصطناعي سيغير سوق العمل بشكل جذري خلال السنوات القادمة. لذلك من المهم أن نطور مهاراتنا في مجالات مثل البرمجة وتحليل البيانات للتكيف مع المستقبل.</p>
+  </article>
+
+  <article>
+    <h2>التغذية الصحية ودورها في الوقاية من الأمراض</h2>
+    <p>النظام الغذائي الصحي يساعد الجسم على محاربة الأمراض وتعزيز المناعة. الاعتماد على الخضروات، الفواكه، الحبوب الكاملة، وتجنب الأطعمة المصنعة هو المفتاح لصحة أفضل.</p>
+    <p>تشير الدراسات إلى أن الغذاء المتوازن يقلل من خطر الإصابة بأمراض القلب، السكري، والسرطان. لذلك فإن اختيار الطعام بعناية استثمار في الصحة على المدى الطويل.</p>
+  </article>
+
+  <article>
+    <h2>أسرار النجاح في ريادة الأعمال</h2>
+    <p>ريادة الأعمال ليست مجرد فكرة مشروع، بل هي رحلة مليئة بالتحديات تحتاج إلى صبر، رؤية واضحة، وشغف. من أهم أسرار النجاح: القدرة على التكيف، بناء شبكة علاقات قوية، وتقديم قيمة حقيقية للزبائن.</p>
+    <p>العديد من الشركات الناجحة بدأت صغيرة جداً، لكنها اعتمدت على الإبداع والابتكار لتحقيق النمو المستمر.</p>
+  </article>
+
+  <article>
+    <h2>أهمية القراءة في تطوير الفكر</h2>
+    <p>القراءة توسع مدارك الإنسان وتمنحه القدرة على رؤية الأمور من زوايا مختلفة. فهي لا تزيد فقط من رصيد المعلومات، بل تنمي الخيال والإبداع.</p>
+    <p>القراءة اليومية ولو لمدة نصف ساعة فقط يمكن أن تحدث فرقاً كبيراً في شخصية الفرد وقدرته على التواصل والفهم.</p>
+  </article>
+
+  <article>
+    <h2>التعليم عبر الإنترنت: الفرص والتحديات</h2>
+    <p>التعليم الإلكتروني أصبح من أبرز التطورات في مجال التعليم، حيث يوفر مرونة كبيرة للمتعلمين ويسمح لهم بالوصول إلى محتوى من أي مكان وفي أي وقت.</p>
+    <p>لكن في نفس الوقت يواجه هذا النوع من التعليم تحديات مثل ضعف التفاعل المباشر بين الطلاب والمعلمين. الحل يكمن في دمج التكنولوجيا مع أساليب التعليم التقليدية.</p>
+  </article>
+
+  <article>
+    <h2>كيف تحافظ على صحتك المالية</h2>
+    <p>إدارة المال بحكمة تعتبر مهارة أساسية في حياتنا. الادخار، وضع ميزانية، والاستثمار الذكي خطوات مهمة لحياة مالية مستقرة.</p>
+    <p>الشخص الذي يراقب نفقاته ويتجنب الديون غير الضرورية يضمن لنفسه أماناً مالياً على المدى البعيد.</p>
+  </article>
+
+  <article>
+    <h2>السفر وأثره على تطوير الشخصية</h2>
+    <p>السفر يفتح أمام الإنسان آفاقاً جديدة ويجعله يتعرف على ثقافات وعادات مختلفة. هذه التجربة تنمي روح التسامح وتوسع المدارك.</p>
+    <p>كما أن السفر يمنح فرصة للابتعاد عن الروتين اليومي واستعادة النشاط والطاقة.</p>
+  </article>
+
+  <article>
+    <h2>أهمية ممارسة الرياضة بانتظام</h2>
+    <p>الرياضة ليست مجرد وسيلة للحصول على جسم جميل، بل هي أساس للصحة الجسدية والنفسية. ممارسة التمارين بانتظام تقلل من التوتر وتحسن المزاج.</p>
+    <p>يكفي 30 دقيقة من النشاط البدني يومياً لتحسين صحة القلب، تقوية العضلات، وزيادة الطاقة.</p>
+  </article>
 
 </main>
 
 <footer>
-  © 2025 Fast10 — كل الحقوق محفوظة | <a href="#" onclick="showSection('privacy')">سياسة الخصوصية</a>
+  &copy; 2025 - Fast10 Blog. جميع الحقوق محفوظة.
 </footer>
-
-<script>
-/* ================= إعدادات — عدّل القيم التالية ================= */
-const SITE_URL = window.location.href.split('#')[0]; // ضع رابط موقعك المنشور هنا لاحقاً
-const WHATSAPP_NUMBER = '213655643510'; // رقم واتساب بدون +
-const WHATSAPP = 'https://wa.me/' + WHATSAPP_NUMBER;
-
-/* ================= بيانات مقالات مبدئية ================= */
-let POSTS = [
-  {id:'t1',title:'5 خطوات لرفع إنتاجيتك اليومية',cat:'تعليم',excerpt:'نصائح بسيطة لتزيد إنتاجيتك وتنجز أكثر في يومك بدون تعب إضافي.',img:'https://picsum.photos/600/360?sig=11',body:`<p>الإنتاجية مش بالضغط، بل بالتركيز على خطوات صغيرة: 1) خطط يومك في 15 دقيقة، 2) استخدم تقنية Pomodoro، 3) قلل المقاطعات، 4) رتب مهامك حسب الأثر، 5) خذ فترات راحة قصيرة. التطبيق المستمر لهذه الروتينات يعطي نتائج واضحة خلال أسابيع قليلة.</p>` ,views:320,created:Date.now()-1000*60*60*24*30},
-  {id:'t2',title:'أفضل تطبيقات مجانية لتعلم الإنجليزية',cat:'تعليم',excerpt:'تطبيقات عملية تساعدك تتعلم قواعد ومفردات وتسمع اللغة بفعالية.',img:'https://picsum.photos/600/360?sig=12',body:`<p>ابدأ بـ Duolingo/Rosetta/Busuu للمفردات، ثم استعمل تطبيقات الاستماع مثل BBC Learning، ومواقع التبادل اللغوي للممارسة الحقيقية. الأهم: المداومة يومياً 20-30 دقيقة.</p>`,views:210,created:Date.now()-1000*60*60*24*28},
-  {id:'t3',title:'كيف تبدأ متجر إلكتروني بميزانية صغيرة',cat:'مال',excerpt:'خطوات عملية لبناء متجر إلكتروني دون مصاريف كبيرة.',img:'https://picsum.photos/600/360?sig=13',body:`<p>اختيار نيتش ربحى، استخدام قوالب جاهزة (Shopify/WooCommerce)، الترويج عبر Instagram & Facebook بميزانية صغيرة، وبدء بمنتجات محدودة. ركّز على تجربة الشراء والدفع السهلة.</p>`,views:180,created:Date.now()-1000*60*60*24*20},
-  {id:'t4',title:'نصائح لحماية بطارية هاتفك',cat:'تقنية',excerpt:'خطوات سهلة تمد من عمر بطارية هاتفك اليومي.',img:'https://picsum.photos/600/360?sig=14',body:`<p>خفظ سطوع الشاشة، اغلاق التطبيقات في الخلفية، تجنب الشحن المفرط، واستخدام وضع توفير الطاقة في السفر. هذه الخطوات البسيطة تحافظ على البطارية لأشهر أطول.</p>`,views:140,created:Date.now()-1000*60*60*24*18},
-  {id:'t5',title:'أدوات مجانية مفيدة لكل مصمم',cat:'أدوات',excerpt:'قائمة أدوات وإضافات توفر وقت المصمم وتزيد جودة العمل.',img:'https://picsum.photos/600/360?sig=15',body:`<p>Canva, Figma, Unsplash, Icons8، ومعاهم إضافات Photoshop لتسريع العمل. استعمال القوالب الجاهزة يسرّع عملية التسليم للزبائن.</p>`,views:130,created:Date.now()-1000*60*60*24*16},
-  {id:'t6',title:'أساسيات SEO للمبتدئين',cat:'تسويق',excerpt:'خطوات بسيطة لتحسين رؤية موقعك في محركات البحث.',img:'https://picsum.photos/600/360?sig=16',body:`<p>اكتب محتوى مفيد وطويل نسبياً، استخدم عناوين واضحة، حسّن وصف الميتا، وركّز على روابط داخلية وخارجية ذات جودة. استمر بالمحسّنات وراقب الأداء شهرياً.</p>`,views:260,created:Date.now()-1000*60*60*24*12},
-  {id:'t7',title:'طرق استثمار بسيطة للمبتدئين',cat:'مال',excerpt:'أفكار استثمارية بسيطة ومناسبة للمبتدئين.</p>',img:'https://picsum.photos/600/360?sig=17',body:`<p>ابدأ بصناديق المؤشرات (ETFs)، ادخار ثابت شهرياً، واستثمار في مهارة تعطي دخل. تجنب المخاطرة الكبيرة بدون معرفة.</p>`,views:100,created:Date.now()-1000*60*60*24*9},
-  {id:'t8',title:'كيف تكتب محتوى يُحوّل زائر إلى مشتري',cat:'تسويق',excerpt:'نمط كتابة يساعدك تبيع أكثر عبر صفحات المنتج.',img:'https://picsum.photos/600/360?sig=18',body:`<p>ابدأ بمشكلة القارئ، قدم الحل بوضوح، اعرض المزايا والأمثلة، ثم دعوة للعمل قوية (CTA). استخدم شهادات وتجارب فعلية عند الإمكان.</p>`,views:210,created:Date.now()-1000*60*60*24*6},
-  {id:'t9',title:'روتين صباحي لزيادة تركيزك',cat:'تعليم',excerpt:'روتين صباحي بسيط يساعدك تبدأ يومك بنشاط وتركيز.',img:'https://picsum.photos/600/360?sig=19',body:`<p>استيقظ مبكراً، اشرب ماء، مارس 10 دقائق تمارين تنفس، خطط أهم ثلاث مهام، ثم ابدأ العمل بدون تشتيت. هذا الروتين يرفع فعالية يومك بشكل ملحوظ.</p>`,views:90,created:Date.now()-1000*60*60*24*4},
-  {id:'t10',title:'نصائح بسيطة لأمن حساباتك على الإنترنت',cat:'تقنية',excerpt:'خطوات سهلة لحماية حساباتك وتجنّب السرقة.',img:'https://picsum.photos/600/360?sig=20',body:`<p>استخدم كلمات مرور طويلة ومختلفة، فعّل المصادقة الثنائية (2FA)، لا تشارك رموز التحقق، وتحديث التطبيقات لتقليل الثغرات.</p>`,views:150,created:Date.now()-1000*60*60*24*2}
-];
-
-/* تخزين محلي: لو تريد حفظ تعديلات أو مقالات جديدة */
-const KEY_POSTS = 'f10_posts_v1';
-if(!localStorage.getItem(KEY_POSTS)) localStorage.setItem(KEY_POSTS, JSON.stringify(POSTS));
-else POSTS = JSON.parse(localStorage.getItem(KEY_POSTS));
-
-/* ====== DOM helpers ====== */
-const qs = id => document.getElementById(id);
-function nl2br(s){ return s.replace(/\n/g,'<br>'); }
-
-/* ====== render ====== */
-function renderCategories(){
-  const cats = ['كل',...Array.from(new Set(POSTS.map(p=>p.cat)))];
-  const el = document.getElementById('cats'); el.innerHTML = '';
-  cats.forEach(c=>{
-    const d = document.createElement('div'); d.className='chip'; d.textContent=c;
-    d.onclick = ()=>{ current.filter=c; current.page=1; applyFilters(); document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active')); d.classList.add('active'); };
-    el.appendChild(d);
-  });
-}
-let current = {q:'',filter:'كل',sort:'new',page:1};
-function applyFilters(){
-  current.q = document.getElementById('search').value.trim();
-  current.sort = document.getElementById('sort').value;
-  current.page = 1;
-  renderPosts();
-}
-function renderPosts(){
-  let list = POSTS.slice();
-  if(current.filter && current.filter!=='كل') list = list.filter(p=>p.cat===current.filter);
-  if(current.q) list = list.filter(p=> (p.title + ' ' + p.excerpt + ' ' + p.body).toLowerCase().includes(current.q.toLowerCase()));
-  if(current.sort==='new') list.sort((a,b)=>b.created - a.created); else list.sort((a,b)=>b.views - a.views);
-  const container = qs('posts'); container.innerHTML = '';
-  list.forEach(p=>{
-    const card = document.createElement('article'); card.className='card';
-    card.innerHTML = `<img src="${p.img}" alt="${p.title}"><h3>${p.title}</h3><p class="excerpt">${p.excerpt}</p>
-      <div class="meta">${p.cat} • ${new Date(p.created).toLocaleDateString()} • ${p.views} مشاهدة</div>
-      <div style="margin-top:10px;display:flex;gap:8px"><button class="btn" onclick="openPost('${p.id}')">اقرأ</button>
-      <button class="btn ghost" onclick="shareWA('${p.id}')">مشاركة</button></div>`;
-    container.appendChild(card);
-  });
-  renderCategories();
-  renderPopular();
-}
-function renderPopular(){
-  const popular = POSTS.slice().sort((a,b)=>b.views - a.views).slice(0,5);
-  const el = document.getElementById('popular'); el.innerHTML = '';
-  popular.forEach(p=> el.innerHTML += `<div style="margin-bottom:8px"><a href="#" onclick="openPost('${p.id}');return false" style="color:var(--accent);text-decoration:none">${p.title}</a><div class="small">${p.views} مشاهدة</div></div>`);
-}
-
-/* ===== open article ===== */
-function openPost(id){
-  const p = POSTS.find(x=>x.id===id); if(!p) return alert('خطأ');
-  p.views = (p.views||0) + 1; localStorage.setItem(KEY_POSTS, JSON.stringify(POSTS));
-  renderPopular(); renderPosts();
-  const reader = document.getElementById('readerArea');
-  reader.innerHTML = `<div class="reader"><button class="btn ghost" onclick="closeReader()">رجوع</button>
-    <h2 style="color:var(--accent);margin-top:8px">${p.title}</h2>
-    <img src="${p.img}" alt="${p.title}">
-    <div class="small">${p.cat} • ${new Date(p.created).toLocaleDateString()} • ${p.views} مشاهدة</div>
-    <div style="margin-top:12px">${p.body}</div>
-    <div style="margin-top:12px"><button class="btn" onclick="shareWA('${p.id}')">مشاركة عبر واتساب</button>
-    <a class="btn ghost" href="${SITE_URL}#${p.id}" onclick="window.location.hash='${p.id}'">رابط مباشر</a></div></div>`;
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-function closeReader(){ document.getElementById('readerArea').innerHTML = ''; }
-
-/* ===== share via WA ===== */
-function shareWA(id){
-  const p = POSTS.find(x=>x.id===id);
-  const text = encodeURIComponent(`${p.title}\n${p.excerpt}\n\nاقرأ المزيد: ${SITE_URL}#${p.id}`);
-  window.open(WHATSAPP + '?text=' + text,'_blank');
-}
-
-/* ===== pages: about/contact/privacy ===== */
-function showSection(sec){
-  closeReader();
-  const page = document.getElementById('pageArea');
-  if(sec==='about'){
-    page.innerHTML = `<div class="card"><h3>من نحن</h3><p class="small">Fast10 موقع يقدم مقالات عملية ومباشرة تساعدك تتعلم وتطبّق. هدفنا محتوى مفيد، قابل للتطبيق، ويساعدك تبدا مشروع أو تطوّر مهارة.</p></div>`;
-    page.scrollIntoView({behavior:'smooth'});
-    return;
-  }
-  if(sec==='contact'){
-    page.innerHTML = `<div class="card"><h3>اتصل بنا</h3>
-      <p class="small">للتواصل، راسلنا على البريد: <a href="mailto:info@fast10.example">info@fast10.example</a> أو عبر واتساب: <a href="${WHATSAPP}" target="_blank">${WHATSAPP_NUMBER}</a></p>
-      <p class="small">يمكنك أيضاً استخدام عنوان الموضوع التالي عند المراسلة: "طلب شراكة إعلانية".</p></div>`;
-    page.scrollIntoView({behavior:'smooth'});
-    return;
-  }
-  if(sec==='privacy'){
-    page.innerHTML = `<div class="card"><h3>سياسة الخصوصية</h3><p class="small">نحترم خصوصيتك. الموقع يجمع بيانات بسيطة (مشاهدات مقالات) لتقديم تجربة أفضل. لا نشارك بيانات المستخدمين مع جهات أخرى. لأي استفسار راسل: info@fast10.example</p></div>`;
-    page.scrollIntoView({behavior:'smooth'});
-    return;
-  }
-  // default home
-  page.innerHTML = '';
-}
-
-/* ===== init ===== */
-document.getElementById('waLink').href = WHATSAPP;
-renderPosts();
-
-/* If URL hash points to a post, open it */
-window.addEventListener('load', ()=>{
-  if(window.location.hash){
-    const id = window.location.hash.replace('#','');
-    const p = POSTS.find(x=>x.id===id);
-    if(p) openPost(id);
-  }
-});
-</script>
 
 </body>
 </html>
